@@ -1,0 +1,9 @@
+.DS_Store
+*.[ao]
+a.out
+*test*
+.vscode/
+*.dSYM/
+playground/
+cub3d
+*.pdf
