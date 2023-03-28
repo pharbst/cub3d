@@ -59,3 +59,22 @@ void	draw_line(mlx_image_t *img, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t
 		++i;
 	}
 }
+
+void	draw_rect(mlx_image_t *img, uint32_t x0, uint32_t y0, uint32_t width, uint32_t height, uint32_t color)
+{
+	uint32_t	x;
+	uint32_t	y;
+
+	y = y0;
+	while (y < y0 + height)
+	{
+		x = x0;
+		while (x < x0 + width)
+		{
+			if (x < img->width && y < img->height)
+				mlx_put_pixel(img, x, y, color);
+			++x;
+		}
+		++y;
+	}
+}

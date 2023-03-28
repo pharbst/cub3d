@@ -53,7 +53,7 @@ void	scene_init(struct s_scene *scene)
 	scene->screen = mlx_new_image(scene->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (scene->screen == NULL)
 		mlx_panic();
-	img_fill_color(scene->screen, 0x0000FFFF);
+	img_fill_color(scene->screen, 0x000000FF);
 	if (mlx_image_to_window(scene->mlx, scene->screen, 0, 0) < 0)
 		mlx_panic();
 	scene->sprites = (struct s_sprites){
@@ -62,16 +62,18 @@ void	scene_init(struct s_scene *scene)
 	};
 	if (scene->sprites.tile_white == NULL || scene->sprites.tile_black == NULL)
 		mlx_panic();
-	img_fill_color(scene->sprites.tile_white, 0xFFFF88FF);
+	img_fill_color(scene->sprites.tile_white, 0x660088FF);
 	img_fill_color(scene->sprites.tile_black, 0x000000FF);
+	// v-- TODO: set map with file parsing function
 	map_init(&scene->map, 16, 16, NULL); // don't change these values until file parser is implemented!
 	draw_map(scene);
-	// v-- TODO: set map with file parsing function
-	scene->player = (struct s_player){300, 300, 0, 0, 0, mlx_new_image(scene->mlx, 16, 16)};
+	scene->player = (struct s_player){300, 300, 0, 0, M_PI, mlx_new_image(scene->mlx, 16, 16)};
 	if (scene->player.image_2d == NULL)
 		mlx_panic();
-	draw_point(scene->player.image_2d, 8, 8, 8, 0xFF00FFFF);
+	draw_point(scene->player.image_2d, 8, 8, 8, 0x00AA00FF);
 	if (mlx_image_to_window(scene->mlx, scene->player.image_2d, scene->player.x, scene->player.y) < 0)
 		mlx_panic();
 	//draw_point(scene->screen, 0, 0, 20, 0xFFFF00FF);
+	//draw_line(scene->screen, 0, 0, scene->player.x, scene->player.y, 0xFF0000FF);
+	//draw_rect(scene->screen, 0, 255, 512, 512, 0xAA0000FF);
 }

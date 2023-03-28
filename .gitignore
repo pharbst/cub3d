@@ -5,5 +5,5 @@ a.out
 .vscode/
 *.dSYM/
 playground/
-cub3d
+cub3D
 *.pdf

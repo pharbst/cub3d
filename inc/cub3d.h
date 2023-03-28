@@ -61,6 +61,7 @@ void	draw_map(struct s_scene *scene);
 // draw_utils.c
 void	draw_point(mlx_image_t *img, int32_t x, int32_t y, int32_t size, uint32_t color);
 void	draw_line(mlx_image_t *img, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t color);
+void    draw_rect(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t color);
 // hook.c
 void	input_hook(void *param);
 

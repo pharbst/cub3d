@@ -34,7 +34,7 @@ void	draw_player(struct s_player *player)
 {
 	player->image_2d->instances[0].x = player->x;
 	player->image_2d->instances[0].y = player->y;
-	//draw_line(player->image_2d, player->x, player->y, player->x + 3 * player->dx, player->y + 3 * player->dy);
+	draw_line(player->image_2d, 4, 4, 2 * player->dx, 2 * player->dy, 0x00AA00FF);
 }
 
 void	draw_map(struct s_scene *scene)
@@ -49,10 +49,9 @@ void	draw_map(struct s_scene *scene)
 		while(x < scene->map.width)
 		{
 			if (scene->map.data[y * scene->map.width + x] == 1)
-			// TODO: draw directly to screen instead of placing sprite instances
-				mlx_image_to_window(scene->mlx, scene->sprites.tile_white, x * SPRITE_SIZE, y * SPRITE_SIZE);
+				draw_rect(scene->screen, x * SPRITE_SIZE, y * SPRITE_SIZE, x + SPRITE_SIZE, y + SPRITE_SIZE, 0xFFFFFFFF);
 			else
-				mlx_image_to_window(scene->mlx, scene->sprites.tile_black, x * SPRITE_SIZE, y * SPRITE_SIZE);
+				draw_rect(scene->screen, x * SPRITE_SIZE, y * SPRITE_SIZE, x + SPRITE_SIZE, y + SPRITE_SIZE, 0x222222FF);
 			++x;
 		}
 		++y;
