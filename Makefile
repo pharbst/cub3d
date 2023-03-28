@@ -3,7 +3,8 @@ CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./inc -I $(LIBMLX)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS	:= $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -framework Cocoa -framework OpenGL -framework IOKit
 SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}
 
@@ -20,7 +21,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS)
-	@rm -f $(LIBMLX)/build
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@rm -f $(NAME)

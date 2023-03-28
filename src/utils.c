@@ -1,24 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 11:36:56 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/28 12:24:40 by jlohmann         ###   ########.fr       */
+/*   Created: 2023/03/28 12:23:00 by jlohmann          #+#    #+#             */
+/*   Updated: 2023/03/28 12:23:01 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int32_t	main(void)
-{
-	struct s_scene	scene;
-
-	scene_init(&scene);
-	mlx_loop_hook(scene.mlx, input_hook, &scene);
-	mlx_loop(scene.mlx);
-	mlx_terminate(scene.mlx);
-	return (EXIT_SUCCESS);
-}
