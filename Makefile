@@ -1,6 +1,6 @@
 NAME	:= cub3D
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g
+#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g
 LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./inc -I $(LIBMLX)/include
@@ -14,7 +14,7 @@ all: libmlx $(NAME)
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c
+%.o: %.c ./inc/cub3d.h
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)

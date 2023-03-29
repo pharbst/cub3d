@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:20:31 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/28 17:58:39 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:26:24 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,11 @@ void	scene_init(struct s_scene *scene)
 	img_fill_color(scene->sprites.tile_black, 0x000000FF);
 	// v-- TODO: set map with file parsing function
 	map_init(&scene->map, 16, 16, NULL); // don't change these values until file parser is implemented!
-	draw_map(scene);
-	scene->player = (struct s_player){300, 300, 0, 0, M_PI, mlx_new_image(scene->mlx, 16, 16)};
+	//draw_map(scene);
+	scene->player = (struct s_player){300, 300, -2, 0, M_PI, mlx_new_image(scene->mlx, 16, 16)};
 	if (scene->player.image_2d == NULL)
 		mlx_panic();
-	draw_point(scene->player.image_2d, 8, 8, 8, 0x00AA00FF);
 	if (mlx_image_to_window(scene->mlx, scene->player.image_2d, scene->player.x, scene->player.y) < 0)
 		mlx_panic();
-	//draw_point(scene->screen, 0, 0, 20, 0xFFFF00FF);
-	//draw_line(scene->screen, 0, 0, scene->player.x, scene->player.y, 0xFF0000FF);
-	//draw_rect(scene->screen, 0, 255, 512, 512, 0xAA0000FF);
+	draw_player(&scene->player);
 }
