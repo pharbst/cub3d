@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:07 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/29 14:16:36 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:00:23 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	draw_rays(struct s_scene *scene)
 			yo = 32;
 			xo = -yo * aTan;
 		}
-		else if (ra == 0 || ra == M_PI)
+		if (fabs(ra) < 0.0001 || (ra >= M_PI - 0.0001 && ra <= M_PI + 0.0001))
 		{
 			rx = scene->player.x;
 			ry = scene->player.y;

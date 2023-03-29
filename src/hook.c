@@ -6,17 +6,17 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/29 14:26:41 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:06:35 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	input_hook(void *param)
+void input_hook(void *param)
 {
-	struct s_scene	*scene;
-	struct s_player	*player;
-	bool			change;
+	struct s_scene *scene;
+	struct s_player *player;
+	bool change;
 
 	scene = (struct s_scene *)param;
 	player = &scene->player;
@@ -39,19 +39,20 @@ void	input_hook(void *param)
 	if (mlx_is_key_down(scene->mlx, MLX_KEY_RIGHT))
 	{
 		change = true;
-		player->phi += 0.1 + (2 * M_PI * (player->phi > 2*M_PI));
+		player->phi += 0.1 - (2 * M_PI * (player->phi + 0.1 > 2 * M_PI));
 		player->dx = cos(player->phi) * 2;
 		player->dy = sin(player->phi) * 2;
 	}
 	else if (mlx_is_key_down(scene->mlx, MLX_KEY_LEFT))
 	{
 		change = true;
-		scene->player.phi -= 0.1 + (2 * M_PI * (scene->player.phi < 0));
+		scene->player.phi -= 0.1 - (2 * M_PI * (scene->player.phi - 0.1 < 0));
 		player->dx = cos(player->phi) * 2;
 		player->dy = sin(player->phi) * 2;
 	}
 	if (change)
 	{
+		draw_map(scene);
 		draw_player(player);
 		draw_rays(scene);
 	}
