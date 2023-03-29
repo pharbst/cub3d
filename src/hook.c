@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/29 16:06:35 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:40:19 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ void input_hook(void *param)
 	{
 		change = true;
 		player->phi += 0.1 - (2 * M_PI * (player->phi + 0.1 > 2 * M_PI));
-		player->dx = cos(player->phi) * 2;
-		player->dy = sin(player->phi) * 2;
+		player->dx = cos(player->phi) * 5;
+		player->dy = sin(player->phi) * 5;
 	}
 	else if (mlx_is_key_down(scene->mlx, MLX_KEY_LEFT))
 	{
 		change = true;
 		scene->player.phi -= 0.1 - (2 * M_PI * (scene->player.phi - 0.1 < 0));
-		player->dx = cos(player->phi) * 2;
-		player->dy = sin(player->phi) * 2;
+		player->dx = cos(player->phi) * 5;
+		player->dy = sin(player->phi) * 5;
 	}
 	if (change)
 	{

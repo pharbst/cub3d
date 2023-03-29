@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:07 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/29 16:00:23 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:49:20 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,32 @@ void	draw_map(struct s_scene *scene)
 	}
 }
 
+static double dist(double x0, double y0, double x1, double y1)
+{
+	return (sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * y1 - y0));
+}
+
 void	draw_rays(struct s_scene *scene)
 {
 	int		r, mx, my, mp, dof;
 	double	rx, ry, ra, xo, yo;
-	double	aTan;
+	double	/* aTan,  */nTan;
+	double	dstH, hx, hy;
+	double	dstV, vx, vy;
+
+	dstH = 100000;
+	hx = scene->player.x;
+	hy = scene->player.y;
+	dstV = 100000;
+	vx = scene->player.x;
+	vy = scene->player.y;
 
 	ra = scene->player.phi;
 	r = 0;
 	while (r < 1)
 	{
-		dof = 0;
+		// Horizontal lines
+		/* dof = 0;
 		aTan = -1 / tan(ra);
 		if (ra > M_PI)
 		{
@@ -98,13 +113,70 @@ void	draw_rays(struct s_scene *scene)
 			my = (int)(ry)>>5;
 			mp = my * scene->map.width + mx;
 			if (mp < scene->map.width * scene->map.height && scene->map.data[mp] == 1)
+			{
+				hx = rx;
+				hy = ry;
+				dstH = dist(scene->player.x, scene->player.y, hx, hy);
 				break ;
+			}
+			rx += xo;
+			ry += yo;
+			++dof;
+		} */
+		
+		// vertical lines
+		dof = 0;
+		nTan = -tan(ra);
+		if (ra > M_PI_2 && ra < 3 * M_PI_2)
+		{
+			rx = (((int)scene->player.x>>5)<<5) - 0.0001;
+			ry = (scene->player.x - rx) * nTan + scene->player.y;
+			xo = -32;
+			yo = -xo * nTan;
+		}
+		else if (ra < M_PI_2 || ra > 3 * M_PI_2)
+		{
+			rx = (((int)scene->player.x>>5)<<5) + 32;
+			ry = (scene->player.x - rx) * nTan + scene->player.y;
+			xo = 32;
+			yo = -xo * nTan;
+		}
+		if (fabs(ra) < 0.0001 || (ra >= M_PI - 0.0001 && ra <= M_PI + 0.0001))
+		{
+			ry = scene->player.y;
+			rx = scene->player.x;
+			dof = 16;
+		}
+		while (dof < 16)
+		{
+			mx = (int)(rx)>>5;
+			my = (int)(ry)>>5;
+			mp = my * scene->map.width + mx;
+			if (mp < scene->map.width * scene->map.height && scene->map.data[mp] == 1)
+			{
+				vx = rx;
+				vy = ry;
+				dstV = dist(scene->player.x, scene->player.y, vx, vy);
+				break ;
+			}
 			rx += xo;
 			ry += yo;
 			++dof;
 		}
-		draw_line(scene->screen, scene->player.x, scene->player.y, rx, ry, 0xFFFF00FF);
+		if (dstV < dstH)
+		{
+			rx = vx;
+			ry = vy;
+		}
+		else
+		{
+			rx = hx;
+			ry = hy;
+		}
+		draw_line(scene->screen, scene->player.x, scene->player.y, rx, ry, 0xFF0000FF);
+		
 		++r;
 	}
+
 	
 }
