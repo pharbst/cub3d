@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/29 13:30:15 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:05:24 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 512
 # define SPRITE_SIZE 32
+
+# define DEG_RAD 0.01745329
 
 struct s_player {
 	uint32_t	x;

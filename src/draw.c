@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:07 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/29 16:49:20 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:07:10 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void	draw_map(struct s_scene *scene)
 
 static double dist(double x0, double y0, double x1, double y1)
 {
-	return (sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * y1 - y0));
+	return (sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)));
 }
 
 void	draw_rays(struct s_scene *scene)
 {
 	int		r, mx, my, mp, dof;
 	double	rx, ry, ra, xo, yo;
-	double	/* aTan,  */nTan;
+	double	aTan,  nTan;
 	double	dstH, hx, hy;
 	double	dstV, vx, vy;
 
@@ -80,12 +80,16 @@ void	draw_rays(struct s_scene *scene)
 	vx = scene->player.x;
 	vy = scene->player.y;
 
-	ra = scene->player.phi;
+	ra = scene->player.phi - DEG_RAD * 30;
+	if (ra < 0)
+		ra += 2 * M_PI;
+	else if (ra > 2 * M_PI)
+		ra -= 2 * M_PI;
 	r = 0;
-	while (r < 1)
+	while (r < 60)
 	{
 		// Horizontal lines
-		/* dof = 0;
+		dof = 0;
 		aTan = -1 / tan(ra);
 		if (ra > M_PI)
 		{
@@ -112,7 +116,7 @@ void	draw_rays(struct s_scene *scene)
 			mx = (int)(rx)>>5;
 			my = (int)(ry)>>5;
 			mp = my * scene->map.width + mx;
-			if (mp < scene->map.width * scene->map.height && scene->map.data[mp] == 1)
+			if (mp > 0 && mp < scene->map.width * scene->map.height && scene->map.data[mp] == 1)
 			{
 				hx = rx;
 				hy = ry;
@@ -122,7 +126,7 @@ void	draw_rays(struct s_scene *scene)
 			rx += xo;
 			ry += yo;
 			++dof;
-		} */
+		}
 		
 		// vertical lines
 		dof = 0;
@@ -152,7 +156,7 @@ void	draw_rays(struct s_scene *scene)
 			mx = (int)(rx)>>5;
 			my = (int)(ry)>>5;
 			mp = my * scene->map.width + mx;
-			if (mp < scene->map.width * scene->map.height && scene->map.data[mp] == 1)
+			if (mp > 0 && mp < scene->map.width * scene->map.height && scene->map.data[mp] == 1)
 			{
 				vx = rx;
 				vy = ry;
@@ -174,9 +178,11 @@ void	draw_rays(struct s_scene *scene)
 			ry = hy;
 		}
 		draw_line(scene->screen, scene->player.x, scene->player.y, rx, ry, 0xFF0000FF);
-		
+		ra += DEG_RAD;
+		if (ra < 0)
+			ra += 2 * M_PI;
+		else if (ra > 2 * M_PI)
+			ra -= 2 * M_PI;
 		++r;
 	}
-
-	
 }
