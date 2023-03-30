@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:07 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/30 17:53:43 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/30 19:31:22 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ void	img_fill_color(mlx_image_t *img, uint32_t color)
 
 void	draw_player(struct s_player *player)
 {
-	img_fill_color(player->image_2d, 0x00000000);
-	player->image_2d->instances[0].x = player->pos.x - 8;
-	player->image_2d->instances[0].y = player->pos.y - 8;
-	draw_point(player->image_2d, (t_point){8, 8}, 4, 0x00AA00FF);
-	draw_line(player->image_2d, (t_point){8, 8}, (t_point){8 + player->dir.x * 1.5, 8 + player->dir.y * 1.5}, 0x00AA00FF);
+	img_fill_color(player->img, 0x00000000);
+	player->img->instances[0].x = player->pos.x - 8;
+	player->img->instances[0].y = player->pos.y - 8;
+	draw_point(player->img, (t_point){8, 8}, 4, 0x00AA00FF);
+	draw_line(player->img, (t_point){8, 8}, (t_point){8 + player->dir.x * 1.5, 8 + player->dir.y * 1.5}, 0x00AA00FF);
 }
 
-void	draw_map(struct s_scene *scene)
+void	draw_map(struct s_map *map)
 {
 	int x;
 	int	y;
 
 	y = 0;
-	while (y < scene->map.height)
+	while (y < map->height)
 	{
 		x = 0;
-		while(x < scene->map.width)
+		while(x < map->width)
 		{
-			if (scene->map.data[y * scene->map.width + x] == 1)
-				draw_rect(scene->screen, (t_rect){x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE}, 0xFFFFFFFF);
+			if (map->data[y * map->width + x] == 1)
+				draw_rect(map->img, (t_rect){x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE}, 0xFFFFFFFF);
 			else
-				draw_rect(scene->screen, (t_rect){x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE}, 0x222222FF);
+				draw_rect(map->img, (t_rect){x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE}, 0x222222FF);
 			++x;
 		}
 		++y;

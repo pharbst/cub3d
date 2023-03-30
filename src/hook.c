@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/30 15:53:54 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/30 19:32:23 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void input_hook(void *param)
 	}
 	if (change)
 	{
-		draw_map(scene);
+		draw_map(&scene->map);
 		draw_player(player);
 		//draw_rays(scene);
 	}
