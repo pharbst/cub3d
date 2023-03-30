@@ -14,7 +14,7 @@ all: libmlx $(NAME)
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c ./inc/cub3d.h
+%.o: %.c ./inc/cub3d.h ./inc/graphics.h
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)

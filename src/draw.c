@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:07 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/30 15:07:10 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:53:43 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	img_fill_color(mlx_image_t *img, uint32_t color)
 void	draw_player(struct s_player *player)
 {
 	img_fill_color(player->image_2d, 0x00000000);
-	player->image_2d->instances[0].x = player->x - 8;
-	player->image_2d->instances[0].y = player->y - 8;
-	draw_point(player->image_2d, 8, 8, 4, 0x00AA00FF);
-	draw_line(player->image_2d, 8, 8, 8 + player->dx * 4, 8 + player->dy * 4, 0x00AA00FF);
+	player->image_2d->instances[0].x = player->pos.x - 8;
+	player->image_2d->instances[0].y = player->pos.y - 8;
+	draw_point(player->image_2d, (t_point){8, 8}, 4, 0x00AA00FF);
+	draw_line(player->image_2d, (t_point){8, 8}, (t_point){8 + player->dir.x * 1.5, 8 + player->dir.y * 1.5}, 0x00AA00FF);
 }
 
 void	draw_map(struct s_scene *scene)
@@ -51,16 +51,16 @@ void	draw_map(struct s_scene *scene)
 		while(x < scene->map.width)
 		{
 			if (scene->map.data[y * scene->map.width + x] == 1)
-				draw_rect(scene->screen, x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, 0xFFFFFFFF);
+				draw_rect(scene->screen, (t_rect){x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE}, 0xFFFFFFFF);
 			else
-				draw_rect(scene->screen, x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, 0x222222FF);
+				draw_rect(scene->screen, (t_rect){x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE}, 0x222222FF);
 			++x;
 		}
 		++y;
 	}
 }
 
-static double dist(double x0, double y0, double x1, double y1)
+/* static double dist(double x0, double y0, double x1, double y1)
 {
 	return (sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)));
 }
@@ -185,4 +185,4 @@ void	draw_rays(struct s_scene *scene)
 			ra -= 2 * M_PI;
 		++r;
 	}
-}
+} */
