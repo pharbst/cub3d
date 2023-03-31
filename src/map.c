@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 13:22:09 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:51:41 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ void	map_init(mlx_t *mlx, t_map *map, char *file_path)
 
 void	map_draw(t_map *map)
 {
-	int16_t x;
-	int16_t	y;
-	int32_t	block_size;
-
-	block_size = MAP_HEIGHT / map->height;
+	const int32_t	block_size = MAP_HEIGHT / map->height;
+	int16_t			x;
+	int16_t			y;
 
 	y = 0;
 	while (y < map->height)

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 14:06:22 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:59:15 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
 		mlx_panic();
 }
 
-void	player_update(mlx_t *mlx, t_player *player, double dtime)
+void	player_update(mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
@@ -38,12 +38,12 @@ void	player_update(mlx_t *mlx, t_player *player, double dtime)
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
-		player->dir = vec_rotate(player->dir, -ROT_SPEED * dtime);
+		player->dir = vec_rotate(player->dir, -ROT_SPEED);
 		player->plane = vec_rotate(player->dir, M_PI_2);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
-		player->dir = vec_rotate(player->dir, ROT_SPEED * dtime);
+		player->dir = vec_rotate(player->dir, ROT_SPEED);
 		player->plane = vec_rotate(player->dir, M_PI_2);
 	}
 }

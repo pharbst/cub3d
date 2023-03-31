@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 14:06:57 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:01:51 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ void		map_draw(t_map *map);
 void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
 void		player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir);
-void		player_update(mlx_t *mlx, t_player *player, double dtime);
+void		player_update(mlx_t *mlx, t_player *player);
 void		player_draw(t_player *player);
 void		player_destroy(mlx_t *mlx, t_player *player);
 // hooks.c
 void		update(void *param);
-void		fixed_update(void *param);
 // common_utils.c
 t_vec		vec_rotate(t_vec vec, double angle);
 
