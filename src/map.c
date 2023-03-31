@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 11:50:14 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:22:09 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	map_init(mlx_t *mlx, t_map *map, char *file_path)
 		1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 	}, 256);
-	map->img = init_image(mlx, 50, 50, MAP_WIDTH, MAP_HEIGHT);
+	map->img = init_image(mlx, 50, 50, MAP_HEIGHT, MAP_WIDTH);
+	map_draw(map);
 }
 
 void	map_draw(t_map *map)
