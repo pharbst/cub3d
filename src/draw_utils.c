@@ -6,11 +6,29 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/30 19:02:59 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:22:44 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_fill(mlx_image_t *img, uint32_t color)
+{
+	uint32_t	x;
+	uint32_t	y;
+
+	y = 0;
+	while (y < img->height)
+	{
+		x = 0;
+		while (x < img->width)
+		{
+			mlx_put_pixel(img, x, y, color);
+			++x;
+		}
+		++y;
+	}
+}
 
 void	draw_point(mlx_image_t *img, t_point p, int32_t size, uint32_t color)
 {

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/30 19:33:11 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:33:09 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,40 +23,49 @@
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 500
 # define MAP_WIDTH 400
-# define MAP_HEIGHT 400 
-# define SPRITE_SIZE 25
+# define MAP_HEIGHT 400
+# define ROT_SPEED 0.1
 
 # define DEG_RAD 0.01745329
 
-struct s_player {
-	t_point		pos;
+typedef struct s_player {
+	t_vec		pos;
 	t_vec		dir;
-	double		phi;
+	t_vec		plane;
 	mlx_image_t	*img;
-};
+}	t_player;
 
-struct s_map {
+typedef struct s_map {
 	uint16_t	width;
 	uint16_t	height;
 	char		*data;
 	mlx_image_t	*img;
-};
+}	t_map;
 
-struct s_scene {
-	mlx_t				*mlx;
-	mlx_image_t			*screen;
-	struct s_map		map;
-	struct s_player		player;
-};
+typedef struct s_scene {
+	mlx_t		*mlx;
+	mlx_image_t	*screen;
+	t_map		map;
+	t_player	player;
+}	t_scene;
 
-// init.c
-void	scene_init(struct s_scene *scene);
-// draw.c
-void	img_fill_color(mlx_image_t *img, uint32_t color);
-void	draw_player(struct s_player *player);
-void	draw_map(struct s_map *map);
-void	draw_rays(struct s_scene *scene);
-// hook.c
-void	input_hook(void *param);
+// init_utils.c
+void		mlx_panic(void);
+mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);
+void		scene_init(t_scene *scene);
+// map.c
+void		map_init(mlx_t *mlx, t_map *map, char *file_path);
+void		map_draw(t_map *map);
+void		map_destroy(mlx_t *mlx, t_map *map);
+// player.c
+void		player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir);
+void		player_update(mlx_t *mlx, t_player *player);
+void		player_draw(t_player *player);
+void		player_destroy(mlx_t *mlx, t_player *player);
+// hooks.c
+void		update(void *param);
+void		fixed_update(void *param);
+// common_utils.c
+t_vec		vec_rotate(t_vec vec, double angle);
 
 #endif

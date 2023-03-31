@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 11:36:56 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 12:09:19 by jlohmann         ###   ########.fr       */
+/*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
+/*   Updated: 2023/03/31 11:51:14 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int32_t	main(void)
+void	update(void *param)
 {
-	t_scene	scene;
+	t_scene		*scene;
 
-	scene_init(&scene);
-	mlx_loop_hook(scene.mlx, update, &scene);
-	mlx_loop_hook(scene.mlx, fixed_update, &scene);
-	mlx_loop(scene.mlx);
-	mlx_terminate(scene.mlx);
-	return (EXIT_SUCCESS);
+	scene = (t_scene *)param;
+	if (mlx_is_key_down(scene->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(scene->mlx);
+	map_draw(&scene->map);
+	player_draw(&scene->player);
+}
+
+// updates 60 times per second
+void	fixed_update(void *param)
+{
+	t_scene	*scene;
+
+	// TODO: check time
+	scene = (t_scene *)param;
+	player_update(scene->mlx, &scene->player);
 }
