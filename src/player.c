@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 14:59:15 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:13:21 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
 {
 	player->pos = pos;
 	player->dir = dir;
-	player->plane = vec_rotate(player->dir, M_PI_2);
+	player->plane = vec_rotate((t_vec){player->dir.x * FOV, player->dir.y * FOV}, M_PI_2);
 	player->img = mlx_new_image(mlx, 32, 32);
 	if (player->img == NULL)
 		mlx_panic();
@@ -39,12 +39,12 @@ void	player_update(mlx_t *mlx, t_player *player)
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
 		player->dir = vec_rotate(player->dir, -ROT_SPEED);
-		player->plane = vec_rotate(player->dir, M_PI_2);
+		player->plane = vec_rotate(player->plane, -ROT_SPEED);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
 		player->dir = vec_rotate(player->dir, ROT_SPEED);
-		player->plane = vec_rotate(player->dir, M_PI_2);
+		player->plane = vec_rotate(player->plane, ROT_SPEED);
 	}
 }
 
@@ -57,16 +57,21 @@ void	player_draw(t_player *player)
 	draw_fill(player->img, 0x00000000);
 	player->img->instances[0].x = player->pos.x - offset.x; // round pos for smoother movement?
 	player->img->instances[0].y = player->pos.y - offset.y;
-	draw_point(player->img, offset, 4, 0x00AA00FF);
-	draw_line(player->img, offset, (t_point){offset.x + player->dir.x * 8, offset.y + player->dir.y * 8}, 0x00AA00FF);
-	draw_line(player->img,
+	draw_point(player->img, offset, 3, 0x00AA00FF);
+	draw_triangle(player->img,
+		(t_point){
+			offset.x,
+			offset.y
+		},
 		(t_point){
 			offset.x + player->dir.x * 8 + player->plane.x * 8,
-			offset.y + player->dir.y * 8 + player->plane.y * 8},
+			offset.y + player->dir.y * 8 + player->plane.y * 8
+		},
 		(t_point){
 			offset.x + player->dir.x * 8 + -player->plane.x * 8,
-			offset.y + player->dir.y * 8 + -player->plane.y * 8},
-		0xFF0000FF
+			offset.y + player->dir.y * 8 + -player->plane.y * 8
+		},
+		0xFFFF00FF
 	);
 }
 

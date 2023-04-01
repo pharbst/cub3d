@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 11:22:44 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:59:08 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ void	draw_line(mlx_image_t *img, t_point start, t_point end, uint32_t color)
 			start.y += sign.y;
 		}
 	}
+}
+
+void	draw_triangle(mlx_image_t *img, t_point a, t_point b, t_point c, uint32_t color)
+{
+	draw_line(img, a, b, color);
+	draw_line(img, b, c, color);
+	draw_line(img, c, a, color);
 }
 
 void	draw_rect(mlx_image_t *img, t_rect rect, uint32_t color)

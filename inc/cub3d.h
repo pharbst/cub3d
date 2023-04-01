@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 15:01:51 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:10:46 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 500
+# define FOV 0.66
 # define MAP_WIDTH 400
 # define MAP_HEIGHT 400
 # define ROT_SPEED 0.1
