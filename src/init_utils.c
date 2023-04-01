@@ -6,17 +6,11 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:20:31 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 17:43:35 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:25:09 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	mlx_panic(void)
-{
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
-}
 
 mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height)
 {
@@ -31,15 +25,4 @@ mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32
 		mlx_panic();
 	}
 	return (img);
-}
-
-void	scene_init(t_scene *scene)
-{
-	scene->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D", true);
-	if (scene->mlx == NULL)
-		mlx_panic();
-	scene->screen = init_image(scene->mlx, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	draw_fill(scene->screen, 0x000000FF);
-	map_init(scene->mlx, &scene->map, NULL);
-	player_init(scene->mlx, &scene->player, (t_vec){8.0, 8.0}, (t_vec){0.0, 1.0});
 }

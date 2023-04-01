@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 17:46:53 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:16:29 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <math.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "libft.h"
+# include "get_next_line.h"
 # include "graphics.h"
 
 # define SCREEN_WIDTH 1000
@@ -48,9 +50,10 @@ typedef struct s_scene {
 }	t_scene;
 
 // init_utils.c
-void		mlx_panic(void);
 mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);
+// scene.c
 void		scene_init(t_scene *scene);
+void		scene_destroy(t_scene *scene);
 // map.c
 void		map_init(mlx_t *mlx, t_map *map, char *file_path);
 void		map_draw(t_map *map);
@@ -64,5 +67,9 @@ void		player_destroy(mlx_t *mlx, t_player *player);
 void		update(void *param);
 // common_utils.c
 t_vec		vec_rotate(t_vec vec, double angle);
+// error_handling.c
+//void		print_help(void);
+void		panic(const char *msg);
+void		mlx_panic(void);
 
 #endif
