@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 16:40:41 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:36:08 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # define FOV 0.66
 # define MAP_WIDTH 400
 # define MAP_HEIGHT 400
-# define ROT_SPEED 0.1
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.07
 
 # define DEG_RAD 0.01745329
 
@@ -59,7 +60,7 @@ void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
 void		player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir);
 void		player_update(mlx_t *mlx, t_player *player);
-void		player_draw(t_player *player);
+void		player_draw(t_player *player, t_map *map);
 void		player_destroy(mlx_t *mlx, t_player *player);
 // hooks.c
 void		update(void *param);

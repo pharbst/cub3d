@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 15:13:21 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:34:35 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	player_update(mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
-		player->pos.x += player->dir.x;
-		player->pos.y += player->dir.y;
+		player->pos.x += player->dir.x * MOVE_SPEED;
+		player->pos.y += player->dir.y * MOVE_SPEED;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
-		player->pos.x -= player->dir.x;
-		player->pos.y -= player->dir.y;
+		player->pos.x -= player->dir.x * MOVE_SPEED;
+		player->pos.y -= player->dir.y * MOVE_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
@@ -48,15 +48,15 @@ void	player_update(mlx_t *mlx, t_player *player)
 	}
 }
 
-void	player_draw(t_player *player)
+void	player_draw(t_player *player, t_map *map)
 {
 	const t_point	offset = (t_point){
 		player->img->width / 2, player->img->height / 2
 	};
 
 	draw_fill(player->img, 0x00000000);
-	player->img->instances[0].x = player->pos.x - offset.x; // round pos for smoother movement?
-	player->img->instances[0].y = player->pos.y - offset.y;
+	player->img->instances[0].x = player->pos.x * MAP_WIDTH / map->width - offset.x; // round pos for smoother movement?
+	player->img->instances[0].y = player->pos.y * MAP_HEIGHT / map->height - offset.y;
 	draw_point(player->img, offset, 3, 0x00AA00FF);
 	draw_triangle(player->img,
 		(t_point){

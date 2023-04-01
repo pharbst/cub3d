@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:20:31 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 12:32:56 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:29:34 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	scene_init(t_scene *scene)
 	scene->screen = init_image(scene->mlx, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	draw_fill(scene->screen, 0x000000FF);
 	map_init(scene->mlx, &scene->map, NULL);
-	player_init(scene->mlx, &scene->player, (t_vec){220, 220}, (t_vec){0.0, 1.0});
+	player_init(scene->mlx, &scene->player, (t_vec){8.0, 8.0}, (t_vec){0.0, 1.0});
 }
