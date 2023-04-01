@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 21:16:29 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:26:09 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "libft.h"
-# include "get_next_line.h"
 # include "graphics.h"
 
 # define SCREEN_WIDTH 1000
