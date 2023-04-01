@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/03/31 14:51:41 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 16:38:11 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	map_init(mlx_t *mlx, t_map *map, char *file_path)
 	map->data = malloc(sizeof(char) * map->width * map->height);
 	if (map->data == NULL)
 		mlx_panic(); // not a mlx_error. Call another function to panic.
-	map->data = memcpy(map->data, (char[256]){
+	map->data = ft_memcpy(map->data, (char[256]){
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,
 		1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,1,

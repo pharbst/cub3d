@@ -6,18 +6,16 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 15:10:46 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 16:40:41 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
 # include <math.h>
+# include <stdio.h>
+# include "libft.h"
 # include "graphics.h"
 
 # define SCREEN_WIDTH 1000
