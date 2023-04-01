@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 17:36:08 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:46:53 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # define MAP_HEIGHT 400
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.07
-
-# define DEG_RAD 0.01745329
 
 typedef struct s_player {
 	t_vec		pos;

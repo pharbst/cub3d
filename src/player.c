@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 17:34:35 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:42:58 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	player_draw(t_player *player, t_map *map)
 	};
 
 	draw_fill(player->img, 0x00000000);
-	player->img->instances[0].x = player->pos.x * MAP_WIDTH / map->width - offset.x; // round pos for smoother movement?
-	player->img->instances[0].y = player->pos.y * MAP_HEIGHT / map->height - offset.y;
+	player->img->instances[0].x = player->pos.x * MAP_WIDTH / map->width + map->img->instances[0].x - offset.x; // round pos for smoother movement?
+	player->img->instances[0].y = player->pos.y * MAP_HEIGHT / map->height + map->img->instances[0].y - offset.y;
 	draw_point(player->img, offset, 3, 0x00AA00FF);
 	draw_triangle(player->img,
 		(t_point){
