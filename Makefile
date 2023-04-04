@@ -6,7 +6,7 @@
 #    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/01 20:39:45 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/04/04 17:41:06 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include
 # LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -framework Cocoa -framework OpenGL -framework IOKit
 
-VPATH	:= src
-SRCS	:= common_utils.c hooks.c main.c player.c draw_utils.c init_utils.c map.c scene.c error_handling.c
+VPATH	:= src src/graphics
+SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c  draw_utils.c init_utils.c map.c scene.c error_handling.c
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)
 

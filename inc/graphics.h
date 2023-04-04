@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:22:55 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 14:59:28 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:42:11 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ typedef struct s_rect {
 	int32_t	width;
 	int32_t	height;
 }	t_rect;
+
+typedef struct s_dda_params {
+	double	camera_x;
+	t_vec	ray_dir;
+	t_point	step_pos;
+	t_point	step_dir;
+	t_vec	dist;
+	t_vec	delta;
+}	t_dda_params;
 
 // draw_utils.c
 void	draw_fill(mlx_image_t *img, uint32_t color);

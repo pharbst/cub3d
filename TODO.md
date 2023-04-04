@@ -2,6 +2,9 @@
 
 ## Mandatory:
 * [ ] 3D scene rendering using raycasting.
+	* [x] Basic drawing utilities
+	* [ ] Raycasting algorithm (DDA)
+	* [ ] 3D projection on screen
 * [ ] Different textures for each side (N, E, S, W)
 * [ ] Floor and ceiling colors
 * [ ] Controls:

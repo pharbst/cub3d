@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 21:26:09 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:13:05 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void		player_update(mlx_t *mlx, t_player *player);
 void		player_draw(t_player *player, t_map *map);
 void		player_destroy(mlx_t *mlx, t_player *player);
 // hooks.c
+void		key_hook(mlx_key_data_t keydata, void* param);
 void		update(void *param);
+// raycaster.c
+void		raycast(t_player *player, t_map *map, t_scene *scene);
 // common_utils.c
 t_vec		vec_rotate(t_vec vec, double angle);
 // error_handling.c
