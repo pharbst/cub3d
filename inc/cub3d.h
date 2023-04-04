@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 21:26:09 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:48:38 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct s_player {
 typedef struct s_map {
 	uint16_t	width;
 	uint16_t	height;
+	int32_t		color_floor;
+	int32_t		color_ceiling;
+	int32_t		fd_no;
+	int32_t		fd_so;
+	int32_t		fd_we;
+	int32_t		fd_ea;
 	char		*data;
 	mlx_image_t	*img;
 }	t_map;
