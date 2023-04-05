@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/04 18:15:24 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 11:36:37 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	set_dda_params(t_player *player, t_dda_params *ddap, int x)
 	if (ddap->ray_dir.x != 0)
 		ddap->delta.x = fabs(1 / ddap->ray_dir.x);
 	if (ddap->ray_dir.y != 0)
-		ddap->delta.y = fabs(1 / ddap->ray_dir.x);
+		ddap->delta.y = fabs(1 / ddap->ray_dir.y);
 	ddap->step_dir = (t_point){
 		2 * (ddap->ray_dir.x > 0) - 1,
 		2 * (ddap->ray_dir.y > 0) - 1
@@ -57,7 +57,7 @@ static double	perform_dda(t_dda_params *ddap, t_map *map)
 			ddap->step_pos.y += ddap->step_dir.y;
 			side = 1;
 		}
-		if (map->data[ddap->step_pos.y * map->height + ddap->step_pos.x] > 0)
+		if (map->data[ddap->step_pos.y * map->width + ddap->step_pos.x] > 0)
 			break;
 	}
 	if (side == 0)
@@ -65,25 +65,37 @@ static double	perform_dda(t_dda_params *ddap, t_map *map)
 	return (ddap->dist.y - ddap->delta.y);
 }
 
+static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist)
+{
+	int		line_height;
+	int		start;
+	int		end;
+
+	line_height = SCREEN_HEIGHT / dist;
+	start = -line_height / 2 + SCREEN_HEIGHT / 2;
+	end = line_height / 2 + SCREEN_HEIGHT / 2;
+	start *= (start >= 0);
+	if (end > SCREEN_HEIGHT)
+		end = SCREEN_HEIGHT;
+	while (start != end)
+	{
+		mlx_put_pixel(screen, x, start, 0x550055FF);
+		++start;
+	}
+}
+
 void	raycast(t_player *player, t_map *map, t_scene *scene)
 {
 	t_dda_params	ddap;
 	int				x;
 	double			dist;
-
-	int				line_height;
-	t_point			start;
-	t_point			end;
 	
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
 		set_dda_params(player, &ddap, x);
 		dist = perform_dda(&ddap, map);
-		line_height = SCREEN_HEIGHT / dist;
-		start = (t_point){x, -line_height / 2 + SCREEN_HEIGHT / 2};
-		end = (t_point){x, line_height / 2 + SCREEN_HEIGHT / 2};
-		draw_line(scene->screen, start, end, 0x00AA00FF);
+		draw_vertical_line(scene->screen, x, dist);
 		++x;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 10:21:22 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 11:07:10 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include "libft.h"
 # include "graphics.h"
 
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGHT 500
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define FOV 0.66
 # define MAP_WIDTH 400
 # define MAP_HEIGHT 400
 # define MOVE_SPEED 0.05
-# define ROT_SPEED 0.07
+# define ROT_SPEED 0.04
 
 typedef struct s_player {
 	t_vec		pos;

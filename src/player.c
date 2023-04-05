@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 10:33:30 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 11:40:01 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
 	player->pos = pos;
 	player->dir = dir;
 	player->plane = vec_rotate((t_vec){player->dir.x * FOV, player->dir.y * FOV}, M_PI_2);
-	player->img = mlx_new_image(mlx, 32, 32);
-	if (player->img == NULL)
-		mlx_panic();
-	if (mlx_image_to_window(mlx, player->img, player->pos.x, player->pos.y) < 0)
-		mlx_panic();
+	player->img = init_image(mlx, player->pos.x, player->pos.y, 32, 32);
+	player->img->enabled = false;
 }
 
 void	player_update(mlx_t *mlx, t_player *player)
