@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/04 18:13:05 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:21:22 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void		update(void *param);
 // raycaster.c
 void		raycast(t_player *player, t_map *map, t_scene *scene);
 // common_utils.c
+t_vec		vec_add(t_vec a, t_vec b);
+t_vec		vec_scale(t_vec vec, double factor);
 t_vec		vec_rotate(t_vec vec, double angle);
 // error_handling.c
 //void		print_help(void);

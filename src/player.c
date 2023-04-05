@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/01 17:42:58 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:33:30 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
 
 void	player_update(mlx_t *mlx, t_player *player)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-	{
-		player->pos.x += player->dir.x * MOVE_SPEED;
-		player->pos.y += player->dir.y * MOVE_SPEED;
-	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-	{
-		player->pos.x -= player->dir.x * MOVE_SPEED;
-		player->pos.y -= player->dir.y * MOVE_SPEED;
-	}
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+		player->pos = vec_add(player->pos, vec_scale(player->dir, MOVE_SPEED));
+	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+		player->pos = vec_add(player->pos, vec_scale(player->dir, -MOVE_SPEED));
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
+		player->pos = vec_add(player->pos, vec_scale(player->plane, -1 / FOV * MOVE_SPEED));
+	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+		player->pos = vec_add(player->pos, vec_scale(player->plane, 1 / FOV * MOVE_SPEED));
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
 		player->dir = vec_rotate(player->dir, -ROT_SPEED);
