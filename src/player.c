@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 15:43:00 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:39:03 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
 void	player_update(mlx_t *mlx, t_player *player)
 {
 	t_vec	step;
-	bool	key_state[6];
+	bool	key_state[7];
 
 	key_state[0] = mlx_is_key_down(mlx, MLX_KEY_W);
 	key_state[1] = mlx_is_key_down(mlx, MLX_KEY_A);
@@ -31,6 +31,7 @@ void	player_update(mlx_t *mlx, t_player *player)
 	key_state[3] = mlx_is_key_down(mlx, MLX_KEY_D);
 	key_state[4] = mlx_is_key_down(mlx, MLX_KEY_LEFT);
 	key_state[5] = mlx_is_key_down(mlx, MLX_KEY_RIGHT);
+	key_state[6] = mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT);
 
 	if (key_state[4])
 	{
@@ -43,6 +44,8 @@ void	player_update(mlx_t *mlx, t_player *player)
 		player->plane = vec_rotate(player->plane, ROT_SPEED);
 	}
 	step = vec_scale(player->dir, MOVE_SPEED);
+	if (key_state[6])
+		step = vec_scale(step, 2);
 	if (key_state[0] && key_state[1])
 		step = vec_rotate(step, -M_PI_4);
 	else if (key_state[0] && key_state[3])
