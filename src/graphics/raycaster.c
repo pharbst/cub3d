@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 11:36:37 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:34:34 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,26 @@ static double	perform_dda(t_dda_params *ddap, t_map *map)
 	return (ddap->dist.y - ddap->delta.y);
 }
 
-static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist)
+static uint32_t	select_color(t_map *map, t_dda_params *ddap)
+{
+	int	tile;
+
+	tile = map->data[ddap->step_pos.y * map->width + ddap->step_pos.x];
+	if (tile == 1)
+		return (0xFFFFFF00);
+	else if (tile == 2)
+		return (0xFF000000);
+	else if (tile == 3)
+		return (0x00FF0000);
+	else if (tile == 4)
+		return (0x0000FF00);
+	else if (tile == 5)
+		return (0xFFFF0000);
+	else
+		return (0x00000000);
+}
+
+static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color)
 {
 	int		line_height;
 	int		start;
@@ -79,7 +98,11 @@ static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist)
 		end = SCREEN_HEIGHT;
 	while (start != end)
 	{
-		mlx_put_pixel(screen, x, start, 0x550055FF);
+		if (dist != 0)
+			color |= (int)(0xFF / dist);
+		if (line_height >= SCREEN_HEIGHT)
+			color |= 0xFF;
+		mlx_put_pixel(screen, x, start, color);
 		++start;
 	}
 }
@@ -89,13 +112,15 @@ void	raycast(t_player *player, t_map *map, t_scene *scene)
 	t_dda_params	ddap;
 	int				x;
 	double			dist;
-	
+	uint32_t		color;
+
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
 		set_dda_params(player, &ddap, x);
 		dist = perform_dda(&ddap, map);
-		draw_vertical_line(scene->screen, x, dist);
+		color = select_color(map, &ddap);
+		draw_vertical_line(scene->screen, x, dist, color);
 		++x;
 	}
 }

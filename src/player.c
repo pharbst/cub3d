@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 11:40:01 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:43:00 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,50 @@ void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
 	player->dir = dir;
 	player->plane = vec_rotate((t_vec){player->dir.x * FOV, player->dir.y * FOV}, M_PI_2);
 	player->img = init_image(mlx, player->pos.x, player->pos.y, 32, 32);
-	player->img->enabled = false;
 }
 
 void	player_update(mlx_t *mlx, t_player *player)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		player->pos = vec_add(player->pos, vec_scale(player->dir, MOVE_SPEED));
-	else if (mlx_is_key_down(mlx, MLX_KEY_S))
-		player->pos = vec_add(player->pos, vec_scale(player->dir, -MOVE_SPEED));
-	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		player->pos = vec_add(player->pos, vec_scale(player->plane, -1 / FOV * MOVE_SPEED));
-	else if (mlx_is_key_down(mlx, MLX_KEY_D))
-		player->pos = vec_add(player->pos, vec_scale(player->plane, 1 / FOV * MOVE_SPEED));
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	t_vec	step;
+	bool	key_state[6];
+
+	key_state[0] = mlx_is_key_down(mlx, MLX_KEY_W);
+	key_state[1] = mlx_is_key_down(mlx, MLX_KEY_A);
+	key_state[2] = mlx_is_key_down(mlx, MLX_KEY_S);
+	key_state[3] = mlx_is_key_down(mlx, MLX_KEY_D);
+	key_state[4] = mlx_is_key_down(mlx, MLX_KEY_LEFT);
+	key_state[5] = mlx_is_key_down(mlx, MLX_KEY_RIGHT);
+
+	if (key_state[4])
 	{
 		player->dir = vec_rotate(player->dir, -ROT_SPEED);
 		player->plane = vec_rotate(player->plane, -ROT_SPEED);
 	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	else if (key_state[5])
 	{
 		player->dir = vec_rotate(player->dir, ROT_SPEED);
 		player->plane = vec_rotate(player->plane, ROT_SPEED);
 	}
+	step = vec_scale(player->dir, MOVE_SPEED);
+	if (key_state[0] && key_state[1])
+		step = vec_rotate(step, -M_PI_4);
+	else if (key_state[0] && key_state[3])
+		step = vec_rotate(step, M_PI_4);
+	else if (key_state[2] && key_state[1])
+		step = vec_rotate(step, -3 * M_PI_4);
+	else if (key_state[2] && key_state[3])
+		step = vec_rotate(step, 3 * M_PI_4);
+	else if (key_state[0])
+		;
+	else if (key_state[1])
+		step = vec_rotate(step, -M_PI_2);
+	else if (key_state[2])
+		step = vec_rotate(step, -M_PI);
+	else if (key_state[3])
+		step = vec_rotate(step, M_PI_2);
+	else 
+		return ;
+	player->pos = vec_add(player->pos, step);
 }
 
 void	player_draw(t_player *player, t_map *map)

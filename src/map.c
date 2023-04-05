@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 11:35:23 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:23:28 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,23 @@ void	map_init(mlx_t *mlx, t_map *map, char *file_path)
 		mlx_panic(); // not a mlx_error. Call another function to panic.
 	map->data = ft_memcpy(map->data, (char[256]){
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-		1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
-		1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,
-		1,0,0,1,0,0,0,0,0,0,1,1,1,0,0,1,
-		1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,
-		1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
-		1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,
-		1,0,1,0,1,0,0,0,0,0,1,1,0,0,0,1,
-		1,0,0,0,0,0,0,0,0,1,0,1,0,1,1,1,
-		1,0,1,0,1,0,0,0,1,0,0,1,0,0,0,1,
-		1,0,0,0,0,0,0,0,1,0,1,1,0,1,1,1,
-		1,0,1,0,1,0,0,1,0,0,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,1,0,1,1,0,1,1,0,1,
-		1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,
+		1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,
+		1,0,0,0,0,0,2,0,0,0,0,3,0,0,0,1,
+		1,0,0,2,0,0,0,0,0,0,3,3,3,0,0,1,
+		1,0,0,0,0,0,2,0,0,0,0,3,0,0,0,1,
+		1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,
+		1,2,2,0,2,2,2,0,0,0,0,0,0,0,0,1,
+		1,0,0,0,0,0,0,0,0,0,0,0,4,4,0,1,
+		1,0,5,0,5,0,0,0,0,0,4,4,0,0,0,1,
+		1,0,0,0,0,0,0,0,0,4,0,4,0,4,4,1,
+		1,0,5,0,5,0,0,0,4,0,0,4,0,0,0,1,
+		1,0,0,0,0,0,0,0,4,0,4,4,0,4,4,1,
+		1,0,5,0,5,0,0,4,0,0,0,0,0,4,0,1,
+		1,0,0,0,0,0,0,4,0,4,4,0,4,4,0,1,
+		1,0,0,0,0,0,0,0,0,4,0,0,0,0,0,1,
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 	}, 256);
 	map->img = init_image(mlx, 50, 50, MAP_HEIGHT, MAP_WIDTH);
-	map->img->enabled = false;
 	map_draw(map);
 }
 
@@ -48,6 +47,7 @@ void	map_draw(t_map *map)
 	const int32_t	block_size = MAP_HEIGHT / map->height;
 	int16_t			x;
 	int16_t			y;
+	uint32_t		color;
 
 	y = 0;
 	while (y < map->height)
@@ -56,9 +56,18 @@ void	map_draw(t_map *map)
 		while(x < map->width)
 		{
 			if (map->data[y * map->width + x] == 1)
-				draw_rect(map->img, (t_rect){x * block_size, y * block_size, block_size, block_size}, 0xFFFFFFFF);
+				color = 0xFFFFFFFF;
+			else if (map->data[y * map->width + x] == 2)
+				color = 0xFF0000FF;
+			else if (map->data[y * map->width + x] == 3)
+				color = 0x00FF00FF;
+			else if (map->data[y * map->width + x] == 4)
+				color = 0x0000FFFF;
+			else if (map->data[y * map->width + x] == 5)
+				color = 0xFFFF00FF;
 			else
-				draw_rect(map->img, (t_rect){x * block_size, y * block_size, block_size, block_size}, 0x222222FF);
+				color = 0x000000FF;
+			draw_rect(map->img, (t_rect){x * block_size, y * block_size, block_size, block_size}, color);
 			++x;
 		}
 		++y;

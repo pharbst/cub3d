@@ -1,15 +1,15 @@
 # TODO
 
 ## Mandatory:
-* [ ] 3D scene rendering using raycasting.
+* [x] 3D scene rendering using raycasting.
 	* [x] Basic drawing utilities
-	* [ ] Raycasting algorithm (DDA)
-	* [ ] 3D projection on screen
+	* [x] Raycasting algorithm (DDA)
+	* [x] 3D projection on screen
 * [ ] Different textures for each side (N, E, S, W)
 * [ ] Floor and ceiling colors
-* [ ] Controls:
+* [x] Controls:
 	* [x] LEFT, RIGHT: rotate view
-	* [ ] W, A, S, D: move player/camera
+	* [x] W, A, S, D: move player/camera
 	* [x] ESC: exit
 	* [x] Click red cross: exit
 * [ ] Map:
@@ -23,7 +23,7 @@
 
 ## Bonus:
 * [ ] Wall collisions
-* [ ] Minimap
+* [x] Minimap
 * [ ] Doors
 * [ ] Animated sprites
 * [ ] Mouse movement
