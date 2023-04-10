@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/04 16:48:38 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/10 02:59:00 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "graphics.h"
+# include "cub3d_error.h"
+# include "get_next_line.h"
 
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 500
@@ -53,6 +55,16 @@ typedef struct s_scene {
 	t_map		map;
 	t_player	player;
 }	t_scene;
+
+// parsing
+char		*check_map(char **map, t_scene *scene);
+void		clean_pars(t_scene *scene);
+int			get_cf_colors(int fd, t_scene *scene);
+int			get_map(int fd, t_scene *scene);
+int			get_textures(int fd, t_scene *scene);
+int			parse_map(char **map);
+int			pars(char *path, t_scene *scene);
+char		*skip_space(char *line);
 
 // init_utils.c
 mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);

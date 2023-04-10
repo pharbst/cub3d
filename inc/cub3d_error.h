@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:59:36 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/04 18:48:40 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/10 03:05:01 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,25 @@
 
 # define READ 1
 # define WRITE 0
-# define ERNOID 1
+
+# define ERNOID		1
+# define ERNOFILE	2
+# define EREOF		3
+# define ERFORMAT	4
+# define ERALLOC	5
+# define EREXT		6
+# define ERARG		7
+
+# define _ERNOID	"error: unknown identifier for wall texture\n"
+# define _ERNOFILE	"error: file not found\n"
+# define _EREOF		"error: unexpected end of file\n"
+# define _ERFORMAT	"error: invalid file format\n"
+# define _ERALLOC	"error: memory allocation failed\n"
+# define _EREXT		"error: invalid file extension\n"
+# define _ERARG		"error: invalid number of arguments\n"
+# define _ERARGHELP	"usage: ./cub3d <path to map.cub>\n"
 
 int		cub_errno(bool read, int value);
 void	cub_strerror(void);
-void	ft_putstrsfd(int fd, const char *str, ...);
 
 #endif
