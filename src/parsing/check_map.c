@@ -6,42 +6,86 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 01:49:55 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/10 02:57:05 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:49:09 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "cub3d_error.h"
 
-static char	*convert_map(char **map, t_scene *scene)
+int	add_queue(t_list **queue, int coords[2])
 {
-	char	*ret_map;
-	int		i;
-	int		j;
+	t_list	*tmp;
 
-	i = -1;
-	j = 0;
-	while (map[++i])
-		if ((int)ft_strlen(map[i]) > j)
-			j = ft_strlen(map[i]);
-	ret_map = ft_calloc(j * scene->map.height, sizeof(char));
-	if (!ret_map)
-		return (cub_errno(WRITE, ERALLOC), NULL);
-	i = -1;
-	while (map[++i])
-	{
-		ft_memcpy(ret_map + (i * j), map[i], ft_strlen(map[i]));
-		if ((int)ft_strlen(map[i]) < j)
-			ft_memset(ret_map + (i * j) + ft_strlen(map[i]),
-				'0', j - ft_strlen(map[i]));
-		free(map[i]);
-	}
-	free(map);
-	return (ret_map);
+	tmp = ft_lstnew(create_vector(coords[0] + 1, coords[1]));
+	if (!tmp)
+		return (1);
+	ft_lstadd_back(queue, tmp);
+	tmp = ft_lstnew(create_vector(coords[0] - 1, coords[1]));
+	if (!tmp)
+		return (1);
+	ft_lstadd_back(queue, tmp);
+	tmp = ft_lstnew(create_vector(coords[0], coords[1] + 1));
+	if (!tmp)
+		return (1);
+	ft_lstadd_back(queue, tmp);
+	tmp = ft_lstnew(create_vector(coords[0], coords[1] - 1));
+	if (!tmp)
+		return (1);
+	ft_lstadd_back(queue, tmp);
+	return (0);
 }
 
-char	*check_map(char **map, t_scene *scene)
+int	check_algo(t_scene *scene, t_list **queue, char old)
 {
-	printf("map check not implemented yet\n");
-	return (convert_map(map, scene));
+	t_list	*tmp;
+	int		coords[2];
+
+	coords[0] = ((int *)((*queue)->content))[0];
+	coords[1] = ((int *)((*queue)->content))[1];
+	if (coords[0] < 0 || coords[1] < 0
+		|| coords[0] >= scene->map.width
+		|| coords[1] >= scene->map.height)
+		return (ft_lstclear(queue, &free), cub_errno(WRITE, ERMAP), 1);
+	if (scene->map.data[coords[0] + coords[1] * scene->map.width] == '1'
+		|| scene->map.data[coords[0] + coords[1] * scene->map.width] == '0')
+		return (tmp = (*queue)->next, ft_lstdelone(*queue, &free), *queue = tmp,
+			0);
+	if (scene->map.data[coords[0] + coords[1] * scene->map.width] == old)
+	{
+		scene->map.data[coords[0] + coords[1] * scene->map.width] = '0';
+		if (add_queue(queue, coords))
+			return (cub_errno(WRITE, ERALLOC), 1);
+	}
+	return (0);
+}
+
+int	check_main(t_scene *scene)
+{
+	int		coords[2];
+	char	old;
+	t_list	*queue;
+
+	old = '9';
+	if (find_start(coords, scene))
+		return (1);
+	scene->map.data = ft_strreplace(scene->map.data, '0', old);
+	queue = ft_lstnew(create_vector(coords[0] + 1, coords[1]));
+	ft_lstadd_back(&queue, ft_lstnew(create_vector(coords[0] - 1, coords[1])));
+	ft_lstadd_back(&queue, ft_lstnew(create_vector(coords[0], coords[1] + 1)));
+	ft_lstadd_back(&queue, ft_lstnew(create_vector(coords[0], coords[1] - 1)));
+	while (queue)
+		if (check_algo(scene, &queue, old))
+			return (1);
+	scene->map.data = ft_strreplace(scene->map.data, old, '0');
+}
+
+int	check_map(char **map, t_scene *scene)
+{
+	scene->map.data = convert_map(map, scene);
+	if (!scene->map.data)
+		return (1);
+	if (check_main(scene))
+		return (1);
+	return (0);
 }

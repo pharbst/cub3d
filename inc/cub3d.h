@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/10 02:59:00 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:32:46 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ typedef struct s_scene {
 }	t_scene;
 
 // parsing
-char		*check_map(char **map, t_scene *scene);
+char		*convert_map(char **map, t_scene *scene);
+int			find_start(int start[2], t_scene *scene);
+void		*create_vector(int x, int y);
+int			check_map(char **map, t_scene *scene);
 void		clean_pars(t_scene *scene);
 int			get_cf_colors(int fd, t_scene *scene);
 int			get_map(int fd, t_scene *scene);
