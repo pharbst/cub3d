@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 16:23:12 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:33:13 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@
 # define MAP_HEIGHT 300
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.04
+
+typedef struct s_keystate {
+	bool	W;
+	bool	A;
+	bool	S;
+	bool	D;
+	bool	LEFT;
+	bool	RIGHT;
+	bool	SHIFT;
+}	t_keystate;
 
 typedef struct s_player {
 	t_vec		pos;
@@ -52,6 +62,7 @@ typedef struct s_scene {
 mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);
 // scene.c
 void		scene_init(t_scene *scene);
+void		scene_draw(t_scene *scene);
 void		scene_destroy(t_scene *scene);
 // map.c
 void		map_init(mlx_t *mlx, t_map *map, char *file_path);
@@ -59,14 +70,19 @@ void		map_draw(t_map *map);
 void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
 void		player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir);
-void		player_update(mlx_t *mlx, t_player *player);
+void		player_update(mlx_t *mlx, t_player *player, t_map *map);
 void		player_draw(t_player *player, t_map *map);
 void		player_destroy(mlx_t *mlx, t_player *player);
+// player_utils.c
+void		player_move(t_keystate *state, t_player *player, t_map *map);
+void		player_rotate(t_keystate *state, t_player *player);
 // hooks.c
 void		key_hook(mlx_key_data_t keydata, void* param);
 void		update(void *param);
+// input.c
+t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
-void		raycast(t_player *player, t_map *map, t_scene *scene);
+void		raycast(t_scene *scene);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);

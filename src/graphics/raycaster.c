@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 16:34:34 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:32:35 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist, uint
 	}
 }
 
-void	raycast(t_player *player, t_map *map, t_scene *scene)
+void	raycast(t_scene *scene)
 {
 	t_dda_params	ddap;
 	int				x;
@@ -117,9 +117,9 @@ void	raycast(t_player *player, t_map *map, t_scene *scene)
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		set_dda_params(player, &ddap, x);
-		dist = perform_dda(&ddap, map);
-		color = select_color(map, &ddap);
+		set_dda_params(&scene->player, &ddap, x);
+		dist = perform_dda(&ddap, &scene->map);
+		color = select_color(&scene->map, &ddap);
 		draw_vertical_line(scene->screen, x, dist, color);
 		++x;
 	}

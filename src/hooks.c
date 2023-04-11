@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 11:41:00 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:34:57 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	update(void *param)
 	t_scene		*scene;
 
 	scene = (t_scene *)param;
-	player_update(scene->mlx, &scene->player);
+	player_update(scene->mlx, &scene->player, &scene->map);
+	scene_draw(scene);
 	player_draw(&scene->player, &scene->map);
-	draw_fill(scene->screen, 0x000000FF);
-	raycast(&scene->player, &scene->map, scene);
 }
