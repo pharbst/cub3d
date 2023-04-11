@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/07 19:33:13 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:37:20 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MAP_HEIGHT 300
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.04
+# define MOUSE_SENSITIVITY 0.002
 
 typedef struct s_keystate {
 	bool	W;
@@ -78,6 +79,7 @@ void		player_move(t_keystate *state, t_player *player, t_map *map);
 void		player_rotate(t_keystate *state, t_player *player);
 // hooks.c
 void		key_hook(mlx_key_data_t keydata, void* param);
+void		cursor_hook(double xpos, double ypos, void* param);
 void		update(void *param);
 // input.c
 t_keystate	input_get_keys(mlx_t *mlx);
