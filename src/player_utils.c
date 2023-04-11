@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:33:11 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/11 20:16:56 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:39:46 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 static t_vec	collision_correction(t_map *map, t_vec pos, t_vec step)
 {
-	t_vec	coll_h;
-	t_vec	coll_v;
-	t_vec	new_pos;
+	t_vec	target;
+	t_vec	new_step;
 
-	coll_h = vec_add(pos, (t_vec){step.x, 0});
-	coll_h = vec_add(pos, (t_vec){0, step.y});
-	if (map->data[(int)coll_h.y * map->width + (int)coll_h.x])
-	return ();
+	new_step = step;
+	target = vec_add(pos, vec_scale(step, 0.5));
+	if (map->data[(int)pos.y * map->width + (int)target.x])
+		new_step.x = 0;
+	if (map->data[(int)target.y * map->width + (int)pos.x])
+		new_step.y = 0;
+	return (new_step);
 }
 
 void	player_move(t_keystate *state, t_player *player, t_map *map)
@@ -50,7 +52,7 @@ void	player_move(t_keystate *state, t_player *player, t_map *map)
 		step = vec_scale(step, 2 * MOVE_SPEED);
 	else
 		step = vec_scale(step, MOVE_SPEED);
-	player->pos = step;
+	player->pos = vec_add(player->pos, step);
 }
 
 void	player_rotate(t_keystate *state, t_player *player)
