@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/07 19:32:35 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/11 23:30:00 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,17 @@ static uint32_t	select_color(t_map *map, t_dda_params *ddap)
 
 	tile = map->data[ddap->step_pos.y * map->width + ddap->step_pos.x];
 	if (tile == 1)
-		return (0xFFFFFF00);
+		return (0xAAAAAAFF);
 	else if (tile == 2)
-		return (0xFF000000);
+		return (0xAA0000FF);
 	else if (tile == 3)
-		return (0x00FF0000);
+		return (0x00AA00FF);
 	else if (tile == 4)
-		return (0x0000FF00);
+		return (0x0000AAFF);
 	else if (tile == 5)
-		return (0xFFFF0000);
+		return (0xAAAA00FF);
 	else
-		return (0x00000000);
+		return (0x000000FF);
 }
 
 static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color)
