@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/11 23:30:00 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:42:22 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist, uint
 	int		end;
 
 	line_height = SCREEN_HEIGHT / dist;
-	start = -line_height / 2 + SCREEN_HEIGHT / 2;
-	end = line_height / 2 + SCREEN_HEIGHT / 2;
+	start = -line_height / 2 + 0.75 * SCREEN_HEIGHT;
+	end = line_height / 2 + 0.75 * SCREEN_HEIGHT;
 	start *= (start >= 0);
-	if (end > SCREEN_HEIGHT)
-		end = SCREEN_HEIGHT;
+	if (end > 1.5 * SCREEN_HEIGHT)
+		end = 1.5 * SCREEN_HEIGHT;
 	while (start != end)
 	{
 		if (dist != 0)

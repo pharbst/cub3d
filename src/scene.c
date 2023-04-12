@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/11 22:59:26 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:39:41 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	scene_init(t_scene *scene)
 	if (scene->mlx == NULL)
 		mlx_panic();
 	mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_HIDDEN);
-	scene->background = init_image(scene->mlx, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	draw_rect(scene->background, (t_rect){0, 0, SCREEN_WIDTH, SCREEN_HEIGHT / 2}, 0x402DA3FF); // C color
-	draw_rect(scene->background, (t_rect){0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2}, 0x262626FF); // F color
-	scene->screen = init_image(scene->mlx, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	scene->background = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
+	draw_rect(scene->background, (t_rect){0, 0, SCREEN_WIDTH, 0.75 * SCREEN_HEIGHT}, 0x402DA3FF); // C color
+	draw_rect(scene->background, (t_rect){0, 0.75 * SCREEN_HEIGHT, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT}, 0x262626FF); // F color
+	scene->screen = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
 	map_init(scene->mlx, &scene->map, NULL);
 	player_init(scene->mlx, &scene->player, (t_vec){8.0, 8.0}, (t_vec){0.0, 1.0});
 }
