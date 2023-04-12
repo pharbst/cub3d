@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:33:11 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/11 20:39:46 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:25:42 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	player_move(t_keystate *state, t_player *player, t_map *map)
 
 void	player_rotate(t_keystate *state, t_player *player)
 {
-	
 	if (state->LEFT)
 	{
 		player->dir = vec_rotate(player->dir, -ROT_SPEED);

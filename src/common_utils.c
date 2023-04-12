@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:00:56 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/05 10:21:14 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:26:46 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec	vec_scale(t_vec vec, double factor)
 t_vec	vec_rotate(t_vec vec, double angle)
 {
 	t_vec	new;
+
 	new.x = vec.x * cos(angle) - vec.y * sin(angle);
 	new.y = vec.x * sin(angle) + vec.y * cos(angle);
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/12 19:42:22 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:25:12 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static double	perform_dda(t_dda_params *ddap, t_map *map)
 			side = 1;
 		}
 		if (map->data[ddap->step_pos.y * map->width + ddap->step_pos.x] > 0)
-			break;
+			break ;
 	}
 	if (side == 0)
 		return (ddap->dist.x - ddap->delta.x);
