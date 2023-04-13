@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/11 22:44:49 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:22:37 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,21 @@ typedef struct s_map {
 	mlx_image_t	*img;
 }	t_map;
 
+typedef struct s_textures {
+	mlx_texture_t	*t_north;
+	mlx_texture_t	*t_east;
+	mlx_texture_t	*t_south;
+	mlx_texture_t	*t_west;
+	int32_t			floor;
+	int32_t			ceiling;
+}	t_textures;
+
 typedef struct s_scene {
 	mlx_t		*mlx;
 	mlx_image_t	*background;
 	mlx_image_t	*screen;
 	t_map		map;
+	t_textures	textures;
 	t_player	player;
 }	t_scene;
 

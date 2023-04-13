@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/13 17:41:55 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:31:09 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,16 @@ static double	perform_dda(t_dda_params *ddap, t_map *map)
 	return (ddap->dist.y - ddap->delta.y);
 }
 
-static uint32_t	select_color(t_map *map, t_dda_params *ddap)
-{
-	int	tile;
-
-	tile = map->data[ddap->step_pos.y * map->width + ddap->step_pos.x];
-	if (tile == 1)
-		return (0xAAAAAAFF);
-	else if (tile == 2)
-		return (0xAA0000FF);
-	else if (tile == 3)
-		return (0x00AA00FF);
-	else if (tile == 4)
-		return (0x0000AAFF);
-	else if (tile == 5)
-		return (0xAAAA00FF);
-	else
-		return (0x000000FF);
-}
-
 static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color)
 {
 	int		line_height;
 	int		start;
 	int		end;
 
-	line_height = SCREEN_HEIGHT / dist;
+	if (dist == 0)
+		line_height = SCREEN_HEIGHT;
+	else
+		line_height = SCREEN_HEIGHT / dist;
 	start = -line_height / 2 + 0.75 * SCREEN_HEIGHT;
 	end = line_height / 2 + 0.75 * SCREEN_HEIGHT;
 	start *= (start >= 0);
@@ -119,7 +103,7 @@ void	raycast(t_scene *scene)
 	{
 		set_dda_params(&scene->player, &ddap, x);
 		dist = perform_dda(&ddap, &scene->map);
-		color = select_color(&scene->map, &ddap);
+		color = get_color(scene->map.data[ddap.step_pos.y * scene->map.width + ddap.step_pos.x]);
 		draw_vertical_line(scene->screen, x, dist, color);
 		++x;
 	}

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/12 20:33:25 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:35:02 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,7 @@ void	map_draw(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if (map->data[y * map->width + x] == 1)
-				color = 0xFFFFFFFF;
-			else if (map->data[y * map->width + x] == 2)
-				color = 0xFF0000FF;
-			else if (map->data[y * map->width + x] == 3)
-				color = 0x00FF00FF;
-			else if (map->data[y * map->width + x] == 4)
-				color = 0x0000FFFF;
-			else if (map->data[y * map->width + x] == 5)
-				color = 0xFFFF00FF;
-			else
-				color = 0x000000FF;
+			color = get_color(map->data[y * map->width + x]);
 			draw_rect(map->img, (t_rect){x * block_size, y * block_size, block_size, block_size}, color);
 			++x;
 		}
