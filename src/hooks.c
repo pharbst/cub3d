@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/12 20:27:25 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:38:31 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_scene *scene;
+	t_scene	*scene;
 
 	scene = (t_scene *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
@@ -26,7 +26,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void	cursor_hook(double xpos, double ypos, void* param)
+void	cursor_hook(double xpos, double ypos, void *param)
 {
 	static bool	first = true;
 	double		rot_angle;

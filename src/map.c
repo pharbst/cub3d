@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/13 22:35:02 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:39:42 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	map_draw(t_map *map)
 void	map_destroy(mlx_t *mlx, t_map *map)
 {
 	free(map->data);
-	mlx_delete_image(mlx, map->img);	
+	mlx_delete_image(mlx, map->img);
 }
