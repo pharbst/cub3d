@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/12 20:25:12 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:41:55 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ static void	draw_vertical_line(mlx_image_t *screen, int32_t x, double dist, uint
 	start *= (start >= 0);
 	if (end > 1.5 * SCREEN_HEIGHT)
 		end = 1.5 * SCREEN_HEIGHT;
+	if (dist == 0)
+		color = color_change_lightness(color, 1);
+	else
+		color = color_change_lightness(color, 2 / dist);
 	while (start != end)
 	{
-		if (dist != 0)
-			color |= (int)(0xFF / dist);
-		if (line_height >= SCREEN_HEIGHT)
-			color |= 0xFF;
 		mlx_put_pixel(screen, x, start, color);
 		++start;
 	}
