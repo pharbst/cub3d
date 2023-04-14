@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 10:30:50 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 02:16:26 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/14 05:30:28 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,17 @@ static int	start_assistant(t_scene *scene, int coords[2], int start[2])
 	{
 		if (start[0] != -1)
 			return (cub_errno(WRITE, ERMULTIPLAY), 1);
+		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'N')
+			scene->player.dir = (t_vec){0, -1};
+		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'S')
+			scene->player.dir = (t_vec){0, 1};
+		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'W')
+			scene->player.dir = (t_vec){-1, 0};
+		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'E')
+			scene->player.dir = (t_vec){1, 0};
 		start[0] = coords[0];
 		start[1] = coords[1];
+		scene->player.pos = (t_vec){coords[0] + 0.5, coords[1] + 0.5};
 	}
 	coords[0]++;
 	if (coords[0] == scene->map.width)
