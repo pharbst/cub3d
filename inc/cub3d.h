@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/10 10:32:46 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/14 00:31:04 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,30 @@ typedef struct s_player {
 typedef struct s_map {
 	uint16_t	width;
 	uint16_t	height;
-	int32_t		color_floor;
-	int32_t		color_ceiling;
-	int32_t		fd_no;
-	int32_t		fd_so;
-	int32_t		fd_we;
-	int32_t		fd_ea;
 	char		*data;
 	mlx_image_t	*img;
 }	t_map;
+
+typedef struct s_tex {
+	mlx_texture_t	*t_north;
+	mlx_texture_t	*t_south;
+	mlx_texture_t	*t_west;
+	mlx_texture_t	*t_east;
+	int32_t			floor;
+	int32_t			ceiling;
+
+}	t_tex;
 
 typedef struct s_scene {
 	mlx_t		*mlx;
 	mlx_image_t	*screen;
 	t_map		map;
+	t_tex		tex;
 	t_player	player;
 }	t_scene;
 
 // parsing
+int			tex_init(t_scene *scene);
 char		*convert_map(char **map, t_scene *scene);
 int			find_start(int start[2], t_scene *scene);
 void		*create_vector(int x, int y);
@@ -68,6 +74,9 @@ int			get_textures(int fd, t_scene *scene);
 int			parse_map(char **map);
 int			pars(char *path, t_scene *scene);
 char		*skip_space(char *line);
+char		*first_word(char *line);
+char		*skip_number(char *line);
+char		*cub_trim(char *line);
 
 // init_utils.c
 mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);

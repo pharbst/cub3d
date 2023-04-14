@@ -6,11 +6,12 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:31:26 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/10 08:02:43 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/13 23:13:58 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_error.h"
+#include "cub3d.h"
 
 int	cub_errno(bool read, int value)
 {
@@ -21,12 +22,28 @@ int	cub_errno(bool read, int value)
 	return (cub_errno = value);
 }
 
+char	*cub_errinfo(char *info)
+{
+	static char	stash[1024];
+
+	if (!info)
+		return (stash);
+	if (ft_strlen(info) > 1023)
+		return (NULL);
+	ft_memcpy(stash, info, ft_strlen(info));
+	return (stash);
+}
+
 void	cub_strerror(void)
 {
+	if (!cub_errno(READ, 0))
+		return ;
 	if (cub_errno(READ, 0) == ERNOID)
-		return (ft_putstr_fd(_ERNOID, 2));
+		return (ft_putstr_fd("error: ", 2), ft_putstr_fd(cub_errinfo(NULL), 2),
+			ft_putstr_fd(_ERNOID, 2));
 	else if (cub_errno(READ, 0) == ERNOFILE)
-		return (ft_putstr_fd(_ERNOFILE, 2));
+		return (ft_putstr_fd("error: ", 2), ft_putstr_fd(cub_errinfo(NULL), 2),
+			ft_putstr_fd(_ERNOFILE, 2));
 	else if (cub_errno(READ, 0) == EREOF)
 		return (ft_putstr_fd(_EREOF, 2));
 	else if (cub_errno(READ, 0) == ERFORMAT)
@@ -43,4 +60,18 @@ void	cub_strerror(void)
 		return (ft_putstr_fd(_ERNOPLAY, 2));
 	else if (cub_errno(READ, 0) == ERMAP)
 		return (ft_putstr_fd(_ERMAP, 2));
+}
+
+int	texture_error(char *tmp)
+{
+	if (!cub_errinfo(first_word(skip_space(tmp))))
+		return (cub_errno(WRITE, ERALLOC), 1);
+	return (cub_errno(WRITE, ERNOID), 1);
+}
+
+int	file_error(char *line)
+{
+	if (!cub_errinfo(line))
+		return (cub_errno(WRITE, ERALLOC), 1);
+	return (cub_errno(WRITE, ERNOFILE), 1);
 }

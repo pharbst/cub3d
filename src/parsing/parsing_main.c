@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:13:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/09 23:38:38 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/14 02:20:04 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	pars(char *path, t_scene *scene)
 	if (!f_exten || ft_strncmp(f_exten, ".cub", 5))
 		return (cub_errno(WRITE, EREXT), 1);
 	fd = open(path, O_RDONLY);
+	tex_init(scene);
 	if (fd < 0
 		|| get_textures(fd, scene)
-		|| get_cf_colors(fd, scene)
 		|| get_map(fd, scene))
 		return (1);
-	return (0);
+	printf("If you want a job done well hire a professional!\n");
+	return (close(fd), 0);
 }

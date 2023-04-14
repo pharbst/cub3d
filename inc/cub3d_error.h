@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:59:36 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/10 08:06:11 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/13 22:37:57 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define ERNOPLAY		9
 # define ERMAP			10
 
-# define _ERNOID		"error: unknown identifier for wall texture\n"
-# define _ERNOFILE		"error: file not found\n"
+# define _ERNOID		" unknown identifier for wall texture\n"
+# define _ERNOFILE		" file not found\n"
 # define _EREOF			"error: unexpected end of file\n"
 # define _ERFORMAT		"error: invalid file format\n"
 # define _ERALLOC		"error: memory allocation failed\n"
@@ -45,5 +45,8 @@
 
 int		cub_errno(bool read, int value);
 void	cub_strerror(void);
+char	*cub_errinfo(char *info);
+int		texture_error(char *tmp);
+int		file_error(char *line);
 
 #endif

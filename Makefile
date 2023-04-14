@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/10 02:55:24 by pharbst          ###   ########.fr        #
+#    Updated: 2023/04/14 02:10:49 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,15 +34,15 @@ LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.br
 VPATH	:= src src/parsing
 SRCS	:= common_utils.c hooks.c main.c player.c draw_utils.c init_utils.c map.c scene.c error_handling.c
 # Parsing
-SRCS	+=	check_map.c \
-			clean_pars.c \
+SRCS	+=	check_map_utils.c \
+			check_map.c \
 			error.c \
-			get_color.c \
 			get_map.c \
 			get_textures.c \
 			parse_map.c \
 			parsing_main.c \
 			parsing_utils.c \
+			tex_init.c \
 
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)

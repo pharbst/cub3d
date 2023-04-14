@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 01:46:43 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/10 02:58:52 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/14 02:19:48 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ static int	expand_tab(char **map, int i, int *j)
 
 int	parse_map(char **map)
 {
-	int	width;
 	int	i;
 	int	j;
 
-	width = 0;
 	i = 0;
 	while (map[i])
 	{
+		j = 0;
 		while (map[i][j])
 		{
 			if (' ' == map[i][j])

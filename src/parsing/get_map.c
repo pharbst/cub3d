@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 19:05:35 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/10 02:59:15 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/14 02:04:21 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ static char	**read_map(int fd, char *line, t_scene *scene)
 	char	**map;
 	char	**tmp;
 
+	map = NULL;
 	scene->map.height = 0;
 	while (line && *skip_space(line) != '\0')
 	{
+		line = cub_trim(line);
 		scene->map.height++;
 		tmp = ft_calloc(scene->map.height + 1, sizeof(char *));
 		if (!tmp)
 			return (cub_errno(WRITE, ERALLOC), ft_free_split(tmp), NULL);
-		ft_memcpy(tmp, map, (scene->map.height) * sizeof(char *));			// absolute value??
+		if (map)
+			ft_memcpy(tmp, map, (scene->map.height) * sizeof(char *));
 		tmp[scene->map.height - 1] = line;
 		map = tmp;
 		line = get_next_line(fd);
@@ -62,8 +65,7 @@ int	get_map(int fd, t_scene *scene)
 	map = read_map(fd, line, scene);
 	if (!map || parse_map(map))
 		return (1);
-	scene->map.data = check_map(map, scene);
-	if (!scene->map.data)
+	if (check_map(map, scene))
 		return (1);
 	return (0);
 }
