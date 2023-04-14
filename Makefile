@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/13 16:25:15 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/04/14 02:32:43 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,19 @@ HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include
 # LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -framework Cocoa -framework OpenGL -framework IOKit
 
-VPATH	:= src src/graphics
+VPATH	:= src src/graphics src/parsing
 SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_utils.c init_utils.c map.c scene.c error_handling.c input.c player_utils.c
+# Parsing
+SRCS	+=	check_map_utils.c \
+			check_map.c \
+			error.c \
+			get_map.c \
+			get_textures.c \
+			parse_map.c \
+			parsing_main.c \
+			parsing_utils.c \
+			tex_init.c \
+
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)
 

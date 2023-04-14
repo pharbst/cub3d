@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/14 01:40:07 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:37:59 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_textures	textures_load(void)
+static t_tex	textures_load(void)
 {
-	t_textures	tex;
+	t_tex	tex;
 
 	tex.t_north = mlx_load_png("./scenes/textures/Air.png");
 	tex.t_east = mlx_load_png("./scenes/textures/Earth.png");
@@ -30,11 +30,11 @@ void	scene_init(t_scene *scene)
 	scene->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D", true);
 	if (scene->mlx == NULL)
 		mlx_panic();
-	scene->textures = textures_load();
+	scene->tex = textures_load();
 	mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_HIDDEN);
 	scene->background = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
-	draw_rect(scene->background, (t_rect){0, 0, SCREEN_WIDTH, 0.75 * SCREEN_HEIGHT}, scene->textures.ceiling);
-	draw_rect(scene->background, (t_rect){0, 0.75 * SCREEN_HEIGHT, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT}, scene->textures.floor);
+	draw_rect(scene->background, (t_rect){0, 0, SCREEN_WIDTH, 0.75 * SCREEN_HEIGHT}, scene->tex.ceiling);
+	draw_rect(scene->background, (t_rect){0, 0.75 * SCREEN_HEIGHT, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT}, scene->tex.floor);
 	scene->screen = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
 	map_init(scene->mlx, &scene->map, NULL);
 	player_init(scene->mlx, &scene->player, (t_vec){8.0, 8.0}, (t_vec){0.0, -1.0});

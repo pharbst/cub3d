@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/14 01:37:11 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:37:34 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "graphics.h"
+# include "cub3d_error.h"
+# include "get_next_line.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -44,21 +46,21 @@ typedef struct s_map {
 	mlx_image_t	*img;
 }	t_map;
 
-typedef struct s_textures {
+typedef struct s_tex {
 	mlx_texture_t	*t_north;
-	mlx_texture_t	*t_east;
 	mlx_texture_t	*t_south;
 	mlx_texture_t	*t_west;
+	mlx_texture_t	*t_east;
 	int32_t			floor;
 	int32_t			ceiling;
-}	t_textures;
+}	t_tex;
 
 typedef struct s_scene {
 	mlx_t		*mlx;
 	mlx_image_t	*background;
 	mlx_image_t	*screen;
 	t_map		map;
-	t_textures	textures;
+	t_tex		tex;
 	t_player	player;
 }	t_scene;
 
@@ -90,7 +92,22 @@ typedef struct s_hit_info {
 	int		side;
 }	t_hit_info;
 
-// --- Functions --- //
+// parsing
+int			tex_init(t_scene *scene);
+char		*convert_map(char **map, t_scene *scene);
+int			find_start(int start[2], t_scene *scene);
+void		*create_vector(int x, int y);
+int			check_map(char **map, t_scene *scene);
+void		clean_pars(t_scene *scene);
+int			get_cf_colors(int fd, t_scene *scene);
+int			get_map(int fd, t_scene *scene);
+int			get_textures(int fd, t_scene *scene);
+int			parse_map(char **map);
+int			pars(char *path, t_scene *scene);
+char		*skip_space(char *line);
+char		*first_word(char *line);
+char		*skip_number(char *line);
+char		*cub_trim(char *line);
 
 // init_utils.c
 mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);
