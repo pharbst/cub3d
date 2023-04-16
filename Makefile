@@ -3,13 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
+#    By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/14 02:32:43 by pharbst          ###   ########.fr        #
+#    Updated: 2023/04/16 02:37:49 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
+# **************************************************************************** #
+# Operating System tracking
+# **************************************************************************** #
+UNAME		=	$(shell uname)
+OS			=	$(shell cat /etc/os-release | grep -e NAME | cut -d= -f2 | tr -d '"')
+OS_LIKE		=	$(shell cat /etc/os-release | grep ID_LIKE | cut -d= -f2)
+
+
+# ****************************************************************************  #
+# Colors and Printing stuff
+# ****************************************************************************  #
 RESET  = \033[01;00m
 RED    = \033[01;31m
 GREEN  = \033[01;32m
@@ -28,9 +40,11 @@ LIBFT	:= ./lib/libft
 LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include
-# LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+ifeq ($(UNAME), Darwin)
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -framework Cocoa -framework OpenGL -framework IOKit
-
+else
+LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+endif
 VPATH	:= src src/graphics src/parsing
 SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_utils.c init_utils.c map.c scene.c error_handling.c input.c player_utils.c
 # Parsing
