@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/14 02:37:34 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/16 02:52:08 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ void		scene_init(t_scene *scene);
 void		scene_draw(t_scene *scene);
 void		scene_destroy(t_scene *scene);
 // map.c
-void		map_init(mlx_t *mlx, t_map *map, char *file_path);
+void		map_init(mlx_t *mlx, t_map *map);
 void		map_draw(t_map *map);
 void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
-void		player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir);
+void		player_init(mlx_t *mlx, t_player *player);
 void		player_update(mlx_t *mlx, t_player *player, t_map *map);
 void		player_draw(t_player *player, t_map *map);
 void		player_destroy(mlx_t *mlx, t_player *player);

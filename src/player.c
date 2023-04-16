@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/07 14:38:23 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/16 03:24:58 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(mlx_t *mlx, t_player *player, t_vec pos, t_vec dir)
+void	player_init(mlx_t *mlx, t_player *player)
 {
-	player->pos = pos;
-	player->dir = dir;
+	// player->pos = pos;
+	// player->dir = dir;
 	player->plane = vec_rotate((t_vec){player->dir.x * FOV, player->dir.y * FOV}, M_PI_2);
 	player->img = init_image(mlx, player->pos.x, player->pos.y, 32, 32);
 }

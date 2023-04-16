@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 10:30:50 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 05:30:28 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/16 03:23:18 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ static int	start_assistant(t_scene *scene, int coords[2], int start[2])
 	{
 		if (start[0] != -1)
 			return (cub_errno(WRITE, ERMULTIPLAY), 1);
-		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'N')
+		if (scene->map.data[coords[0] + coords[1] * scene->map.width] == 'N')
 			scene->player.dir = (t_vec){0, -1};
-		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'S')
+		if (scene->map.data[coords[0] + coords[1] * scene->map.width] == 'S')
 			scene->player.dir = (t_vec){0, 1};
-		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'W')
+		if (scene->map.data[coords[0] + coords[1] * scene->map.width] == 'W')
 			scene->player.dir = (t_vec){-1, 0};
-		if (scene->map.data[coords[0] + coords[1] * scene->map.height] == 'E')
+		if (scene->map.data[coords[0] + coords[1] * scene->map.width] == 'E')
 			scene->player.dir = (t_vec){1, 0};
 		start[0] = coords[0];
 		start[1] = coords[1];
