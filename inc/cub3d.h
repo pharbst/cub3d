@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 18:15:58 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/18 19:16:39 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,12 @@ void		scene_draw(t_scene *scene);
 void		scene_destroy(t_scene *scene);
 // map.c
 void		map_init(mlx_t *mlx, t_map *map);
-void		map_draw(t_map *map);
+void		map_draw(t_map *map, t_player *player);
+void		map_draw_player(t_map *map, t_player *player);
 void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
-void		player_init(mlx_t *mlx, t_player *player);
+void		player_init(t_player *player);
 void		player_update(mlx_t *mlx, t_player *player, t_map *map);
-void		player_draw(t_player *player, t_map *map);
-void		player_destroy(mlx_t *mlx, t_player *player);
 // player_utils.c
 void		player_move(t_keystate *state, t_player *player, t_map *map);
 void		player_rotate(t_keystate *state, t_player *player);

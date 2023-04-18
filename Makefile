@@ -6,7 +6,7 @@
 #    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/18 17:17:12 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/04/18 20:06:35 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ NAME	:= cub3D
 
 CC		:= cc
 #CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g -fsanitize=address
 
 LIBFT	:= ./lib/libft
 LIBMLX	:= ./lib/MLX42
