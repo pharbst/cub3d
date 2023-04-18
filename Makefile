@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/16 02:37:49 by pharbst          ###   ########.fr        #
+#    Updated: 2023/04/18 17:17:12 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS	+=	check_map_utils.c \
 			parsing_main.c \
 			parsing_utils.c \
 			tex_init.c \
+			debug_tools.c
 
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)

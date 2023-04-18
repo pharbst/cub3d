@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:42:13 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/13 22:30:46 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:15:20 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ uint32_t	get_color(char map_code)
 		return (GREEN);
 	else if (map_code == 4)
 		return (BLUE);
-	else if (map_code == 5)
-		return (YELLOW);
-	else if (map_code == 6)
-		return (CYAN);
-	else if (map_code == 7)
-		return (MAGENTA);
 	else
 		return (BLACK);
 }

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/14 01:39:04 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:16:24 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_hit_info	ray_cast(int x, t_player *player, t_map *map)
 			ddap.block_pos.y += ddap.step_dir.y;
 			hit.side = 1;
 		}
-		if (map->data[ddap.block_pos.y * map->width + ddap.block_pos.x] > 0)
+		if (map->data[ddap.block_pos.y * map->width + ddap.block_pos.x] > '0')
 			break ;
 	}
 	if (hit.side == 0)

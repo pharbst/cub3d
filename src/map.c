@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/16 02:47:24 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:20:50 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	map_draw(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			color = get_color(map->data[y * map->width + x]);
+			color = get_color(map->data[y * map->width + x] - '0');
 			draw_rect(map->img, (t_rect){x * block_size, y * block_size, block_size, block_size}, color);
 			++x;
 		}

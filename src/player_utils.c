@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:33:11 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/14 01:36:35 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:19:01 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static t_vec	collision_correction(t_map *map, t_vec pos, t_vec step)
 
 	new_step = step;
 	target = vec_add(pos, vec_scale(step, 0.5));
-	if (map->data[(int)pos.y * map->width + (int)target.x])
+	if (map->data[(int)pos.y * map->width + (int)target.x] != '0')
 		new_step.x = 0;
-	if (map->data[(int)target.y * map->width + (int)pos.x])
+	if (map->data[(int)target.y * map->width + (int)pos.x] != '0')
 		new_step.y = 0;
 	return (new_step);
 }

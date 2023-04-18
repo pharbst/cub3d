@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/16 03:25:31 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:14:52 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	scene_draw(t_scene *scene)
 	{
 		hit = ray_cast(x, &scene->player, &scene->map);
 		//color = get_color(scene->map.data[hit.block_pos.y * scene->map.width + hit.block_pos.x]);
-		color = get_color(hit.side);
+		color = get_color(hit.side + 1);
 		draw_wall_line(scene->screen, x, hit.dist, color);
 		++x;
 	}

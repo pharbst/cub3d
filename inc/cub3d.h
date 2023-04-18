@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/16 02:52:08 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:15:58 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ char		*convert_map(char **map, t_scene *scene);
 int			find_start(int start[2], t_scene *scene);
 void		*create_vector(int x, int y);
 int			check_map(char **map, t_scene *scene);
-void		clean_pars(t_scene *scene);
-int			get_cf_colors(int fd, t_scene *scene);
 int			get_map(int fd, t_scene *scene);
 int			get_textures(int fd, t_scene *scene);
 int			parse_map(char **map);
@@ -144,5 +142,9 @@ t_vec		vec_rotate(t_vec vec, double angle);
 //void		print_help(void);
 void		panic(const char *msg);
 void		mlx_panic(void);
+
+//debug_tools.c
+void	print_map(t_scene *scene);
+void	print_player(t_scene *scene);
 
 #endif
