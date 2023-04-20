@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 19:16:58 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:37:15 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	scene_draw(t_scene *scene)
 {
 	int				x;
 	t_hit_info		hit;
-	uint32_t		color;
+	//uint32_t		color;
 
 	draw_fill(scene->screen, 0x00000000);
 	x = 0;
@@ -38,8 +38,8 @@ void	scene_draw(t_scene *scene)
 	{
 		hit = ray_cast(x, &scene->player, &scene->map);
 		//color = get_color(scene->map.data[hit.block_pos.y * scene->map.width + hit.block_pos.x]);
-		color = get_color(hit.side + 1);
-		draw_wall_line(scene->screen, x, hit.dist, color);
+		//color = get_color(hit.side + 1);
+		draw_wall_line(scene->screen, x, hit, &scene->tex);
 		++x;
 	}
 }

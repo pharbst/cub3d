@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 20:07:32 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:31:59 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	map_init(mlx_t *mlx, t_map *map)
 {
-	map->img = init_image(mlx, 50, 50, MAP_HEIGHT, MAP_WIDTH);
+	map->img = init_image(mlx, 50, 50, MAP_SIZE, MAP_SIZE);
 }
 
 void	map_draw(t_map *map, t_player *player)
 {
-	const int32_t	block_size = MAP_HEIGHT / 15;
+	const int32_t	block_size = MAP_SIZE / 15;
 	t_point			data_pos;
 	t_point			img_pos;
 	uint32_t		color;
@@ -56,7 +56,7 @@ void	map_draw(t_map *map, t_player *player)
 		++img_pos.y;
 	}
 	map_draw_player(map, player);
-	draw_border(map->img, (t_point){0, 0}, (t_point){MAP_WIDTH - 1, MAP_HEIGHT - 1}, 0xFF00FFFF);
+	draw_border(map->img, (t_point){0, 0}, (t_point){MAP_SIZE - 1, MAP_SIZE - 1}, 0xFF00FFFF);
 }
 
 void	map_draw_player(t_map *map, t_player *player)

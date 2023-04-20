@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 19:16:39 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:39:00 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define FOV 0.666
-# define MAP_WIDTH 300
-# define MAP_HEIGHT 300
+# define MAP_SIZE 300
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.04
 # define MOUSE_SENSITIVITY 0.002
@@ -132,7 +131,8 @@ void		update(void *param);
 t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
 t_hit_info	ray_cast(int x, t_player *player, t_map *map);
-void		draw_wall_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color);
+//void		draw_wall_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color);
+void		draw_wall_line(mlx_image_t *screen, int32_t x, t_hit_info hit, t_tex *textures);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);
@@ -143,7 +143,7 @@ void		panic(const char *msg);
 void		mlx_panic(void);
 
 //debug_tools.c
-void	print_map(t_scene *scene);
-void	print_player(t_scene *scene);
+void		print_map(t_scene *scene);
+void		print_player(t_scene *scene);
 
 #endif

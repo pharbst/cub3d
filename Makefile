@@ -6,7 +6,7 @@
 #    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/18 20:06:35 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/04/20 14:33:34 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ else
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 endif
 VPATH	:= src src/graphics src/parsing
-SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_utils.c init_utils.c map.c scene.c error_handling.c input.c player_utils.c
+SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_cubes.c draw_utils.c init_utils.c map.c scene.c error_handling.c input.c player_utils.c
 # Parsing
 SRCS	+=	check_map_utils.c \
 			check_map.c \

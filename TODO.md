@@ -6,7 +6,7 @@
 	* [x] Raycasting algorithm (DDA)
 	* [x] 3D projection on screen
 * [ ] Different textures for each side (N, E, S, W)
-* [ ] Floor and ceiling colors
+* [x] Floor and ceiling colors
 * [x] Controls:
 	* [x] LEFT, RIGHT: rotate view
 	* [x] W, A, S, D: move player/camera
@@ -22,8 +22,8 @@
 	* [ ] print explicit errors for each misconfiguration.
 
 ## Bonus:
-* [ ] Wall collisions
+* [x] Wall collisions
 * [x] Minimap
 * [ ] Doors
 * [ ] Animated sprites
-* [ ] Mouse movement
+* [x] Mouse movement
