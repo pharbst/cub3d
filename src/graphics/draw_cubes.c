@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 15:39:37 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:12:06 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ static uint32_t	get_pixel(int tex_x, double step, mlx_texture_t *tex)
 	}
 	if (tex_y >= tex->height)
 		tex_y = tex->height - 1;
-	//color = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel];
-	ft_memcpy(&color, &tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel], tex->bytes_per_pixel);
+	color = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel] << 24;
+	color |= (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 1] << 16;
+	color |= (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 2] << 8;
+	color |= (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 3];
 	tex_y += step;
 	return (color);
 }
