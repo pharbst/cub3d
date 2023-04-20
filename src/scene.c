@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 14:37:15 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/21 01:02:51 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ void	scene_destroy(t_scene *scene)
 {
 	map_destroy(scene->mlx, &scene->map);
 	mlx_delete_image(scene->mlx, scene->screen);
+	mlx_delete_texture(scene->tex.t_north);
+	mlx_delete_texture(scene->tex.t_west);
+	mlx_delete_texture(scene->tex.t_south);
+	mlx_delete_texture(scene->tex.t_east);
 	mlx_terminate(scene->mlx);
 }
