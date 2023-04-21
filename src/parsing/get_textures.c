@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:00 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 02:37:12 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/21 14:39:45 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	validate_texture(char *line, t_scene *scene)
 
 	tmp = line;
 	color = NULL;
-	line = ft_strtrim(line, "\n");
 	if (!ft_strncmp(line, "NO", 2))
 		texture = &scene->tex.t_north;
 	else if (!ft_strncmp(line, "SO", 2))
