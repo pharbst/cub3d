@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cubes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/21 00:53:23 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/21 23:46:40 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_wall_line(mlx_image_t *screen, int32_t x, t_hit_info hit, t_tex *textu
 			color = color_change_lightness(color, 1);
 		else
 			color = color_change_lightness(color, 2 / hit.dist); */
-		mlx_put_pixel(screen, x, line_start, color);
+		set_pixel(screen, x, line_start, color);
 		tex_y += tex_step;
 		++line_start;
 	}

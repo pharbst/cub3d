@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 14:34:29 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/21 23:46:40 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_hit_info	ray_cast(int x, t_player *player, t_map *map)
 		color = color_change_lightness(color, 2 / dist);
 	while (start != end)
 	{
-		mlx_put_pixel(screen, x, start, color);
+		set_pixel(screen, x, start, color);
 		++start;
 	}
 } */

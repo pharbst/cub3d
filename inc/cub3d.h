@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 15:39:00 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/21 23:39:46 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@
 # define MOUSE_SENSITIVITY 0.002
 
 // --- Game object structs --- //
+
+typedef union s_pixel
+{
+	struct
+	{
+		char	r;
+		char	g;
+		char	b;
+		char	a;
+	};
+	unsigned int	pixel;
+}	t_pixel;
 
 typedef struct s_player {
 	t_vec		pos;
@@ -133,6 +145,8 @@ t_keystate	input_get_keys(mlx_t *mlx);
 t_hit_info	ray_cast(int x, t_player *player, t_map *map);
 //void		draw_wall_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color);
 void		draw_wall_line(mlx_image_t *screen, int32_t x, t_hit_info hit, t_tex *textures);
+void		set_pixel( mlx_image_t *img, unsigned int x, unsigned int y,
+				unsigned int color);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);
