@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 19:05:35 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 02:04:21 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/21 15:58:48 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ static char	**read_map(int fd, char *line, t_scene *scene)
 		scene->map.height++;
 		tmp = ft_calloc(scene->map.height + 1, sizeof(char *));
 		if (!tmp)
-			return (cub_errno(WRITE, ERALLOC), ft_free_split(tmp), NULL);
+			return (cub_errno(WRITE, ERALLOC), ft_free_split(map), NULL);
 		if (map)
+		{
 			ft_memcpy(tmp, map, (scene->map.height) * sizeof(char *));
+			free(map);
+		}
 		tmp[scene->map.height - 1] = line;
 		map = tmp;
 		line = get_next_line(fd);
