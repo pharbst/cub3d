@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:22:55 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 15:38:46 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/24 22:20:44 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,7 @@ typedef struct s_rect {
 	int32_t	height;
 }	t_rect;
 
-typedef enum e_colors {
-	WHITE = 0xAAAAAAFF,
-	RED = 0xAA0000FF,
-	GREEN = 0x00AA00FF,
-	BLUE = 0x0000AAFF,
-	YELLOW = 0xAAAA00FF,
-	CYAN = 0x00AAAAFF,
-	MAGENTA = 0xAA00AAFF,
-	BLACK = 0x000000FF
-}	t_colors;
-
 // color_utils.c
-uint32_t	get_color(char map_code);
 uint32_t	color_change_lightness(uint32_t color, double lightness);
 
 // draw_utils.c

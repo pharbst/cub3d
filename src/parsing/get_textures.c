@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:00 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/21 14:39:45 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/24 17:30:02 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	pars_get_color(char *line, int *color)
 		line++;
 		i++;
 	}
-	*color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+	*color = rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | 0xFF;
 	return (0);
 }
 

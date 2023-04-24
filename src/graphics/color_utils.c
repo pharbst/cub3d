@@ -6,25 +6,11 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:42:13 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 18:15:20 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:04:39 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-uint32_t	get_color(char map_code)
-{
-	if (map_code == 1)
-		return (WHITE);
-	else if (map_code == 2)
-		return (RED);
-	else if (map_code == 3)
-		return (GREEN);
-	else if (map_code == 4)
-		return (BLUE);
-	else
-		return (BLACK);
-}
 
 uint32_t	color_change_lightness(uint32_t color, double lightness)
 {

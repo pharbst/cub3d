@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 15:31:59 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/24 22:16:42 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ void	map_draw(t_map *map, t_player *player)
 			data_pos.x = map->width - 14;
 		while (img_pos.x < 15 && data_pos.x < map->width)
 		{
-			color = get_color(map->data[data_pos.y * map->width + data_pos.x] - '0');
+			color = 0x00000000;
+			if (map->data[data_pos.y * map->width + data_pos.x] == '0')
+				color = 0x000000FF;
+			else if (map->data[data_pos.y * map->width + data_pos.x] == '1')
+				color = 0xAAAAAAFF;
 			draw_rect(map->img, (t_rect){img_pos.x * block_size, img_pos.y * block_size, block_size, block_size}, color);
 			++data_pos.x;
 			++img_pos.x;
@@ -64,7 +68,7 @@ void	map_draw_player(t_map *map, t_player *player)
 	const t_point	offset = (t_point){
 		map->img->width / 2, map->img->height / 2
 	};
-	draw_point(map->img, offset, 3, 0x00AA00FF);
+	draw_point(map->img, offset, 5, 0x00AA00FF);
 	draw_triangle(map->img,
 		(t_point){
 			offset.x,

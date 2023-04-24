@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 18:41:28 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/24 22:07:48 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	cursor_hook(double xpos, double ypos, void *param)
 		first = false;
 		return ;
 	}
-	rot_angle = MOUSE_SENSITIVITY * (xpos - SCREEN_WIDTH / 2);
+	rot_angle = MOUSE_SENSITIVITY * (xpos - SCREEN_WIDTH / 2) * scene->player.fov;
 	scene->player.dir = vec_rotate(scene->player.dir, rot_angle);
 	scene->player.plane = vec_rotate(scene->player.plane, rot_angle);
 	scene->screen->instances[0].y -= (ypos - SCREEN_HEIGHT / 2);
@@ -51,6 +51,20 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	mlx_set_mouse_pos(scene->mlx, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }
 
+void	scroll_hook(double xdelta, double ydelta, void* param)
+{
+	t_player	*player;
+
+	(void)!xdelta;
+	player = (t_player *)param;
+	player->fov -= 0.01 * ydelta;
+	if (player->fov < 0.1)
+		player->fov = 0.1;
+	if (player->fov > 1.2)
+		player->fov = 1.2;
+	player->plane = vec_rotate((t_vec){player->dir.x * player->fov, player->dir.y * player->fov}, M_PI_2);
+}
+
 void	update(void *param)
 {
 	t_scene		*scene;
@@ -59,5 +73,4 @@ void	update(void *param)
 	player_update(scene->mlx, &scene->player, &scene->map);
 	scene_draw(scene);
 	map_draw(&scene->map, &scene->player);
-	//player_draw(&scene->player, &scene->map);
 }

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 15:39:00 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/24 22:12:38 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_player {
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		plane;
+	double		fov;
 	mlx_image_t	*img;
 }	t_player;
 
@@ -126,13 +127,14 @@ void		player_rotate(t_keystate *state, t_player *player);
 // hooks.c
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		cursor_hook(double xpos, double ypos, void *param);
+void		scroll_hook(double xdelta, double ydelta, void* param);
 void		update(void *param);
 // input.c
 t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
 t_hit_info	ray_cast(int x, t_player *player, t_map *map);
 //void		draw_wall_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color);
-void		draw_wall_line(mlx_image_t *screen, int32_t x, t_hit_info hit, t_tex *textures);
+void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);

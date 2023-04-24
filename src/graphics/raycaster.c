@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/20 14:34:29 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:09:28 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,30 +72,3 @@ t_hit_info	ray_cast(int x, t_player *player, t_map *map)
 	hit.block_pos = ddap.block_pos;
 	return (hit);
 }
-
-/* void	draw_wall_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color)
-{
-	int		line_height;
-	int		start;
-	int		end;
-
-	if (dist == 0)
-		line_height = SCREEN_HEIGHT;
-	else
-		line_height = SCREEN_HEIGHT / dist;
-	start = -line_height / 2 + 0.75 * SCREEN_HEIGHT;
-	end = line_height / 2 + 0.75 * SCREEN_HEIGHT;
-	start *= (start >= 0);
-	if (end > 1.5 * SCREEN_HEIGHT)
-		end = 1.5 * SCREEN_HEIGHT;
-	if (dist == 0)
-		//color = color_change_lightness(color, 1);
-		color_change_lightness(color, 1);
-	else
-		color = color_change_lightness(color, 2 / dist);
-	while (start != end)
-	{
-		mlx_put_pixel(screen, x, start, color);
-		++start;
-	}
-} */
