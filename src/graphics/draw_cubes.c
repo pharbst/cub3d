@@ -6,11 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/04/24 22:19:35 by jlohmann         ###   ########.fr       */
-=======
-/*   Updated: 2023/04/21 23:46:40 by pharbst          ###   ########.fr       */
->>>>>>> dev-ph
+/*   Updated: 2023/04/25 15:12:31 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +55,13 @@ static int	get_tex_column(int side, t_vec hit_pos, mlx_texture_t *tex)
 
 static uint32_t	get_pixel(int tex_x, int tex_y, mlx_texture_t *tex)
 {
-	uint32_t		color;
+	t_pixel	color;
 
-	color = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel] << 24;
-	color |= (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 1] << 16;
-	color |= (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 2] << 8;
-	color |= (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 3];
-	return (color);
+	color.a = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel];
+	color.g = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 1];
+	color.b = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 2];
+	color.r = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 3];
+	return (color.pixel);
 }
 
 void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
@@ -76,7 +72,7 @@ void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 	int				tex_x;
 	double			tex_y;
 	double			tex_step;
-	uint32_t		color;
+	t_pixel			color;
 
 	get_line_height(hit.dist, &line_start, &line_end, scene->player.fov);
 	tex = get_texture(hit.side, &scene->tex);
@@ -89,12 +85,13 @@ void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 		{
 			if (tex_y >= tex->height)
 				tex_y = tex->height - 1;
-			color = get_pixel(tex_x, tex_y, tex);
+			color.pixel = get_pixel(tex_x, tex_y, tex);
 			/* if (hit.dist == 0)
 				color = color_change_lightness(color, 1);
 			else
 				color = color_change_lightness(color, 2 / hit.dist); */
-			mlx_put_pixel(scene->screen, x, line_start, color);
+			// color.a = 0XFF;
+			set_pixel(scene->screen, x, line_start, color.pixel);
 		}
 		tex_y += tex_step;
 		++line_start;

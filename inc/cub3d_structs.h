@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 14:42:27 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:02:29 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_player {
 	t_vec		dir;
 	t_vec		plane;
 	mlx_image_t	*img;
+	double		fov;
 }	t_player;
 
 typedef struct s_map {

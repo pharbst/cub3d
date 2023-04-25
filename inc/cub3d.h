@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 14:53:05 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:01:29 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "libft.h"
-# include "graphics.h"
 # include "cub3d_structs.h"
+# include "graphics.h"
 # include "cub3d_error.h"
 # include "get_next_line.h"
 
