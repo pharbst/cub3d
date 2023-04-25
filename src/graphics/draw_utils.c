@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/21 23:46:40 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:28:55 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	draw_line(mlx_image_t *img, t_point start, t_point end, uint32_t color)
 	{
 		if (start.x >= 0 && start.y >= 0 && start.x < (int32_t)img->width && start.y < (int32_t)img->height)
 			set_pixel(img, start.x, start.y, color);
-			// 
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		e2 = 2 * err;

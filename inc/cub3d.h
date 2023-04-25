@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 16:03:05 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:26:20 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,12 @@ t_keystate	input_get_keys(mlx_t *mlx);
 t_hit_info	ray_cast(int x, t_player *player, t_map *map);
 void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
 void		set_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+t_pixel		get_pixel(mlx_texture_t *tex, uint32_t x, uint32_t y);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);
 t_vec		vec_rotate(t_vec vec, double angle);
+void		universal_memset(void *dst, void *src, size_t size, size_t len);
 // error_handling.c
 //void		print_help(void);
 void		panic(const char *msg);
