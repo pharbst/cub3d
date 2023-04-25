@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/24 22:07:48 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:10:46 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	update(void *param)
 	scene = (t_scene *)param;
 	player_update(scene->mlx, &scene->player, &scene->map);
 	scene_draw(scene);
+	fps_counter();
 	map_draw(&scene->map, &scene->player);
 }

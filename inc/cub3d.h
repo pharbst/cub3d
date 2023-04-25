@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 15:01:29 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:28:50 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "graphics.h"
 # include "cub3d_error.h"
 # include "get_next_line.h"
+# include "fps.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
