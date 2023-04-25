@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:00 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/21 23:51:50 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 14:41:57 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	load_texture(char *path, mlx_texture_t **texture)
 	return (0);
 }
 
-static int	pars_get_color(char *line, int *color)
+static int	pars_get_color(char *line, t_pixel *color)
 {
 	int		i;
 	int		rgb[3];
@@ -30,7 +30,7 @@ static int	pars_get_color(char *line, int *color)
 	while (i < 3)
 	{
 		rgb[i] = ft_atoi(line);
-		if (rgb[i] < 0 || rgb[i] > 255)
+		if (rgb[i] > 255)
 			return (cub_errno(WRITE, ERFORMAT), 1);
 		line = skip_number(line);
 		if (i < 2 && *line != ',')
@@ -38,15 +38,24 @@ static int	pars_get_color(char *line, int *color)
 		line++;
 		i++;
 	}
-	*color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+	color->a = 0XFF;
+	color->r = rgb[0];
+	printf("r: %x\n", color->r);
+	color->g = rgb[1];
+	printf("g: %x\n", color->g);
+	color->b = rgb[2];
+	printf("b: %x\n", color->b);
 	return (0);
+	// printf("rgb: %x %x %x\n", rgb[0], rgb[1], rgb[2]);
+	// return (color->a = 0XFF, color->r = rgb[0],
+	// 	color->g = rgb[1], color->b = rgb[2], 0);
 }
 
 static int	validate_texture(char *line, t_scene *scene)
 {
 	char			*tmp;
 	mlx_texture_t	**texture;
-	int				*color;
+	t_pixel			*color;
 
 	tmp = line;
 	color = NULL;
@@ -76,7 +85,7 @@ int	get_textures(int fd, t_scene *scene)
 
 	while (scene->tex.t_north == NULL || scene->tex.t_south == NULL
 		|| scene->tex.t_west == NULL || scene->tex.t_east == NULL
-		|| scene->tex.floor == -1 || scene->tex.ceiling == -1)
+		|| scene->tex.floor.pixel == 0 || scene->tex.ceiling.pixel == 0)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -90,5 +99,6 @@ int	get_textures(int fd, t_scene *scene)
 		free(line);
 	}
 	printf("textures loaded!!\n");
+	printf("t_north: %p\nt_south: %p\nt_west: %p\nt_east: %p\nfloor: %x\nceiling: %x\n", scene->tex.t_north, scene->tex.t_south, scene->tex.t_west, scene->tex.t_east, scene->tex.floor.pixel, scene->tex.ceiling.pixel);
 	return (0);
 }

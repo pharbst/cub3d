@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/21 23:39:46 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 13:16:38 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "graphics.h"
+# include "cub3d_structs.h"
 # include "cub3d_error.h"
 # include "get_next_line.h"
 
@@ -28,80 +29,6 @@
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.04
 # define MOUSE_SENSITIVITY 0.002
-
-// --- Game object structs --- //
-
-typedef union s_pixel
-{
-	struct
-	{
-		char	r;
-		char	g;
-		char	b;
-		char	a;
-	};
-	unsigned int	pixel;
-}	t_pixel;
-
-typedef struct s_player {
-	t_vec		pos;
-	t_vec		dir;
-	t_vec		plane;
-	mlx_image_t	*img;
-}	t_player;
-
-typedef struct s_map {
-	uint16_t	width;
-	uint16_t	height;
-	char		*data;
-	mlx_image_t	*img;
-}	t_map;
-
-typedef struct s_tex {
-	mlx_texture_t	*t_north;
-	mlx_texture_t	*t_south;
-	mlx_texture_t	*t_west;
-	mlx_texture_t	*t_east;
-	int32_t			floor;
-	int32_t			ceiling;
-}	t_tex;
-
-typedef struct s_scene {
-	mlx_t		*mlx;
-	mlx_image_t	*background;
-	mlx_image_t	*screen;
-	t_map		map;
-	t_tex		tex;
-	t_player	player;
-}	t_scene;
-
-// --- Helper structs --- //
-
-typedef struct s_keystate {
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-	bool	shift;
-}	t_keystate;
-
-typedef struct s_dda_params {
-	double	camera_x;
-	t_vec	ray_dir;
-	t_point	block_pos;
-	t_point	step_dir;
-	t_vec	dist;
-	t_vec	delta;
-}	t_dda_params;
-
-typedef struct s_hit_info {
-	double	dist;
-	t_vec	pos;
-	t_point	block_pos;
-	int		side;
-}	t_hit_info;
 
 // parsing
 int			tex_init(t_scene *scene);
