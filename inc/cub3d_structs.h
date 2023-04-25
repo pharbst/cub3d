@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 16:11:05 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:19:57 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_rect {
 
 typedef union s_pixel
 {
+	uint32_t	pixel;
 	struct
 	{
 		uint8_t	r;
@@ -45,7 +46,6 @@ typedef union s_pixel
 		uint8_t	b;
 		uint8_t	a;
 	};
-	uint32_t	pixel;
 }	t_pixel;
 
 typedef struct s_player {

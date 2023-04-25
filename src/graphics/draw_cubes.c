@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 16:34:16 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:11:30 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 				color = color_change_lightness(color, 1);
 			else
 				color = color_change_lightness(color, 2 / hit.dist);
-			set_pixel(scene->screen, x, line_start, color.pixel);
+			set_pixel(scene->screen, x, line_start, color);
 		}
 		tex_y += tex_step;
 		++line_start;

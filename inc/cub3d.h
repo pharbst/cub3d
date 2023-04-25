@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 17:26:20 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:12:12 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
 t_hit_info	ray_cast(int x, t_player *player, t_map *map);
 void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
-void		set_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+void		set_pixel(mlx_image_t *img, uint32_t x, uint32_t y, t_pixel color);
 t_pixel		get_pixel(mlx_texture_t *tex, uint32_t x, uint32_t y);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);

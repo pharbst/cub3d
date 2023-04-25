@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 18:07:01 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:18:05 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	scene_init(t_scene *scene)
 	mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_HIDDEN);
 	scene->background = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
 	draw_background(scene->background, scene->tex.ceiling, scene->tex.floor);
-	//draw_rect(scene->background, (t_rect){0, 0, SCREEN_WIDTH, 0.75 * SCREEN_HEIGHT}, scene->tex.ceiling.pixel);
-	//draw_rect(scene->background, (t_rect){0, 0.75 * SCREEN_HEIGHT, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT}, scene->tex.floor.pixel);
 	scene->screen = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
 	map_init(scene->mlx, &scene->map);
 	player_init(&scene->player);
@@ -52,7 +50,7 @@ void	scene_draw(t_scene *scene)
 	int			x;
 	t_hit_info	hit;
 
-	draw_fill(scene->screen, 0x00000000);
+	draw_fill(scene->screen, (t_pixel){0x00000000});
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{

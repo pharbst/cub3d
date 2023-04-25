@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/24 22:16:42 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:25:52 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	map_draw(t_map *map, t_player *player)
 	const int32_t	block_size = MAP_SIZE / 15;
 	t_point			data_pos;
 	t_point			img_pos;
-	uint32_t		color;
+	t_pixel			color;
 
-	draw_fill(map->img, 0x00000000);
+	draw_fill(map->img, (t_pixel){0x00000000});
 	data_pos.y = floor(player->pos.y - 7);
 	img_pos.y = 0;
 	if (data_pos.y < 0)
@@ -47,11 +47,10 @@ void	map_draw(t_map *map, t_player *player)
 			data_pos.x = map->width - 14;
 		while (img_pos.x < 15 && data_pos.x < map->width)
 		{
-			color = 0x00000000;
 			if (map->data[data_pos.y * map->width + data_pos.x] == '0')
-				color = 0x000000FF;
+				color = (t_pixel){0xFF000000};
 			else if (map->data[data_pos.y * map->width + data_pos.x] == '1')
-				color = 0xAAAAAAFF;
+				color = (t_pixel){0xFFAAAAAA};
 			draw_rect(map->img, (t_rect){img_pos.x * block_size, img_pos.y * block_size, block_size, block_size}, color);
 			++data_pos.x;
 			++img_pos.x;
@@ -60,7 +59,7 @@ void	map_draw(t_map *map, t_player *player)
 		++img_pos.y;
 	}
 	map_draw_player(map, player);
-	draw_border(map->img, (t_point){0, 0}, (t_point){MAP_SIZE - 1, MAP_SIZE - 1}, 0xFF00FFFF);
+	draw_border(map->img, (t_point){0, 0}, (t_point){MAP_SIZE - 1, MAP_SIZE - 1}, (t_pixel){0xFFFFFFFF});
 }
 
 void	map_draw_player(t_map *map, t_player *player)
@@ -68,7 +67,8 @@ void	map_draw_player(t_map *map, t_player *player)
 	const t_point	offset = (t_point){
 		map->img->width / 2, map->img->height / 2
 	};
-	draw_point(map->img, offset, 5, 0x00AA00FF);
+
+	draw_point(map->img, offset, 5, (t_pixel){0xFF00AA00});
 	draw_triangle(map->img,
 		(t_point){
 			offset.x,
@@ -82,7 +82,7 @@ void	map_draw_player(t_map *map, t_player *player)
 			offset.x + player->dir.x * 8 + -player->plane.x * 8,
 			offset.y + player->dir.y * 8 + -player->plane.y * 8
 		},
-		0xFFFF00FF
+		(t_pixel){0xFF00FFFF}
 	);
 }
 
