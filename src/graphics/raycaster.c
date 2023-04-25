@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/04/24 17:09:28 by jlohmann         ###   ########.fr       */
+=======
+/*   Updated: 2023/04/21 23:46:40 by pharbst          ###   ########.fr       */
+>>>>>>> dev-ph
 /*                                                                            */
 /* ************************************************************************** */
 

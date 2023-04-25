@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:00 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/24 17:30:02 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 14:54:57 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	load_texture(char *path, mlx_texture_t **texture)
 	return (0);
 }
 
-static int	pars_get_color(char *line, int *color)
+static int	pars_get_color(char *line, t_pixel *color)
 {
 	int		i;
 	int		rgb[3];
@@ -30,7 +30,7 @@ static int	pars_get_color(char *line, int *color)
 	while (i < 3)
 	{
 		rgb[i] = ft_atoi(line);
-		if (rgb[i] < 0 || rgb[i] > 255)
+		if (rgb[i] > 255)
 			return (cub_errno(WRITE, ERFORMAT), 1);
 		line = skip_number(line);
 		if (i < 2 && *line != ',')
@@ -38,15 +38,15 @@ static int	pars_get_color(char *line, int *color)
 		line++;
 		i++;
 	}
-	*color = rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | 0xFF;
-	return (0);
+	return (color->a = 0XFF, color->r = rgb[0],
+		color->g = rgb[1], color->b = rgb[2], 0);
 }
 
 static int	validate_texture(char *line, t_scene *scene)
 {
 	char			*tmp;
 	mlx_texture_t	**texture;
-	int				*color;
+	t_pixel			*color;
 
 	tmp = line;
 	color = NULL;
@@ -76,7 +76,7 @@ int	get_textures(int fd, t_scene *scene)
 
 	while (scene->tex.t_north == NULL || scene->tex.t_south == NULL
 		|| scene->tex.t_west == NULL || scene->tex.t_east == NULL
-		|| scene->tex.floor == -1 || scene->tex.ceiling == -1)
+		|| scene->tex.floor.pixel == 0 || scene->tex.ceiling.pixel == 0)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -89,6 +89,5 @@ int	get_textures(int fd, t_scene *scene)
 			return (free(line), close(fd), 1);
 		free(line);
 	}
-	printf("textures loaded!!\n");
 	return (0);
 }
