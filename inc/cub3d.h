@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 15:01:29 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:03:05 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ void		update(void *param);
 t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
 t_hit_info	ray_cast(int x, t_player *player, t_map *map);
-//void		draw_wall_line(mlx_image_t *screen, int32_t x, double dist, uint32_t color);
 void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
-void		set_pixel( mlx_image_t *img, unsigned int x, unsigned int y,
-				unsigned int color);
+void		set_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);

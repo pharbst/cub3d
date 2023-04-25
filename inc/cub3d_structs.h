@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 15:02:29 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:01:51 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ typedef union s_pixel
 {
 	struct
 	{
-		unsigned char	r;
-		unsigned char	g;
-		unsigned char	b;
-		unsigned char	a;
+		uint8_t	r;
+		uint8_t	g;
+		uint8_t	b;
+		uint8_t	a;
 	};
 	uint32_t	pixel;
 }	t_pixel;

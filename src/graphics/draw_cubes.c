@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cubes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 15:12:31 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:01:19 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ static uint32_t	get_pixel(int tex_x, int tex_y, mlx_texture_t *tex)
 {
 	t_pixel	color;
 
-	color.a = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel];
-	color.g = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 1];
-	color.b = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 2];
-	color.r = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 3];
+	color.r = tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel];
+	color.g = tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 1];
+	color.b = tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 2];
+	color.a = tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 3];
 	return (color.pixel);
 }
 
