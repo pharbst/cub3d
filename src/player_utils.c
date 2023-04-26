@@ -6,31 +6,28 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:33:11 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/18 18:19:01 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 01:31:28 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_vec	collision_correction(t_map *map, t_vec pos, t_vec step)
+static t_vec	collision_correction(t_vec pos, t_vec step, t_map *map)
 {
-	t_vec	target;
 	t_vec	new_step;
+	t_vec	target;
 
 	new_step = step;
 	target = vec_add(pos, vec_scale(step, 0.5));
-	if (map->data[(int)pos.y * map->width + (int)target.x] != '0')
+	if (map->data[(int)pos.y * map->width + (int)target.x] > '0')
 		new_step.x = 0;
-	if (map->data[(int)target.y * map->width + (int)pos.x] != '0')
+	if (map->data[(int)target.y * map->width + (int)pos.x] > '0')
 		new_step.y = 0;
 	return (new_step);
 }
 
-void	player_move(t_keystate *state, t_player *player, t_map *map)
+t_vec	player_move(t_keystate *state, t_vec step, t_vec pos, t_map *map)
 {
-	t_vec	step;
-
-	step = player->dir;
 	if (state->w && state->a)
 		step = vec_rotate(step, -M_PI_4);
 	else if (state->w && state->d)
@@ -46,13 +43,14 @@ void	player_move(t_keystate *state, t_player *player, t_map *map)
 	else if (state->d)
 		step = vec_rotate(step, M_PI_2);
 	else if (!state->w)
-		return ;
-	step = collision_correction(map, player->pos, step);
+		return (pos);
+	if (!state->alt)
+		step = collision_correction(pos, step, map);
 	if (state->shift)
 		step = vec_scale(step, 2 * MOVE_SPEED);
 	else
 		step = vec_scale(step, MOVE_SPEED);
-	player->pos = vec_add(player->pos, step);
+	return (vec_add(pos, step));
 }
 
 void	player_rotate(t_keystate *state, t_player *player)

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 18:19:57 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 00:49:22 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ typedef struct s_keystate {
 	bool	left;
 	bool	right;
 	bool	shift;
+	bool	alt;
 }	t_keystate;
 
 typedef struct s_dda_params {
-	double	camera_x;
 	t_vec	ray_dir;
 	t_point	block_pos;
 	t_point	step_dir;

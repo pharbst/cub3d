@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 18:12:12 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 01:35:43 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ void		map_destroy(mlx_t *mlx, t_map *map);
 void		player_init(t_player *player);
 void		player_update(mlx_t *mlx, t_player *player, t_map *map);
 // player_utils.c
-void		player_move(t_keystate *state, t_player *player, t_map *map);
+t_vec		player_move(t_keystate *state, t_vec step, t_vec pos, t_map *map);
 void		player_rotate(t_keystate *state, t_player *player);
 // hooks.c
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		cursor_hook(double xpos, double ypos, void *param);
-void		scroll_hook(double xdelta, double ydelta, void* param);
+void		scroll_hook(double xdelta, double ydelta, void *param);
 void		update(void *param);
 // input.c
 t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
-t_hit_info	ray_cast(int x, t_player *player, t_map *map);
+t_hit_info	ray_cast(t_player *player, t_map *map, t_vec ray_dir);
 void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
 void		set_pixel(mlx_image_t *img, uint32_t x, uint32_t y, t_pixel color);
 t_pixel		get_pixel(mlx_texture_t *tex, uint32_t x, uint32_t y);

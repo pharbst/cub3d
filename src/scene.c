@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 18:18:05 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 01:20:43 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	draw_background(mlx_image_t *background, t_pixel ceiling, t_pixel floor)
 	y = 0;
 	while (y < 0.75 * SCREEN_HEIGHT)
 	{
-		color = color_change_lightness(ceiling, 1 - y / (0.75 * SCREEN_HEIGHT));
+		color = color_change_lightness(ceiling, 1 - (0.9 * y) / (0.75 * SCREEN_HEIGHT));
 		universal_memset(background->pixels + (y * background->width * sizeof(uint32_t)), &color.pixel, sizeof(uint32_t), background->width);
 		++y;
 	}
 	while (y < 1.5 * SCREEN_HEIGHT)
 	{
-		color = color_change_lightness(floor, y / (0.75 * SCREEN_HEIGHT) - 1);
+		color = color_change_lightness(floor, y / (0.75 * SCREEN_HEIGHT) - 0.9);
 		universal_memset(background->pixels + (y * background->width * sizeof(uint32_t)), &color.pixel, sizeof(uint32_t), background->width);
 		++y;
 	}
@@ -47,16 +47,20 @@ void	scene_init(t_scene *scene)
 
 void	scene_draw(t_scene *scene)
 {
-	int			x;
+	int			screen_x;
+	double		x;
+	t_vec		ray_dir;
 	t_hit_info	hit;
 
 	draw_fill(scene->screen, (t_pixel){0x00000000});
-	x = 0;
-	while (x < SCREEN_WIDTH)
+	screen_x = 0;
+	while (screen_x < SCREEN_WIDTH)
 	{
-		hit = ray_cast(x, &scene->player, &scene->map);
-		draw_wall_line(scene, x, hit);
-		++x;
+		x = 2 * screen_x / (double)SCREEN_WIDTH - 1;
+		ray_dir = vec_add(scene->player.dir, vec_scale(scene->player.plane, x));
+		hit = ray_cast(&scene->player, &scene->map, ray_dir);
+		draw_wall_line(scene, screen_x, hit);
+		++screen_x;
 	}
 }
 

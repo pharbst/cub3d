@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 18:11:30 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 01:17:43 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	get_line_height(double dist, int *start, int *end, double fov)
 {
 	int	line_height;
 
-	if (dist == 0)
+	if (dist < 0.02)
 		line_height = SCREEN_HEIGHT / fov;
 	else
 		line_height = SCREEN_HEIGHT / dist / fov;
@@ -44,7 +44,7 @@ static int	get_tex_column(int side, t_vec hit_pos, mlx_texture_t *tex)
 	wall_x = hit_pos.x;
 	if (side % 2 == 0)
 		wall_x = hit_pos.y;
-	wall_x -= floor(wall_x); // (int)wallX?
+	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * tex->width);
 	if (side == 0)
 		tex_x = tex->width - tex_x - 1;
@@ -78,7 +78,7 @@ void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 			 if (hit.dist == 0)
 				color = color_change_lightness(color, 1);
 			else
-				color = color_change_lightness(color, 2 / hit.dist);
+				color = color_change_lightness(color, 4 / hit.dist);
 			set_pixel(scene->screen, x, line_start, color);
 		}
 		tex_y += tex_step;

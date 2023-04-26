@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/24 17:54:19 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 01:29:42 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	player_update(mlx_t *mlx, t_player *player, t_map *map)
 	t_keystate	state;
 
 	state = input_get_keys(mlx);
-	player_move(&state, player, map);
+	player->pos = player_move(&state, player->dir, player->pos, map);
 	player_rotate(&state, player);
 }
