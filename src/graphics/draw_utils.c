@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/21 23:46:40 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:13:32 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_fill(mlx_image_t *img, uint32_t color)
+void	draw_fill(mlx_image_t *img, t_pixel color)
 {
 	uint32_t	x;
 	uint32_t	y;
@@ -30,7 +30,7 @@ void	draw_fill(mlx_image_t *img, uint32_t color)
 	}
 }
 
-void	draw_point(mlx_image_t *img, t_point p, int32_t size, uint32_t color)
+void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_pixel color)
 {
 	size = abs(size);
 	if (size == 1)
@@ -39,7 +39,7 @@ void	draw_point(mlx_image_t *img, t_point p, int32_t size, uint32_t color)
 		draw_rect(img, (t_rect){p.x - size / 2, p.y - size / 2, size, size}, color);
 }
 
-void	draw_line(mlx_image_t *img, t_point start, t_point end, uint32_t color)
+void	draw_line(mlx_image_t *img, t_point start, t_point end, t_pixel color)
 {
 	t_point	dist;
 	t_point	sign;
@@ -53,7 +53,6 @@ void	draw_line(mlx_image_t *img, t_point start, t_point end, uint32_t color)
 	{
 		if (start.x >= 0 && start.y >= 0 && start.x < (int32_t)img->width && start.y < (int32_t)img->height)
 			set_pixel(img, start.x, start.y, color);
-			// 
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		e2 = 2 * err;
@@ -70,14 +69,14 @@ void	draw_line(mlx_image_t *img, t_point start, t_point end, uint32_t color)
 	}
 }
 
-void	draw_triangle(mlx_image_t *img, t_point a, t_point b, t_point c, uint32_t color)
+void	draw_triangle(mlx_image_t *img, t_point a, t_point b, t_point c, t_pixel color)
 {
 	draw_line(img, a, b, color);
 	draw_line(img, b, c, color);
 	draw_line(img, c, a, color);
 }
 
-void draw_border(mlx_image_t *img, t_point up_left, t_point bottom_right, uint32_t color)
+void draw_border(mlx_image_t *img, t_point up_left, t_point bottom_right, t_pixel color)
 {
 	draw_line(img, up_left, (t_point){bottom_right.x, up_left.y}, color);
 	draw_line(img, up_left, (t_point){up_left.x, bottom_right.y}, color);
@@ -85,7 +84,7 @@ void draw_border(mlx_image_t *img, t_point up_left, t_point bottom_right, uint32
 	draw_line(img, (t_point){0, bottom_right.y}, bottom_right, color);
 }
 
-void	draw_rect(mlx_image_t *img, t_rect rect, uint32_t color)
+void	draw_rect(mlx_image_t *img, t_rect rect, t_pixel color)
 {
 	int32_t	x;
 	int32_t	y;

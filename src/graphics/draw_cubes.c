@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cubes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 15:12:31 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:11:30 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,6 @@ static int	get_tex_column(int side, t_vec hit_pos, mlx_texture_t *tex)
 	return (tex_x);
 }
 
-static uint32_t	get_pixel(int tex_x, int tex_y, mlx_texture_t *tex)
-{
-	t_pixel	color;
-
-	color.a = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel];
-	color.g = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 1];
-	color.b = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 2];
-	color.r = (uint32_t)tex->pixels[(tex_y * tex->width + tex_x) * tex->bytes_per_pixel + 3];
-	return (color.pixel);
-}
-
 void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 {
 	int				line_start;
@@ -85,13 +74,12 @@ void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 		{
 			if (tex_y >= tex->height)
 				tex_y = tex->height - 1;
-			color.pixel = get_pixel(tex_x, tex_y, tex);
-			/* if (hit.dist == 0)
+			color = get_pixel(tex, tex_x, tex_y);
+			 if (hit.dist == 0)
 				color = color_change_lightness(color, 1);
 			else
-				color = color_change_lightness(color, 2 / hit.dist); */
-			// color.a = 0XFF;
-			set_pixel(scene->screen, x, line_start, color.pixel);
+				color = color_change_lightness(color, 2 / hit.dist);
+			set_pixel(scene->screen, x, line_start, color);
 		}
 		tex_y += tex_step;
 		++line_start;

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:00:56 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/12 20:26:46 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:17:18 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ t_vec	vec_rotate(t_vec vec, double angle)
 	new.x = vec.x * cos(angle) - vec.y * sin(angle);
 	new.y = vec.x * sin(angle) + vec.y * cos(angle);
 	return (new);
+}
+
+void	universal_memset(void *dst, void *src, size_t size, size_t len)
+{
+	while (len > 0)
+	{
+		ft_memcpy(dst, src, size);
+		dst += size;	
+		--len;
+	}
 }

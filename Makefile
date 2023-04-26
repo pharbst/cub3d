@@ -6,7 +6,7 @@
 #    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/25 17:36:21 by pharbst          ###   ########.fr        #
+#    Updated: 2023/04/26 21:52:35 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ BLUE   = \033[01;34m
 NAME	:= cub3D
 
 CC		:= cc
-#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+# CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
 # CFLAGS	+=	-fsanitize=address
 

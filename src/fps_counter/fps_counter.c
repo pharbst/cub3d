@@ -6,10 +6,9 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:52:14 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 16:46:38 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/26 21:52:58 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "fps.h"
 #include <stdio.h>

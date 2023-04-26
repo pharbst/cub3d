@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 17:03:34 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/26 21:03:04 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,38 @@
 # define CUB3D_STRUCTS_H
 
 # include "MLX42/MLX42.h"
-# include "graphics.h"
-# include <stdbool.h>
+
+// --- Geometric structs --- //
+
+typedef struct s_point {
+	int32_t	x;
+	int32_t	y;
+}	t_point;
+
+typedef struct s_vec {
+	double	x;
+	double	y;
+}	t_vec;
+
+typedef struct s_rect {
+	int32_t	x;
+	int32_t	y;
+	int32_t	width;
+	int32_t	height;
+}	t_rect;
 
 // --- Game object structs --- //
 
 typedef union s_pixel
 {
+	uint32_t	pixel;
 	struct
 	{
-		unsigned char	r;
-		unsigned char	g;
-		unsigned char	b;
-		unsigned char	a;
+		uint8_t	r;
+		uint8_t	g;
+		uint8_t	b;
+		uint8_t	a;
 	};
-	uint32_t	pixel;
 }	t_pixel;
 
 typedef struct s_player {

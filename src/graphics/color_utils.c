@@ -6,25 +6,23 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:42:13 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/24 17:04:39 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:12:49 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-uint32_t	color_change_lightness(uint32_t color, double lightness)
+t_pixel	color_change_lightness(t_pixel color, double lightness)
 {
-	uint32_t	new_color;
-	uint8_t		*area;
+	t_pixel	new_color;
 
 	if (lightness > 1)
 		lightness = 1;
 	else if (lightness < 0)
-		return (0x000000FF);
-	area = (uint8_t *)&new_color + 3;
-	*(area--) = ((uint8_t)(color >> 24) * lightness);
-	*(area--) = ((uint8_t)(color >> 16) * lightness);
-	*(area--) = ((uint8_t)(color >> 8) * lightness);
-	*(area--) = ((uint8_t)(color & 0xFF));
+		lightness = 0;
+	new_color.r = color.r * lightness;
+	new_color.g = color.g * lightness;
+	new_color.b = color.b * lightness;
+	new_color.a = 0xFF;
 	return (new_color);
 }

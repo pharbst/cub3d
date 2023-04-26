@@ -6,11 +6,31 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 17:14:10 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/26 21:03:29 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_background(mlx_image_t *background, t_pixel ceiling, t_pixel floor)
+{
+	int		y;
+	t_pixel	color;
+
+	y = 0;
+	while (y < 0.75 * SCREEN_HEIGHT)
+	{
+		color = color_change_lightness(ceiling, 1 - y / (0.75 * SCREEN_HEIGHT));
+		universal_memset(background->pixels + (y * background->width * sizeof(uint32_t)), &color.pixel, sizeof(uint32_t), background->width);
+		++y;
+	}
+	while (y < 1.5 * SCREEN_HEIGHT)
+	{
+		color = color_change_lightness(floor, y / (0.75 * SCREEN_HEIGHT) - 1);
+		universal_memset(background->pixels + (y * background->width * sizeof(uint32_t)), &color.pixel, sizeof(uint32_t), background->width);
+		++y;
+	}
+}
 
 void	scene_init(t_scene *scene)
 {
@@ -19,8 +39,7 @@ void	scene_init(t_scene *scene)
 		mlx_panic();
 	mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_HIDDEN);
 	scene->background = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
-	draw_rect(scene->background, (t_rect){0, 0, SCREEN_WIDTH, 0.75 * SCREEN_HEIGHT}, scene->tex.ceiling.pixel);
-	draw_rect(scene->background, (t_rect){0, 0.75 * SCREEN_HEIGHT, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT}, scene->tex.floor.pixel);
+	draw_background(scene->background, scene->tex.ceiling, scene->tex.floor);
 	scene->screen = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
 	scene->fps_screen = init_image(scene->mlx, SCREEN_HEIGHT - 40, SCREEN_WIDTH - 15, 40, 20);
 	map_init(scene->mlx, &scene->map);
@@ -32,7 +51,7 @@ void	scene_draw(t_scene *scene)
 	int			x;
 	t_hit_info	hit;
 
-	draw_fill(scene->screen, 0x00000000);
+	draw_fill(scene->screen, (t_pixel){0x00000000});
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
