@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 16:10:46 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:34:44 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	update(void *param)
 	scene = (t_scene *)param;
 	player_update(scene->mlx, &scene->player, &scene->map);
 	scene_draw(scene);
-	fps_counter();
+	cub_fps(scene);
 	map_draw(&scene->map, &scene->player);
 }

@@ -6,7 +6,7 @@
 #    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/25 16:34:10 by pharbst          ###   ########.fr        #
+#    Updated: 2023/04/25 17:36:21 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,14 +41,14 @@ LIBFT	:= ./lib/libft
 LIBMLX	:= ./lib/MLX42
 HEADER	:= ./inc/cub3d.h ./inc/cub3d_structs.h ./inc/cub3d_error.h ./inc/graphics.h
 
-HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include
+HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include -I $(LIBMLX)/src/font
 ifeq ($(UNAME), Darwin)
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -framework Cocoa -framework OpenGL -framework IOKit
 else
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 endif
 VPATH	:= src src/graphics src/parsing src/fps_counter
-SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_cubes.c draw_utils.c init_utils.c map.c scene.c set_pixel.c error_handling.c input.c player_utils.c fps_counter.c
+SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_cubes.c draw_utils.c init_utils.c map.c scene.c set_pixel.c error_handling.c input.c player_utils.c fps_counter.c cub_fps.c
 # Parsing
 SRCS	+=	check_map_utils.c \
 			check_map.c \

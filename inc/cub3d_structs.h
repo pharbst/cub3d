@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 15:02:29 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:03:34 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_scene {
 	mlx_t		*mlx;
 	mlx_image_t	*background;
 	mlx_image_t	*screen;
+	mlx_image_t	*fps_screen;
 	t_map		map;
 	t_tex		tex;
 	t_player	player;

@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 16:28:50 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:34:24 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 void		cursor_hook(double xpos, double ypos, void *param);
 void		scroll_hook(double xdelta, double ydelta, void* param);
 void		update(void *param);
+void		cub_fps(t_scene *scene);
 // input.c
 t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
