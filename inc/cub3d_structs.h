@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/27 00:49:22 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:12:37 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,11 @@ typedef struct s_hit_info {
 	t_point	block_pos;
 	int		side;
 }	t_hit_info;
+
+typedef struct s_tex_params {
+	mlx_texture_t	*tex;
+	t_vec			pos;
+	double			step;
+}	t_tex_params;
 
 #endif

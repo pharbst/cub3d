@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 01:20:43 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:51:04 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,18 @@ void	draw_background(mlx_image_t *background, t_pixel ceiling, t_pixel floor)
 	y = 0;
 	while (y < 0.75 * SCREEN_HEIGHT)
 	{
-		color = color_change_lightness(ceiling, 1 - (0.9 * y) / (0.75 * SCREEN_HEIGHT));
-		universal_memset(background->pixels + (y * background->width * sizeof(uint32_t)), &color.pixel, sizeof(uint32_t), background->width);
+		color = color_dim(ceiling, 1 - (0.9 * y) / (0.75 * SCREEN_HEIGHT));
+		universal_memset(
+			background->pixels + (y * background->width * sizeof(uint32_t)),
+			&color.pixel, sizeof(uint32_t), background->width);
 		++y;
 	}
 	while (y < 1.5 * SCREEN_HEIGHT)
 	{
-		color = color_change_lightness(floor, y / (0.75 * SCREEN_HEIGHT) - 0.9);
-		universal_memset(background->pixels + (y * background->width * sizeof(uint32_t)), &color.pixel, sizeof(uint32_t), background->width);
+		color = color_dim(floor, y / (0.75 * SCREEN_HEIGHT) - 0.9);
+		universal_memset(
+			background->pixels + (y * background->width * sizeof(uint32_t)),
+			&color.pixel, sizeof(uint32_t), background->width);
 		++y;
 	}
 }
@@ -38,9 +42,13 @@ void	scene_init(t_scene *scene)
 	if (scene->mlx == NULL)
 		mlx_panic();
 	mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_HIDDEN);
-	scene->background = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
+	scene->background = init_image(
+			scene->mlx,
+			(t_rect){0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT});
 	draw_background(scene->background, scene->tex.ceiling, scene->tex.floor);
-	scene->screen = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
+	scene->screen = init_image(
+			scene->mlx,
+			(t_rect){0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT});
 	map_init(scene->mlx, &scene->map);
 	player_init(&scene->player);
 }

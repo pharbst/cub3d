@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 01:35:43 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:45:43 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MAP_SIZE 300
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.04
-# define MOUSE_SENSITIVITY 0.002
+# define MOUSE_SENSTVTY 0.002
 
 // parsing
 int			tex_init(t_scene *scene);
@@ -46,7 +46,7 @@ char		*skip_number(char *line);
 char		*cub_trim(char *line);
 
 // init_utils.c
-mlx_image_t	*init_image(mlx_t *mlx, int32_t x, int32_t y, uint32_t width, uint32_t height);
+mlx_image_t	*init_image(mlx_t *mlx, t_rect dim);
 // scene.c
 void		scene_init(t_scene *scene);
 void		scene_draw(t_scene *scene);

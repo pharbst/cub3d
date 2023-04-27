@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 18:25:52 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:39:51 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	map_init(mlx_t *mlx, t_map *map)
 {
-	map->img = init_image(mlx, 50, 50, MAP_SIZE, MAP_SIZE);
+	map->img = init_image(mlx, (t_rect){50, 50, MAP_SIZE, MAP_SIZE});
 }
 
 void	map_draw(t_map *map, t_player *player)
@@ -67,23 +67,22 @@ void	map_draw_player(t_map *map, t_player *player)
 	const t_point	offset = (t_point){
 		map->img->width / 2, map->img->height / 2
 	};
+	const t_pixel	color = (t_pixel){0xFF00FFFF};
+	t_point			left;
+	t_point			right;
 
+	left = (t_point){
+		offset.x + player->dir.x * 8 + player->plane.x * 8,
+		offset.y + player->dir.y * 8 + player->plane.y * 8
+	};
+	right = (t_point){
+		offset.x + player->dir.x * 8 + -player->plane.x * 8,
+		offset.y + player->dir.y * 8 + -player->plane.y * 8
+	};
 	draw_point(map->img, offset, 5, (t_pixel){0xFF00AA00});
-	draw_triangle(map->img,
-		(t_point){
-			offset.x,
-			offset.y
-		},
-		(t_point){
-			offset.x + player->dir.x * 8 + player->plane.x * 8,
-			offset.y + player->dir.y * 8 + player->plane.y * 8
-		},
-		(t_point){
-			offset.x + player->dir.x * 8 + -player->plane.x * 8,
-			offset.y + player->dir.y * 8 + -player->plane.y * 8
-		},
-		(t_pixel){0xFF00FFFF}
-	);
+	draw_line(map->img, offset, left, color);
+	draw_line(map->img, left, right, color);
+	draw_line(map->img, offset, right, color);
 }
 
 void	map_destroy(mlx_t *mlx, t_map *map)

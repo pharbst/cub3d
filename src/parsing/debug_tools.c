@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 05:50:17 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 06:02:21 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:46:10 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	print_map(t_scene *scene)
 
 	i = 0;
 	j = 0;
-
 	printf("Map:\n   ");
 	while (i < scene->map.width)
 		printf("%2d|", i++);

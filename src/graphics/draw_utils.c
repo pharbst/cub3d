@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/25 18:13:32 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:10:44 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 void	draw_fill(mlx_image_t *img, t_pixel color)
 {
-	uint32_t	x;
-	uint32_t	y;
-
-	y = 0;
-	while (y < img->height)
-	{
-		x = 0;
-		while (x < img->width)
-		{
-			set_pixel(img, x, y, color);
-			++x;
-		}
-		++y;
-	}
+	universal_memset(img->pixels, &color.pixel, sizeof(uint32_t),
+		img->height * img->width);
 }
 
 void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_pixel color)
 {
+	t_rect	rect;
+
 	size = abs(size);
 	if (size == 1)
 		set_pixel(img, p.x, p.y, color);
 	else
-		draw_rect(img, (t_rect){p.x - size / 2, p.y - size / 2, size, size}, color);
+	{
+		rect = (t_rect){p.x - size / 2, p.y - size / 2, size, size};
+		draw_rect(img, rect, color);
+	}
 }
 
 void	draw_line(mlx_image_t *img, t_point start, t_point end, t_pixel color)
@@ -51,37 +44,25 @@ void	draw_line(mlx_image_t *img, t_point start, t_point end, t_pixel color)
 	sign = (t_point){2 * (start.x < end.x) - 1, 2 * (start.y < end.y) - 1};
 	while (true)
 	{
-		if (start.x >= 0 && start.y >= 0 && start.x < (int32_t)img->width && start.y < (int32_t)img->height)
+		if (start.x >= 0 && start.y >= 0
+			&& start.x < (int32_t)img->width && start.y < (int32_t)img->height)
 			set_pixel(img, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		e2 = 2 * err;
-		if (e2 > dist.y)
-		{
-			err += dist.y;
-			start.x += sign.x;
-		}
-		if (e2 < dist.x)
-		{
-			err += dist.x;
-			start.y += sign.y;
-		}
+		err += dist.x * (e2 < dist.x);
+		err += dist.y * (e2 > dist.y);
+		start.x += sign.x * (e2 > dist.y);
+		start.y += sign.y * (e2 < dist.x);
 	}
 }
 
-void	draw_triangle(mlx_image_t *img, t_point a, t_point b, t_point c, t_pixel color)
+void	draw_border(mlx_image_t *img, t_point ul, t_point br, t_pixel color)
 {
-	draw_line(img, a, b, color);
-	draw_line(img, b, c, color);
-	draw_line(img, c, a, color);
-}
-
-void draw_border(mlx_image_t *img, t_point up_left, t_point bottom_right, t_pixel color)
-{
-	draw_line(img, up_left, (t_point){bottom_right.x, up_left.y}, color);
-	draw_line(img, up_left, (t_point){up_left.x, bottom_right.y}, color);
-	draw_line(img, (t_point){bottom_right.x, 0}, bottom_right, color);
-	draw_line(img, (t_point){0, bottom_right.y}, bottom_right, color);
+	draw_line(img, ul, (t_point){br.x, ul.y}, color);
+	draw_line(img, ul, (t_point){ul.x, br.y}, color);
+	draw_line(img, (t_point){br.x, 0}, br, color);
+	draw_line(img, (t_point){0, br.y}, br, color);
 }
 
 void	draw_rect(mlx_image_t *img, t_rect rect, t_pixel color)

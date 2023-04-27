@@ -6,22 +6,24 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 01:17:43 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:49:45 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	get_line_height(double dist, int *start, int *end, double fov)
+static t_point	set_line(double dist, double fov)
 {
-	int	line_height;
+	int		line_height;
+	t_point	line;
 
 	if (dist < 0.02)
 		line_height = SCREEN_HEIGHT / fov;
 	else
 		line_height = SCREEN_HEIGHT / dist / fov;
-	*start = -line_height / 2 + 0.75 * SCREEN_HEIGHT;
-	*end = line_height / 2 + 0.75 * SCREEN_HEIGHT;
+	line.y = -line_height / 2 + 0.75 * SCREEN_HEIGHT;
+	line.x = line_height / 2 + 0.75 * SCREEN_HEIGHT;
+	return (line);
 }
 
 static mlx_texture_t	*get_texture(int side, t_tex *textures)
@@ -53,35 +55,41 @@ static int	get_tex_column(int side, t_vec hit_pos, mlx_texture_t *tex)
 	return (tex_x);
 }
 
+// line.x = end, line.y = start/current position
+static t_tex_params	set_tex_params(t_scene *scene, t_hit_info hit, t_point line)
+{
+	t_tex_params	texp;
+
+	texp.tex = get_texture(hit.side, &scene->tex);
+	texp.pos.x = get_tex_column(hit.side, hit.pos, texp.tex);
+	texp.pos.y = 0;
+	texp.step = 1.0 * texp.tex->height / (line.x - line.y);
+	if (line.y < 0)
+		texp.pos.y = -line.y * texp.step;
+	return (texp);
+}
+
 void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 {
-	int				line_start;
-	int				line_end;
-	mlx_texture_t	*tex;
-	int				tex_x;
-	double			tex_y;
-	double			tex_step;
+	t_point			line;
+	t_tex_params	texp;
 	t_pixel			color;
 
-	get_line_height(hit.dist, &line_start, &line_end, scene->player.fov);
-	tex = get_texture(hit.side, &scene->tex);
-	tex_x = get_tex_column(hit.side, hit.pos, tex);
-	tex_y = 0;
-	tex_step = 1.0 * tex->height / (line_end - line_start);
-	while (line_start < line_end)
+	line = set_line(hit.dist, scene->player.fov);
+	texp = set_tex_params(scene, hit, line);
+	if (texp.pos.y != 0)
+		line.y = 0;
+	while (line.y < line.x && line.y < 1.5 * SCREEN_HEIGHT)
 	{
-		if (line_start >= 0 && line_start < 1.5 * SCREEN_HEIGHT)
-		{
-			if (tex_y >= tex->height)
-				tex_y = tex->height - 1;
-			color = get_pixel(tex, tex_x, tex_y);
-			 if (hit.dist == 0)
-				color = color_change_lightness(color, 1);
-			else
-				color = color_change_lightness(color, 4 / hit.dist);
-			set_pixel(scene->screen, x, line_start, color);
-		}
-		tex_y += tex_step;
-		++line_start;
+		if (texp.pos.y >= texp.tex->height)
+			texp.pos.y = texp.tex->height - 1;
+		color = get_pixel(texp.tex, texp.pos.x, texp.pos.y);
+		if (hit.dist == 0)
+			color = color_dim(color, 1);
+		else
+			color = color_dim(color, 4 / hit.dist);
+		set_pixel(scene->screen, x, line.y, color);
+		texp.pos.y += texp.step;
+		++line.y;
 	}
 }
