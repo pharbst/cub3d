@@ -6,19 +6,19 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 20:10:44 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:42:53 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_fill(mlx_image_t *img, t_pixel color)
+void	draw_fill(mlx_image_t *img, t_color color)
 {
 	universal_memset(img->pixels, &color.pixel, sizeof(uint32_t),
 		img->height * img->width);
 }
 
-void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_pixel color)
+void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_color color)
 {
 	t_rect	rect;
 
@@ -32,7 +32,7 @@ void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_pixel color)
 	}
 }
 
-void	draw_line(mlx_image_t *img, t_point start, t_point end, t_pixel color)
+void	draw_line(mlx_image_t *img, t_point start, t_point end, t_color color)
 {
 	t_point	dist;
 	t_point	sign;
@@ -57,7 +57,7 @@ void	draw_line(mlx_image_t *img, t_point start, t_point end, t_pixel color)
 	}
 }
 
-void	draw_border(mlx_image_t *img, t_point ul, t_point br, t_pixel color)
+void	draw_border(mlx_image_t *img, t_point ul, t_point br, t_color color)
 {
 	draw_line(img, ul, (t_point){br.x, ul.y}, color);
 	draw_line(img, ul, (t_point){ul.x, br.y}, color);
@@ -65,7 +65,7 @@ void	draw_border(mlx_image_t *img, t_point ul, t_point br, t_pixel color)
 	draw_line(img, (t_point){0, br.y}, br, color);
 }
 
-void	draw_rect(mlx_image_t *img, t_rect rect, t_pixel color)
+void	draw_rect(mlx_image_t *img, t_rect rect, t_color color)
 {
 	int32_t	x;
 	int32_t	y;

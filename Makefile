@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
+#    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/25 13:50:14 by pharbst          ###   ########.fr        #
+#    Updated: 2023/04/27 21:50:21 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ BLUE   = \033[01;34m
 NAME	:= cub3D
 
 CC		:= cc
-#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+#CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
 # CFLAGS	+=	-fsanitize=address
 
 LIBFT	:= ./lib/libft
@@ -48,7 +48,7 @@ else
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 endif
 VPATH	:= src src/graphics src/parsing
-SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_cubes.c draw_utils.c init_utils.c map.c scene.c set_pixel.c error_handling.c input.c player_utils.c
+SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_cubes.c draw_utils.c init_utils.c map.c scene.c error_handling.c input.c
 # Parsing
 SRCS	+=	check_map_utils.c \
 			check_map.c \
@@ -58,8 +58,7 @@ SRCS	+=	check_map_utils.c \
 			parse_map.c \
 			parsing_main.c \
 			parsing_utils.c \
-			tex_init.c \
-			debug_tools.c
+			tex_init.c
 
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)

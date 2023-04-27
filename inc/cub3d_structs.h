@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/27 20:12:37 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:41:51 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_rect {
 
 // --- Game object structs --- //
 
-typedef union s_pixel
+typedef union s_color
 {
 	uint32_t	pixel;
 	struct
@@ -46,7 +46,7 @@ typedef union s_pixel
 		uint8_t	b;
 		uint8_t	a;
 	};
-}	t_pixel;
+}	t_color;
 
 typedef struct s_player {
 	t_vec		pos;
@@ -68,8 +68,8 @@ typedef struct s_tex {
 	mlx_texture_t	*t_south;
 	mlx_texture_t	*t_west;
 	mlx_texture_t	*t_east;
-	t_pixel			floor;
-	t_pixel			ceiling;
+	t_color			floor;
+	t_color			ceiling;
 }	t_tex;
 
 typedef struct s_scene {

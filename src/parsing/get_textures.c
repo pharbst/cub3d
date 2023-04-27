@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:00 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/25 14:54:57 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/27 21:44:00 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	load_texture(char *path, mlx_texture_t **texture)
 	return (0);
 }
 
-static int	pars_get_color(char *line, t_pixel *color)
+static int	pars_get_color(char *line, t_color *color)
 {
 	int		i;
 	int		rgb[3];
@@ -46,7 +46,7 @@ static int	validate_texture(char *line, t_scene *scene)
 {
 	char			*tmp;
 	mlx_texture_t	**texture;
-	t_pixel			*color;
+	t_color			*color;
 
 	tmp = line;
 	color = NULL;

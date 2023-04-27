@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 20:45:43 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:50:47 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
 void		player_init(t_player *player);
 void		player_update(mlx_t *mlx, t_player *player, t_map *map);
-// player_utils.c
-t_vec		player_move(t_keystate *state, t_vec step, t_vec pos, t_map *map);
-void		player_rotate(t_keystate *state, t_player *player);
 // hooks.c
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		cursor_hook(double xpos, double ypos, void *param);
@@ -72,20 +69,13 @@ t_keystate	input_get_keys(mlx_t *mlx);
 // raycaster.c
 t_hit_info	ray_cast(t_player *player, t_map *map, t_vec ray_dir);
 void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
-void		set_pixel(mlx_image_t *img, uint32_t x, uint32_t y, t_pixel color);
-t_pixel		get_pixel(mlx_texture_t *tex, uint32_t x, uint32_t y);
 // common_utils.c
 t_vec		vec_add(t_vec a, t_vec b);
 t_vec		vec_scale(t_vec vec, double factor);
 t_vec		vec_rotate(t_vec vec, double angle);
 void		universal_memset(void *dst, void *src, size_t size, size_t len);
 // error_handling.c
-//void		print_help(void);
 void		panic(const char *msg);
 void		mlx_panic(void);
-
-//debug_tools.c
-void		print_map(t_scene *scene);
-void		print_player(t_scene *scene);
 
 #endif

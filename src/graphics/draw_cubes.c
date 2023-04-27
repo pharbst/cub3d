@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 20:49:45 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:43:23 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit)
 {
 	t_point			line;
 	t_tex_params	texp;
-	t_pixel			color;
+	t_color			color;
 
 	line = set_line(hit.dist, scene->player.fov);
 	texp = set_tex_params(scene, hit, line);

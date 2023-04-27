@@ -6,16 +6,16 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 20:51:04 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:43:16 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_background(mlx_image_t *background, t_pixel ceiling, t_pixel floor)
+void	draw_background(mlx_image_t *background, t_color ceiling, t_color floor)
 {
 	int		y;
-	t_pixel	color;
+	t_color	color;
 
 	y = 0;
 	while (y < 0.75 * SCREEN_HEIGHT)
@@ -60,7 +60,7 @@ void	scene_draw(t_scene *scene)
 	t_vec		ray_dir;
 	t_hit_info	hit;
 
-	draw_fill(scene->screen, (t_pixel){0x00000000});
+	draw_fill(scene->screen, (t_color){0x00000000});
 	screen_x = 0;
 	while (screen_x < SCREEN_WIDTH)
 	{
