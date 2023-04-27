@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/27 21:41:51 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:59:41 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ typedef struct s_player {
 }	t_player;
 
 typedef struct s_map {
-	uint16_t	width;
-	uint16_t	height;
-	char		*data;
-	mlx_image_t	*img;
+	uint16_t		width;
+	uint16_t		height;
+	char			*data;
+	mlx_image_t		*img;
+	mlx_texture_t	*pixbuf;
 }	t_map;
 
 typedef struct s_tex {
