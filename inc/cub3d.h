@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 21:50:47 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:57:15 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.04
 # define MOUSE_SENSTVTY 0.002
+# define BPP 4
 
 // parsing
 int			tex_init(t_scene *scene);

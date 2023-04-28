@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 21:42:53 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/28 20:23:29 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	draw_fill(mlx_image_t *img, t_color color)
 {
-	universal_memset(img->pixels, &color.pixel, sizeof(uint32_t),
-		img->height * img->width);
+	universal_memset(img->pixels, &color.pixel, BPP, img->height * img->width);
 }
 
 void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_color color)

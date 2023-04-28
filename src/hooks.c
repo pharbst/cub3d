@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 20:45:52 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/27 23:39:54 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(scene->mlx);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-	{
 		scene->map.img->enabled = !scene->map.img->enabled;
-		scene->player.img->enabled = !scene->player.img->enabled;
-	}
 }
 
 void	cursor_hook(double xpos, double ypos, void *param)

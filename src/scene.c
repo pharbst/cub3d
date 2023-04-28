@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 21:43:16 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:58:56 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	draw_background(mlx_image_t *background, t_color ceiling, t_color floor)
 	{
 		color = color_dim(ceiling, 1 - (0.9 * y) / (0.75 * SCREEN_HEIGHT));
 		universal_memset(
-			background->pixels + (y * background->width * sizeof(uint32_t)),
-			&color.pixel, sizeof(uint32_t), background->width);
+			background->pixels + (y * background->width * BPP),
+			&color.pixel, BPP, background->width);
 		++y;
 	}
 	while (y < 1.5 * SCREEN_HEIGHT)
 	{
 		color = color_dim(floor, y / (0.75 * SCREEN_HEIGHT) - 0.9);
 		universal_memset(
-			background->pixels + (y * background->width * sizeof(uint32_t)),
-			&color.pixel, sizeof(uint32_t), background->width);
+			background->pixels + (y * background->width * BPP),
+			&color.pixel, BPP, background->width);
 		++y;
 	}
 }
