@@ -1,0 +1,12 @@
+NO ./scenes/textures/Water.png
+SO ./scenes/textures/Earth.png
+WE ./scenes/textures/Fire.png
+EA ./scenes/textures/Air.png
+
+F 120,50,50
+C 50,120,50
+
+1111
+1001
+10N1
+1111
