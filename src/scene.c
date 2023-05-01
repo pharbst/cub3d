@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/26 21:03:29 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/30 14:01:33 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	scene_init(t_scene *scene)
 	scene->background = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
 	draw_background(scene->background, scene->tex.ceiling, scene->tex.floor);
 	scene->screen = init_image(scene->mlx, 0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT);
-	scene->fps_screen = init_image(scene->mlx, SCREEN_HEIGHT - 40, SCREEN_WIDTH - 15, 40, 20);
 	map_init(scene->mlx, &scene->map);
 	player_init(&scene->player);
+	scene->fps_screen = mlx_put_string(scene->mlx, "0", SCREEN_WIDTH - 100, 0);
 }
 
 void	scene_draw(t_scene *scene)

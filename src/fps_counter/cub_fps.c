@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cub_fps.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:02:11 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/26 18:29:58 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/04/30 14:25:19 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "font.h"
+#include <sys/time.h>
+
+typedef struct s_fps
+{
+	uint64_t	prev_s;
+	uint64_t	t;
+	double		fps_mid;
+}	t_fps;
 
 static void	mlx_draw_char(mlx_image_t *image, int32_t texoffset,
 		int32_t imgoffset)
@@ -34,19 +42,53 @@ static void	mlx_draw_char(mlx_image_t *image, int32_t texoffset,
 	}
 }
 
+static void	mlx_draw_sting(mlx_image_t *image, const char *str)
+{
+	int32_t	image_off;
+	int32_t	i;
+
+	i = 0;
+	image_off = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		mlx_draw_char(image, mlx_get_texoffset(str[i]), image_off);
+		image_off += FONT_WIDTH;
+		i++;
+	}
+}
+
+static unsigned long	utime(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000000 + tv.tv_usec);
+}
+
 void	cub_fps(t_scene *scene)
 {
-	int		fps;
-	char	*fps_str;
-	int		i;
+	static uint64_t	prev_s;
+	uint64_t		t;
+	static double	fps_mid;
+	char			*str;
 
-	fps = fps_counter();
-	if (fps != -1)
+	t = utime();
+	if (!prev_s)
 	{
-		fps_str = ft_itoa(fps);
-		i = ft_strlen(fps_str);
-		while (--i >= 0)
-			mlx_draw_char(scene->fps_screen, mlx_get_texoffset(fps_str[i]),
-				(i * FONT_WIDTH));
+		prev_s = t;
+		fps_mid = 1 / scene->mlx->delta_time;
+		return ;
+	}
+	else
+		fps_mid = ((1 / scene->mlx->delta_time) + fps_mid) / 2;
+	if (prev_s + 1000000 < t)
+	{
+		str = ft_itoa((int)fps_mid);
+		printf("debug\n");
+		mlx_draw_sting(scene->fps_screen, str);
+		// free(str);
+		prev_s = 0;
 	}
 }
