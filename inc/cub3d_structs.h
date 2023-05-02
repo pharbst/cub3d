@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/27 21:59:41 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 19:53:24 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ typedef union s_color
 }	t_color;
 
 typedef struct s_player {
-	t_vec		pos;
-	t_vec		dir;
-	t_vec		plane;
-	mlx_image_t	*img;
-	double		fov;
+	t_vec	pos;
+	t_vec	dir;
+	t_vec	plane;
+	double	fov;
 }	t_player;
 
 typedef struct s_map {
@@ -84,7 +83,7 @@ typedef struct s_scene {
 
 // --- Helper structs --- //
 
-typedef struct s_keystate {
+typedef struct s_keys {
 	bool	w;
 	bool	a;
 	bool	s;
@@ -93,7 +92,7 @@ typedef struct s_keystate {
 	bool	right;
 	bool	shift;
 	bool	alt;
-}	t_keystate;
+}	t_keys;
 
 typedef struct s_dda_params {
 	t_vec	ray_dir;

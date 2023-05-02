@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:53:23 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 21:43:23 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 19:50:34 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_point	set_line(double dist, double fov)
 	int		line_height;
 	t_point	line;
 
-	if (dist < 0.02)
+	if (dist < 0.01)
 		line_height = SCREEN_HEIGHT / fov;
 	else
 		line_height = SCREEN_HEIGHT / dist / fov;

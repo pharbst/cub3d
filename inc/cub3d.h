@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/29 22:15:24 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:31:52 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			cursor_hook(double xpos, double ypos, void *param);
 void			scroll_hook(double xdelta, double ydelta, void *param);
 void			update(void *param);
 // input.c
-t_keystate		input_get_keys(mlx_t *mlx);
+t_keys			input_get_keys(mlx_t *mlx);
 // raycaster.c
 t_hit_info		ray_cast(t_player *player, t_map *map, t_vec ray_dir);
 void			draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
