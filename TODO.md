@@ -28,4 +28,7 @@
 * [ ] Animated sprites
 * [x] Mouse movement
 
-render map once and reuse
+## Misc:
+* [ ] Handle screen resizing
+* [ ] FPS counter
+* [ ] Norminette

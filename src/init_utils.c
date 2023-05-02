@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:20:31 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/29 18:07:54 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:34:05 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,26 @@ mlx_image_t	*init_image(mlx_t *mlx, t_rect dim)
 	return (img);
 }
 
+static void	fill_block(mlx_texture_t *pixbuf, t_point data)
+{
+	uint32_t	h;
+	void		*dst;
+
+	h = 0;
+	while (h < BLOCK_SIZE)
+	{
+		dst = pixbuf->pixels + data.y * pixbuf->width * BLOCK_SIZE * BPP;
+		ft_memcpy(dst + h * pixbuf->width * BPP, dst, pixbuf->width * BPP);
+		++h;
+	}
+}
+
 static void	fill_pixbuf(mlx_texture_t *pixbuf, t_map *map)
 {
-	t_color			white = (t_color){0xFFEEEEEE};
-	t_color			black = (t_color){0xFF000000};
+	const t_color	white = (t_color){0xFFEEEEEE};
+	const t_color	black = (t_color){0xFF000000};
 	void			*dst;
 	t_point			data;
-	uint32_t		h;
 
 	data.y = 0;
 	while (data.y < map->height)
@@ -44,18 +57,12 @@ static void	fill_pixbuf(mlx_texture_t *pixbuf, t_map *map)
 			dst = pixbuf->pixels
 				+ (data.y * pixbuf->width + data.x) * BLOCK_SIZE * BPP;
 			if (map->data[data.y * map->width + data.x] == '1')
-				universal_memset(dst, &white.pixel, BPP, BLOCK_SIZE);
+				uni_memset(dst, &white.pixel, BPP, BLOCK_SIZE);
 			else
-				universal_memset(dst, &black.pixel, BPP, BLOCK_SIZE);
+				uni_memset(dst, &black.pixel, BPP, BLOCK_SIZE);
 			++data.x;
 		}
-		h = 0;
-		while (h < BLOCK_SIZE)
-		{
-			dst = pixbuf->pixels + data.y * pixbuf->width * BLOCK_SIZE * BPP;
-			ft_memcpy(dst + h * pixbuf->width * BPP, dst, pixbuf->width * BPP);
-			++h;
-		}
+		fill_block(pixbuf, data);
 		++data.y;
 	}
 }

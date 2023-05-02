@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/02 13:31:52 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:29:20 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void			scene_destroy(t_scene *scene);
 // map.c
 void			map_init(mlx_t *mlx, t_map *map);
 void			map_draw(t_map *map, t_player *player);
-void			map_draw_player(t_map *map, t_player *player);
 void			map_destroy(mlx_t *mlx, t_map *map);
 // player.c
 void			player_init(t_player *player);
@@ -76,7 +75,7 @@ void			draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
 t_vec			vec_add(t_vec a, t_vec b);
 t_vec			vec_scale(t_vec vec, double factor);
 t_vec			vec_rotate(t_vec vec, double angle);
-void			universal_memset(void *dst, void *src, size_t size, size_t len);
+void			uni_memset(void *dst, const void *src, size_t size, size_t len);
 // error_handling.c
 void			panic(const char *msg);
 void			mlx_panic(void);

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:39:14 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/28 20:23:29 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:30:02 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	draw_fill(mlx_image_t *img, t_color color)
 {
-	universal_memset(img->pixels, &color.pixel, BPP, img->height * img->width);
+	uni_memset(img->pixels, &color.pixel, BPP, img->height * img->width);
 }
 
 void	draw_point(mlx_image_t *img, t_point p, int32_t size, t_color color)
@@ -66,8 +66,8 @@ void	draw_border(mlx_image_t *img, t_point ul, t_point br, t_color color)
 
 void	draw_rect(mlx_image_t *img, t_rect rect, t_color color)
 {
-	int32_t	x;
-	int32_t	y;
+	int	x;
+	int	y;
 
 	if (rect.width < 0)
 	{
@@ -85,7 +85,7 @@ void	draw_rect(mlx_image_t *img, t_rect rect, t_color color)
 		x = rect.x;
 		while (x < rect.x + rect.width)
 		{
-			if (x >= 0 && y >= 0 && x < (int32_t)img->width && y < (int32_t)img->height)
+			if (x >= 0 && y >= 0 && x < (int)img->width && y < (int)img->height)
 				set_pixel(img, x, y, color);
 			++x;
 		}

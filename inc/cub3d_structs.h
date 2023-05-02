@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/02 19:53:24 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 20:56:30 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ typedef struct s_dda_params {
 typedef struct s_hit_info {
 	double	dist;
 	t_vec	pos;
-	t_point	block_pos;
 	int		side;
 }	t_hit_info;
 

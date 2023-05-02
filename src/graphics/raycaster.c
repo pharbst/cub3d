@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:33:34 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 01:38:04 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 20:56:41 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ static t_hit_info	ray_walk(t_dda_params ddap, t_map *map, t_player *player)
 		hit.dist = ddap.dist.x - ddap.delta.x;
 	else
 		hit.dist = ddap.dist.y - ddap.delta.y;
-	if ((hit.side == 0 && ddap.step_dir.x < 0) || (hit.side == 1 && ddap.step_dir.y < 0))
+	if ((hit.side == 0 && ddap.step_dir.x < 0)
+		|| (hit.side == 1 && ddap.step_dir.y < 0))
 		hit.side += 2;
 	hit.pos = vec_add(player->pos, vec_scale(ddap.ray_dir, hit.dist));
-	hit.block_pos = ddap.block_pos;
 	return (hit);
 }
 

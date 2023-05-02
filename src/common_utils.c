@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:00:56 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 20:52:18 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:29:38 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_vec	vec_rotate(t_vec vec, double angle)
 	return (new);
 }
 
-void	universal_memset(void *dst, void *src, size_t size, size_t len)
+void	uni_memset(void *dst, const void *src, size_t size, size_t len)
 {
 	while (len > 0)
 	{
