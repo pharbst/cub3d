@@ -6,7 +6,7 @@
 #    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/05/03 02:46:00 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/05/03 04:01:10 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIBFT	:= ./lib/libft
 LIBMLX	:= ./lib/MLX42
 HEADER	:= ./inc/cub3d.h ./inc/cub3d_structs.h ./inc/cub3d_error.h ./inc/graphics.h
 
-HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include
+HEADERS	:= -I ./inc -I $(LIBFT)/inc -I $(LIBMLX)/include -I $(LIBMLX)/src/font
 ifeq ($(UNAME), Darwin)
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -framework Cocoa -framework OpenGL -framework IOKit
 else
@@ -58,7 +58,7 @@ SRCS	+=	check_map_utils.c \
 			parsing_main.c \
 			parsing_utils.c
 # Rendering
-SRCS	+=	draw_cubes.c raycaster.c
+SRCS	+=	draw_cubes.c fps_counter.c raycaster.c
 # Scene
 SRCS	+=	map.c player.c scene.c
 # Utils

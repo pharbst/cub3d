@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/03 02:28:54 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 03:38:06 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void		update(void *param);
 t_hit_info	ray_cast(t_player *player, t_map *map, t_vec ray_dir);
 // draw_cubes.c
 void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
-
+// fps_counter.c
+void		fps_draw(mlx_image_t *img, double delta_time);
 /* --- UTILS --- */
 // init_utils.c
 mlx_image_t	*init_image(mlx_t *mlx, t_rect dim);

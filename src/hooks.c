@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/03 01:47:31 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 04:17:23 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,13 @@ static t_keys	get_input(mlx_t *mlx)
 
 void	update(void *param)
 {
-	t_scene	*scene;
-	t_keys	keys;
+	t_scene			*scene;
+	t_keys			keys;
 
 	scene = (t_scene *)param;
 	keys = get_input(scene->mlx);
 	player_update(&scene->player, &scene->map, keys);
 	scene_draw(scene);
 	map_draw(&scene->map, &scene->player);
+	fps_draw(scene->fps_img, scene->mlx->delta_time);
 }

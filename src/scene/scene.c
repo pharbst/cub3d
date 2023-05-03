@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/03 01:37:28 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 04:17:57 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	scene_init(t_scene *scene)
 	scene->screen = init_image(
 			scene->mlx,
 			(t_rect){0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT});
+	scene->fps_img = mlx_put_string(scene->mlx, "0  ", SCREEN_WIDTH - 100, 0);
 	map_init(scene->mlx, &scene->map);
 	player_init(&scene->player);
 }
