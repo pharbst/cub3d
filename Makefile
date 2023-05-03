@@ -6,7 +6,7 @@
 #    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/05/03 20:11:20 by pharbst          ###   ########.fr        #
+#    Updated: 2023/05/03 21:29:12 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ OS_LIKE		=	$(shell cat /etc/os-release | grep ID_LIKE | cut -d= -f2)
 
 include color.mk
 
-# ---------------------------------------------------------------------------- #
+# **************************************************************************** #
+# Variables
+# **************************************************************************** #
 
 NAME	:= cub3D
 
@@ -60,15 +62,19 @@ SRCS	+=	color_utils.c common_utils.c draw_utils.c error_handling.c init_utils.c
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)
 
-# ---------------------------------------------------------------------------- #
+# **************************************************************************** #
+# Compilation Rules
+# **************************************************************************** #
 
 all:
 	@$(MAKE) -s proname_header
 	@$(MAKE) -s std_all
-	
-	
 
 std_all:
+ifneq ($($(LIBFT)/Makefile), "")
+	@printf "%-79s$(RESET)" "$(Yellow)Updating $(FCyan)submodule ..."
+	@git submodule update --init >/dev/null 2>&1
+endif
 	@printf "%-79s$(RESET)" "$(Yellow)Compiling $(FCyan)libft ..."
 	@$(MAKE) -j -s -C $(LIBFT) >/dev/null
 	@printf "$(FGreen)[$(TICK)]\n$(RESET)"
@@ -79,7 +85,6 @@ std_all:
 	@$(MAKE) -s $(NAME)
 	@printf "$(SETCURUP)"
 	@printf "%-86s$(RESET)" "$(Yellow)Compiling $(FBlue)cub$(FYellow)3D :)"
-# @printf "%-95s$(RESET)" "$(Yellow)Compiling $(FBlue)cub$(FYellow)3D $(FGreen)$(SCHMILI)"
 	@printf "$(FGreen)$(TICKBOX)\n$(RESET)"
 
 libft:
@@ -98,15 +103,25 @@ $(ODIR)/%.o : %.c $(HEADER) | $(ODIR)
 $(ODIR):
 	@mkdir -p $@
 
-# ---------------------------------------------------------------------------- #
+# **************************************************************************** #
+# Cleaning Rules
+# **************************************************************************** #
 
 clean: libft
-	@printf "%-50s$(RESET)" "$(FRed)Cleaning up ..."
+	@$(MAKE) -s proname_header
+	@$(MAKE) -s std_clean
+
+std_clean:
+	@printf "%-72s$(RESET)" "$(FPurple)Cleaning up ..."
 	@$(RM) -rf $(ODIR)
 	@$(RM) -rf $(LIBMLX)/build
 	@printf "$(FGreen)$(TICKBOX)\n$(RESET)"
 
 fclean: libft
+	@$(MAKE) -s proname_header
+	@$(MAKE) -s cleanator
+
+cleanator:
 	@printf "%-72s$(RESET)" "$(FPurple)FCleaning up ..."
 	@$(RM) -rf $(ODIR)
 	@$(RM) -rf $(LIBMLX)/build
@@ -115,8 +130,12 @@ fclean: libft
 
 re:
 	@$(MAKE) -s proname_header
-	@$(MAKE) -s fclean
+	@$(MAKE) -s cleanator
 	@$(MAKE) -s std_all
+	
+# **************************************************************************** #
+# Header Rules
+# **************************************************************************** #
 
 proname_header:
 	@printf "$(FRed)╔══════════════════════════════════════════════════════════════════╗\n\
@@ -130,4 +149,4 @@ $(FRed)║        $(FBlue)|  ███████|  ██████/| ██
 $(FRed)║        $(FBlue) \\_______/ \\______/ |_______/ $(FYellow) \\______/ |_______/         $(FRed)║\n\
 ╚══════════════════════════════════════════════════════════════════╝\n$(RESET)"
 
-.PHONY: all clean fclean re libft libmlx proname_header std_all
+.PHONY: all clean fclean re libft libmlx std_all std_clean cleanator proname_header
