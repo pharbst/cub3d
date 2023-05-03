@@ -6,13 +6,13 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/02 21:29:57 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 01:37:28 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_background(mlx_image_t *background, t_color ceiling, t_color floor)
+static void	set_background(mlx_image_t *bg, t_color ceiling, t_color floor)
 {
 	int		y;
 	t_color	color;
@@ -22,16 +22,16 @@ void	draw_background(mlx_image_t *background, t_color ceiling, t_color floor)
 	{
 		color = color_dim(ceiling, 1 - (0.9 * y) / (0.75 * SCREEN_HEIGHT));
 		uni_memset(
-			background->pixels + (y * background->width * BPP),
-			&color.pixel, BPP, background->width);
+			bg->pixels + (y * bg->width * BPP),
+			&color.pixel, BPP, bg->width);
 		++y;
 	}
 	while (y < 1.5 * SCREEN_HEIGHT)
 	{
 		color = color_dim(floor, y / (0.75 * SCREEN_HEIGHT) - 0.9);
 		uni_memset(
-			background->pixels + (y * background->width * BPP),
-			&color.pixel, BPP, background->width);
+			bg->pixels + (y * bg->width * BPP),
+			&color.pixel, BPP, bg->width);
 		++y;
 	}
 }
@@ -45,7 +45,7 @@ void	scene_init(t_scene *scene)
 	scene->background = init_image(
 			scene->mlx,
 			(t_rect){0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT});
-	draw_background(scene->background, scene->tex.ceiling, scene->tex.floor);
+	set_background(scene->background, scene->tex.ceiling, scene->tex.floor);
 	scene->screen = init_image(
 			scene->mlx,
 			(t_rect){0, -SCREEN_HEIGHT / 4, SCREEN_WIDTH, 1.5 * SCREEN_HEIGHT});

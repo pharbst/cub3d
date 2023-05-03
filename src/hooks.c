@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:21:58 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/04/27 23:39:54 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 01:47:31 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,29 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	player->plane = vec_scale(vec_rotate(player->dir, M_PI_2), player->fov);
 }
 
+static t_keys	get_input(mlx_t *mlx)
+{
+	t_keys	keys;
+
+	keys.w = mlx_is_key_down(mlx, MLX_KEY_W);
+	keys.a = mlx_is_key_down(mlx, MLX_KEY_A);
+	keys.s = mlx_is_key_down(mlx, MLX_KEY_S);
+	keys.d = mlx_is_key_down(mlx, MLX_KEY_D);
+	keys.left = mlx_is_key_down(mlx, MLX_KEY_LEFT);
+	keys.right = mlx_is_key_down(mlx, MLX_KEY_RIGHT);
+	keys.shift = mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT);
+	keys.alt = mlx_is_key_down(mlx, MLX_KEY_LEFT_ALT);
+	return (keys);
+}
+
 void	update(void *param)
 {
-	t_scene		*scene;
+	t_scene	*scene;
+	t_keys	keys;
 
 	scene = (t_scene *)param;
-	player_update(scene->mlx, &scene->player, &scene->map);
+	keys = get_input(scene->mlx);
+	player_update(&scene->player, &scene->map, keys);
 	scene_draw(scene);
 	map_draw(&scene->map, &scene->player);
 }

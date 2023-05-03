@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 19:05:35 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/21 15:58:48 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/03 02:13:37 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,45 @@ static char	**read_map(int fd, char *line, t_scene *scene)
 	if (line)
 		free(line);
 	return (map);
+}
+
+static int	expand_tab(char **map, int i, int *j)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_substr(map[i], 0, *j);
+	tmp2 = ft_strjoin(tmp, "0000");
+	free(tmp);
+	tmp = ft_strjoin(tmp2, map[i] + *j + 1);
+	free(map[i]);
+	map[i] = tmp;
+	*j += 3;
+	return (0);
+}
+
+static int	parse_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (' ' == map[i][j])
+				map[i][j] = '0';
+			else if ('\t' == map[i][j])
+				expand_tab(map, i, &j);
+			else if (!ft_strchr("01NSWE", map[i][j]))
+				return (cub_errno(WRITE, ERFORMAT), 1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	get_map(int fd, t_scene *scene)

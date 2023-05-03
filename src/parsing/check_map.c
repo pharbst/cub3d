@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 01:49:55 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 02:19:06 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/03 02:19:42 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "cub3d_error.h"
 
-int	add_queue(t_list **queue, int coords[2])
+static int	add_queue(t_list **queue, int coords[2])
 {
 	t_list	*tmp;
 
@@ -36,7 +36,7 @@ int	add_queue(t_list **queue, int coords[2])
 	return (0);
 }
 
-int	check_algo(t_scene *scene, t_list **queue, char old)
+static int	check_algo(t_scene *scene, t_list **queue, char old)
 {
 	t_list	*tmp;
 	int		coords[2];
@@ -63,7 +63,7 @@ int	check_algo(t_scene *scene, t_list **queue, char old)
 	return (0);
 }
 
-int	check_main(t_scene *scene)
+static int	check_main(t_scene *scene)
 {
 	int		coords[2];
 	char	old;

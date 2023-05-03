@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:16:45 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/02 20:15:55 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 02:38:28 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_vec	collision_correction(t_player *player, t_vec step, t_map *map)
 {
-	t_vec		new_step;
-	t_vec		target;
+	t_vec	new_step;
+	t_vec	target;
 
 	new_step = step;
 	target = vec_add(player->pos, vec_scale(step, 0.3));
@@ -75,12 +75,10 @@ void	player_init(t_player *player)
 	player->plane = vec_scale(vec_rotate(player->dir, M_PI_2), player->fov);
 }
 
-void	player_update(mlx_t *mlx, t_player *player, t_map *map)
+void	player_update(t_player *player, t_map *map, t_keys keys)
 {
-	t_keys	keys;
 	t_vec	step;
 
-	keys = input_get_keys(mlx);
 	step = set_step_dir(player->dir, keys);
 	if (!keys.alt)
 		step = collision_correction(player, step, map);

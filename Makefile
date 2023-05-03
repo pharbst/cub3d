@@ -6,7 +6,7 @@
 #    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/04/29 17:23:02 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/05/03 02:46:00 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,18 +47,22 @@ LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.br
 else
 LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 endif
-VPATH	:= src src/graphics src/parsing
-SRCS	:= common_utils.c hooks.c main.c player.c raycaster.c color_utils.c draw_cubes.c draw_utils.c init_utils.c map.c scene.c error_handling.c input.c
+VPATH	:= src src/parsing src/rendering src/scene src/utils
+SRCS	:= main.c hooks.c
 # Parsing
 SRCS	+=	check_map_utils.c \
 			check_map.c \
 			error.c \
 			get_map.c \
 			get_textures.c \
-			parse_map.c \
 			parsing_main.c \
-			parsing_utils.c \
-			tex_init.c
+			parsing_utils.c
+# Rendering
+SRCS	+=	draw_cubes.c raycaster.c
+# Scene
+SRCS	+=	map.c player.c scene.c
+# Utils
+SRCS	+=	color_utils.c common_utils.c draw_utils.c error_handling.c init_utils.c
 
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 10:30:50 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/16 03:23:18 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/03 02:20:16 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	*create_vector(int x, int y)
 {
 	int	*vector;
 
-	vector = malloc(8);
+	vector = malloc(sizeof(int *));
 	if (!vector)
 		return (cub_errno(WRITE, ERALLOC), NULL);
 	vector[0] = x;
