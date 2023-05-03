@@ -6,7 +6,7 @@
 #    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/05/03 21:29:12 by pharbst          ###   ########.fr        #
+#    Updated: 2023/05/03 21:33:14 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ ifneq ($($(LIBFT)/Makefile), "")
 	@printf "%-79s$(RESET)" "$(Yellow)Updating $(FCyan)submodule ..."
 	@git submodule update --init >/dev/null 2>&1
 endif
+	@printf "$(FGreen)[$(TICK)]\n$(RESET)"
 	@printf "%-79s$(RESET)" "$(Yellow)Compiling $(FCyan)libft ..."
 	@$(MAKE) -j -s -C $(LIBFT) >/dev/null
 	@printf "$(FGreen)[$(TICK)]\n$(RESET)"
