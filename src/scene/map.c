@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:34:03 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/03 02:38:21 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:43:13 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	map_init(mlx_t *mlx, t_map *map)
 {
-	mlx_image_t	*img;
-
 	map->img = init_image(mlx, (t_rect){50, 50, MAP_SIZE, MAP_SIZE});
 	init_map_pixbuf(map);
 	if (map->pixbuf == NULL)
 		panic("Failed to allocate memory.");
-	img = mlx_texture_to_image(mlx, map->pixbuf);
 }
 
 static void	map_draw_map(t_point img, t_point data, t_map *map)

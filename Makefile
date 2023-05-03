@@ -6,7 +6,7 @@
 #    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/05/03 12:41:57 by pharbst          ###   ########.fr        #
+#    Updated: 2023/05/03 20:11:20 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,35 +19,7 @@ OS			=	$(shell cat /etc/os-release | grep -e NAME | cut -d= -f2 | tr -d '"')
 OS_LIKE		=	$(shell cat /etc/os-release | grep ID_LIKE | cut -d= -f2)
 
 
-# ****************************************************************************  #
-# Colors and Printing stuff
-# ****************************************************************************  #
-Black			=	$(shell echo "\033[0;30m")
-FBlack			=	$(shell echo "\033[1;30m")
-Red				=	$(shell echo "\033[0;31m")
-FRed			=	$(shell echo "\033[1;31m")
-BRed			=	$(shell echo "\033[1;41m")
-Green			=	$(shell echo "\033[0;32m")
-FGreen			=	$(shell echo "\033[1;32m")
-Brown/Orange	=	$(shell echo "\033[0;33m")
-FBrown/Orange	=	$(shell echo "\033[1;33m")
-FYellow			=	$(shell echo "\033[1;33m")
-Yellow			=	$(shell echo "\033[0;33m")
-Blue			=	$(shell echo "\033[0;34m")
-FBlue			=	$(shell echo "\033[1;34m")
-Purple			=	$(shell echo "\033[0;35m")
-FPurple			=	$(shell echo "\033[1;35m")
-Cyan			=	$(shell echo "\033[0;36m")
-FCyan			=	$(shell echo "\033[1;36m")
-FWhite			=	$(shell echo "\033[1;37m")
-White			=	$(shell echo "\033[0;37m")
-RESET			=	$(shell echo "\033[0m")
-TICK			=	$(shell echo "\xE2\x9C\x94")
-RESET  = \033[01;00m
-RED    = \033[01;31m
-GREEN  = \033[01;32m
-YELLOW = \033[01;33m
-BLUE   = \033[01;34m
+include color.mk
 
 # ---------------------------------------------------------------------------- #
 
@@ -91,29 +63,37 @@ OBJS = $(SRCS:%.c=$(ODIR)/%.o)
 # ---------------------------------------------------------------------------- #
 
 all:
-	@printf "%-50s$(RESET)" "$(FYellow)Compiling libft ..."
-	@$(MAKE) -j -C $(LIBFT) >/dev/null
-	@printf "$(FGreen)✔\n$(RESET)"
-	@printf "%-50s$(RESET)" "$(FYellow)Compiling libmlx ..."
-	@$(MAKE) libmlx >/dev/null
-	@printf "$(FGreen)✔\n$(RESET)"
-	@printf "\n\n$(FYellow)Compiling cub3D:\n$(RESET)"
-	@$(MAKE) $(NAME)
+	@$(MAKE) -s proname_header
+	@$(MAKE) -s std_all
+	
+	
+
+std_all:
+	@printf "%-79s$(RESET)" "$(Yellow)Compiling $(FCyan)libft ..."
+	@$(MAKE) -j -s -C $(LIBFT) >/dev/null
+	@printf "$(FGreen)[$(TICK)]\n$(RESET)"
+	@printf "%-79s$(RESET)" "$(Yellow)Compiling $(FCyan)libmlx ..."
+	@$(MAKE) -s libmlx >/dev/null
+	@printf "$(FGreen)[$(TICK)]\n$(RESET)"
+	@printf "\n\n%-81s\n$(RESET)" "$(Yellow)Compiling $(FBlue)cub$(FYellow)3D :("
+	@$(MAKE) -s $(NAME)
+	@printf "$(SETCURUP)"
+	@printf "%-86s$(RESET)" "$(Yellow)Compiling $(FBlue)cub$(FYellow)3D :)"
+# @printf "%-95s$(RESET)" "$(Yellow)Compiling $(FBlue)cub$(FYellow)3D $(FGreen)$(SCHMILI)"
+	@printf "$(FGreen)$(TICKBOX)\n$(RESET)"
 
 libft:
-	@$(MAKE) -j -C $(LIBFT) $(MAKECMDGOALS)
+	@$(MAKE) -j -s -C $(LIBFT) $(MAKECMDGOALS) >/dev/null
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -s -C $(LIBMLX)/build -j
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
-	@printf "$(GREEN)Done$(RESET)\n"
 
 $(ODIR)/%.o : %.c $(HEADER) | $(ODIR)
-	@printf "%-50s$(RESET)" "$(Yellow)Compiling $< ..."
+	@printf "%-50s$(RESET)\r" "$(Green)Compiling $< ..."
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
-	@printf "$(FGreen)✔\n$(RESET)"
 
 $(ODIR):
 	@mkdir -p $@
@@ -124,17 +104,30 @@ clean: libft
 	@printf "%-50s$(RESET)" "$(FRed)Cleaning up ..."
 	@$(RM) -rf $(ODIR)
 	@$(RM) -rf $(LIBMLX)/build
-	@printf "$(FGreen)✔\n$(RESET)"
+	@printf "$(FGreen)$(TICKBOX)\n$(RESET)"
 
 fclean: libft
-	@printf "%-50s$(RESET)" "$(FRed)FCleaning up ..."
+	@printf "%-72s$(RESET)" "$(FPurple)FCleaning up ..."
 	@$(RM) -rf $(ODIR)
 	@$(RM) -rf $(LIBMLX)/build
-	@printf "$(FGreen)✔\n$(RESET)"
+	@printf "$(FGreen)$(TICKBOX)\n$(RESET)"
 	@rm -f $(NAME)
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@$(MAKE) -s proname_header
+	@$(MAKE) -s fclean
+	@$(MAKE) -s std_all
 
-.PHONY: all clean fclean re libft libmlx
+proname_header:
+	@printf "$(FRed)╔══════════════════════════════════════════════════════════════════╗\n\
+$(FRed)║        $(FBlue)                     /██      $(FYellow)  /██████  /███████         $(FRed)║\n\
+$(FRed)║        $(FBlue)                    | ██      $(FYellow) /██__  ██| ██__  ██        $(FRed)║\n\
+$(FRed)║        $(FBlue)  /███████ /██   /██| ███████ $(FYellow)|__/  \\ ██| ██  \\ ██        $(FRed)║\n\
+$(FRed)║        $(FBlue) /██_____/| ██  | ██| ██__  ██$(FYellow)   /█████/| ██  | ██        $(FRed)║\n\
+$(FRed)║        $(FBlue)| ██      | ██  | ██| ██  \\ ██$(FYellow)  |___  ██| ██  | ██        $(FRed)║\n\
+$(FRed)║        $(FBlue)| ██      | ██  | ██| ██  | ██$(FYellow) /██  \\ ██| ██  | ██        $(FRed)║\n\
+$(FRed)║        $(FBlue)|  ███████|  ██████/| ███████/$(FYellow)|  ██████/| ███████/        $(FRed)║\n\
+$(FRed)║        $(FBlue) \\_______/ \\______/ |_______/ $(FYellow) \\______/ |_______/         $(FRed)║\n\
+╚══════════════════════════════════════════════════════════════════╝\n$(RESET)"
+
+.PHONY: all clean fclean re libft libmlx proname_header std_all
