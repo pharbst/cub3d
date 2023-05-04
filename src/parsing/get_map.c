@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 19:05:35 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/03 02:13:37 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:46:32 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	**read_map(int fd, char *line, t_scene *scene)
 	while (line && *skip_space(line) != '\0')
 	{
 		line = cub_trim(line);
+		map_trim(line);
 		scene->map.height++;
 		tmp = ft_calloc(scene->map.height + 1, sizeof(char *));
 		if (!tmp)

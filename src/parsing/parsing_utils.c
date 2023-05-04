@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:40 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/14 00:30:22 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:44:19 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,17 @@ char	*cub_trim(char *line)
 	line = ft_strtrim(line, "\n");
 	free(tmp);
 	return (line);
+}
+
+// this function deletes whitespaces at the end of the line
+void	map_trim(char *line)
+{
+	int	i;
+	
+	i = ft_strlen(line) - 1;
+	while (i >= 0 && ft_iswhitespace(line[i]))
+	{
+		line[i] = '\0';
+		i--;
+	}
 }

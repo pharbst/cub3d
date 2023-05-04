@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:00 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/03 02:04:24 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:36:58 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	get_textures(int fd, t_tex *tex)
 		line = get_next_line(fd);
 		if (!line)
 			return (close(fd), cub_errno(WRITE, EREOF), 1);
-		tmp = ft_strtrim(line, "\n");
+		line = cub_trim(line);
+		tmp = ft_strtrim(line, " \t");
 		free(line);
 		line = tmp;
 		tmp = skip_space(line);
