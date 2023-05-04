@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:12:38 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/03 03:16:13 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:23:35 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_scene {
 	mlx_t		*mlx;
 	mlx_image_t	*background;
 	mlx_image_t	*screen;
-	mlx_image_t	*fps_img;
+	mlx_image_t	*fps;
 	t_map		map;
 	t_tex		tex;
 	t_player	player;

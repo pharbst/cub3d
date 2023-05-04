@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
+#    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/05/03 21:33:14 by pharbst          ###   ########.fr        #
+#    Updated: 2023/05/04 16:17:23 by jlohmann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ include color.mk
 NAME	:= cub3D
 
 CC		:= cc
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-#CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
+#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
 # CFLAGS	+=	-fsanitize=address
 
 LIBFT	:= ./lib/libft
@@ -57,7 +57,7 @@ SRCS	+=	draw_cubes.c fps_counter.c raycaster.c
 # Scene
 SRCS	+=	map.c player.c scene.c
 # Utils
-SRCS	+=	color_utils.c common_utils.c draw_utils.c error_handling.c init_utils.c
+SRCS	+=	color_utils.c common_utils.c draw_utils.c init_utils.c
 
 ODIR	:= obj
 OBJS = $(SRCS:%.c=$(ODIR)/%.o)

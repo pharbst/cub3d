@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/04 15:47:36 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:25:05 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void		map_trim(char *line);
 
 /* --- SCENE --- */
 // scene.c
-void		scene_init(t_scene *scene);
+bool		scene_init(t_scene *scene);
 void		scene_draw(t_scene *scene);
-void		scene_destroy(t_scene *scene);
+void		scene_destroy(t_scene *scene, int layer);
 // map.c
-void		map_init(mlx_t *mlx, t_map *map);
+bool		map_init(mlx_t *mlx, t_map *map);
 void		map_draw(t_map *map, t_player *player);
 void		map_destroy(mlx_t *mlx, t_map *map);
 // player.c
@@ -81,14 +81,11 @@ void		fps_draw(mlx_image_t *img, double delta_time);
 /* --- UTILS --- */
 // init_utils.c
 mlx_image_t	*init_image(mlx_t *mlx, t_rect dim);
-void		init_map_pixbuf(t_map *map);
+mlx_texture_t	*init_map_pixbuf(t_map *map);
 // common_utils.c
-t_vec		vec_add(t_vec a, t_vec b);
-t_vec		vec_scale(t_vec vec, double factor);
-t_vec		vec_rotate(t_vec vec, double angle);
-void		uni_memset(void *dst, const void *src, size_t size, size_t len);
-// error_handling.c
-void		panic(const char *msg);
-void		mlx_panic(void);
+t_vec			vec_add(t_vec a, t_vec b);
+t_vec			vec_scale(t_vec vec, double factor);
+t_vec			vec_rotate(t_vec vec, double angle);
+void			uni_memset(void *dst, const void *src, size_t size, size_t len);
 
 #endif

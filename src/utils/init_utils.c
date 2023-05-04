@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:20:31 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/03 02:39:28 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:10:27 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ mlx_image_t	*init_image(mlx_t *mlx, t_rect dim)
 
 	img = mlx_new_image(mlx, dim.width, dim.height);
 	if (img == NULL)
-		mlx_panic();
+		return (NULL);
 	if (mlx_image_to_window(mlx, img, dim.x, dim.y) < 0)
 	{
 		mlx_delete_image(mlx, img);
-		mlx_panic();
+		return (NULL);
 	}
 	return (img);
 }
@@ -67,13 +67,13 @@ static void	fill_pixbuf(mlx_texture_t *pixbuf, t_map *map)
 	}
 }
 
-void	init_map_pixbuf(t_map *map)
+mlx_texture_t	*init_map_pixbuf(t_map *map)
 {
 	mlx_texture_t	*pixbuf;
 
 	pixbuf = malloc(sizeof(mlx_texture_t));
 	if (pixbuf == NULL)
-		panic("Failed to allocate memory.");
+		return (NULL);
 	pixbuf->width = map->width * BLOCK_SIZE;
 	pixbuf->height = map->height * BLOCK_SIZE;
 	pixbuf->bytes_per_pixel = BPP;
@@ -81,8 +81,8 @@ void	init_map_pixbuf(t_map *map)
 	if (pixbuf->pixels == NULL)
 	{
 		free(pixbuf);
-		panic("Failed to allocate memory.");
+		return (NULL);
 	}
 	fill_pixbuf(pixbuf, map);
-	map->pixbuf = pixbuf;
+	return (pixbuf);
 }
