@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:40 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/04 15:44:19 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:48:54 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*cub_trim(char *line)
 void	map_trim(char *line)
 {
 	int	i;
-	
+
 	i = ft_strlen(line) - 1;
 	while (i >= 0 && ft_iswhitespace(line[i]))
 	{

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/04 16:25:05 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:48:12 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,54 +33,54 @@
 # define BPP 4
 
 // hooks.c
-void		key_hook(mlx_key_data_t keydata, void *param);
-void		cursor_hook(double xpos, double ypos, void *param);
-void		scroll_hook(double xdelta, double ydelta, void *param);
+void			key_hook(mlx_key_data_t keydata, void *param);
+void			cursor_hook(double xpos, double ypos, void *param);
+void			scroll_hook(double xdelta, double ydelta, void *param);
 
 /* --- PARSING --- */
 // parsing_main.c
-int			pars(char *path, t_scene *scene);
+int				pars(char *path, t_scene *scene);
 // get_textures.c
-int			get_textures(int fd, t_tex *tex);
+int				get_textures(int fd, t_tex *tex);
 // get_map.c
-int			get_map(int fd, t_scene *scene);
+int				get_map(int fd, t_scene *scene);
 // check_map.c
-int			check_map(char **map, t_scene *scene);
+int				check_map(char **map, t_scene *scene);
 // check_map_utils.c
-char		*convert_map(char **map, t_scene *scene);
-int			find_start(int start[2], t_scene *scene);
-void		*create_vector(int x, int y);
+char			*convert_map(char **map, t_scene *scene);
+int				find_start(int start[2], t_scene *scene);
+void			*create_vector(int x, int y);
 // parsing_utils.c
-char		*skip_space(char *line);
-char		*first_word(char *line);
-char		*skip_number(char *line);
-char		*cub_trim(char *line);
-void		map_trim(char *line);
+char			*skip_space(char *line);
+char			*first_word(char *line);
+char			*skip_number(char *line);
+char			*cub_trim(char *line);
+void			map_trim(char *line);
 
 /* --- SCENE --- */
 // scene.c
-bool		scene_init(t_scene *scene);
-void		scene_draw(t_scene *scene);
-void		scene_destroy(t_scene *scene, int layer);
+bool			scene_init(t_scene *scene);
+void			scene_draw(t_scene *scene);
+void			scene_destroy(t_scene *scene, int layer);
 // map.c
-bool		map_init(mlx_t *mlx, t_map *map);
-void		map_draw(t_map *map, t_player *player);
-void		map_destroy(mlx_t *mlx, t_map *map);
+bool			map_init(mlx_t *mlx, t_map *map);
+void			map_draw(t_map *map, t_player *player);
+void			map_destroy(mlx_t *mlx, t_map *map);
 // player.c
-void		player_init(t_player *player);
-void		player_update(t_player *player, t_map *map, t_keys keys);
-void		update(void *param);
+void			player_init(t_player *player);
+void			player_update(t_player *player, t_map *map, t_keys keys);
+void			update(void *param);
 
 /* --- RENDERING --- */
 // raycaster.c
-t_hit_info	ray_cast(t_player *player, t_map *map, t_vec ray_dir);
+t_hit_info		ray_cast(t_player *player, t_map *map, t_vec ray_dir);
 // draw_cubes.c
-void		draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
+void			draw_wall_line(t_scene *scene, int32_t x, t_hit_info hit);
 // fps_counter.c
-void		fps_draw(mlx_image_t *img, double delta_time);
+void			fps_draw(mlx_image_t *img, double delta_time);
 /* --- UTILS --- */
 // init_utils.c
-mlx_image_t	*init_image(mlx_t *mlx, t_rect dim);
+mlx_image_t		*init_image(mlx_t *mlx, t_rect dim);
 mlx_texture_t	*init_map_pixbuf(t_map *map);
 // common_utils.c
 t_vec			vec_add(t_vec a, t_vec b);
