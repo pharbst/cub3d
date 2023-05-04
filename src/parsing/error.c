@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:31:26 by pharbst           #+#    #+#             */
-/*   Updated: 2023/04/13 23:13:58 by pharbst          ###   ########.fr       */
+/*   Updated: 2023/05/04 17:07:10 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	cub_strerror(void)
 
 int	texture_error(char *tmp)
 {
-	if (!cub_errinfo(first_word(skip_space(tmp))))
+	if (!cub_errinfo(skip_space(tmp)))
 		return (cub_errno(WRITE, ERALLOC), 1);
 	return (cub_errno(WRITE, ERNOID), 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:06:21 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/04 16:14:54 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:14:18 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,20 @@ void	scene_draw(t_scene *scene)
 
 void	scene_destroy(t_scene *scene, int layer)
 {
-	mlx_delete_texture(scene->tex.t_north);
-	mlx_delete_texture(scene->tex.t_west);
-	mlx_delete_texture(scene->tex.t_south);
-	mlx_delete_texture(scene->tex.t_east);
+	if (scene->tex.t_north != NULL)
+		mlx_delete_texture(scene->tex.t_north);
+	if (scene->tex.t_west != NULL)
+		mlx_delete_texture(scene->tex.t_west);
+	if (scene->tex.t_south != NULL)
+		mlx_delete_texture(scene->tex.t_south);
+	if (scene->tex.t_east != NULL)
+		mlx_delete_texture(scene->tex.t_east);
 	if (layer >= 1)
 		mlx_delete_image(scene->mlx, scene->background);
 	if (layer >= 2)
 		mlx_delete_image(scene->mlx, scene->screen);
 	if (layer >= 3)
 		mlx_delete_image(scene->mlx, scene->fps);
-	mlx_terminate(scene->mlx);
+	if (layer >= 0)
+		mlx_terminate(scene->mlx);
 }

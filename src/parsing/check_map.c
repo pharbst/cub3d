@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 01:49:55 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/03 02:19:42 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:58:59 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int	check_map(char **map, t_scene *scene)
 	if (!scene->map.data)
 		return (1);
 	if (check_main(scene))
-		return (1);
+		return (free(scene->map.data), 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 11:33:48 by jlohmann          #+#    #+#             */
-/*   Updated: 2023/05/04 16:48:12 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:07:41 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int				find_start(int start[2], t_scene *scene);
 void			*create_vector(int x, int y);
 // parsing_utils.c
 char			*skip_space(char *line);
-char			*first_word(char *line);
 char			*skip_number(char *line);
 char			*cub_trim(char *line);
 void			map_trim(char *line);

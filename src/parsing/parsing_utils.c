@@ -6,7 +6,7 @@
 /*   By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:28:40 by pharbst           #+#    #+#             */
-/*   Updated: 2023/05/04 16:48:54 by jlohmann         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:07:36 by jlohmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ char	*skip_space(char *line)
 	while (ft_iswhitespace(*line) && *line)
 		line++;
 	return (line);
-}
-
-char	*first_word(char *line)
-{
-	int		i;
-
-	i = 0;
-	while (line[i] && !ft_iswhitespace(line[i]))
-		i++;
-	return (ft_substr(line, 0, i));
 }
 
 char	*skip_number(char *line)
