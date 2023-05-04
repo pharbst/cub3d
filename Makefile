@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlohmann <jlohmann@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: pharbst <pharbst@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:05:35 by jlohmann          #+#    #+#              #
-#    Updated: 2023/05/04 16:17:23 by jlohmann         ###   ########.fr        #
+#    Updated: 2023/05/04 17:29:42 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ include color.mk
 NAME	:= cub3D
 
 CC		:= cc
-#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+# CFLAGS	:=	-Wall -Werror -Wextra -Wunreachable-code -g
 # CFLAGS	+=	-fsanitize=address
 
 LIBFT	:= ./lib/libft
